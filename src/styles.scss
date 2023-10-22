@@ -1,0 +1,128 @@
+@font-face {
+  font-family: 'UbuntuRegular', sans-serif;
+  src: local('UbuntuRegular'),
+  url("./assets/fonts/Ubuntu-Regular.ttf");
+}
+* {
+  font-family: 'UbuntuRegular', sans-serif;
+}
+
+:root{
+  --basic-white: #FFFFFF;
+  --basic-black: #000000;
+
+  --bright: #C0EAEE;
+
+  --turquoise: rgba(103, 236, 255, 0.67);
+  --emerald: #005B64;
+
+  --darkGreen: #164044;
+  --dark: #003237;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar{
+    width: 10px;
+    background-color:var(--bright);
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--emerald);
+    border-radius: 10px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: var(--basic-white);
+  transition: 0.5s;
+
+  &:disabled{
+    opacity: 0.2;
+  }
+}
+
+.themeTwitchContainer{
+  display: flex;
+
+  button {
+    padding: 10px 25px;
+  }
+}
+
+img {
+  background-color: var(--bright);
+  object-fit: cover;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 10vh;
+  border-top: 1px solid white;
+}
+
+html[data-theme='dark'] {
+  background-color: var(--dark);
+  color: var(--basic-white);
+
+  .footer{
+    background-color: var(--dark);
+  }
+
+  button {
+    background-color: var(--darkGreen);
+    color: var(--bright);
+
+    &:hover {
+      background-color: var(--turquoise);
+    }
+  }
+
+  .active-button {
+    background-color: var(--turquoise);
+  }
+}
+
+html[data-theme='light'] {
+  background-color: white;
+
+  .footer{
+    background-color: var(--bright);
+  }
+
+  button {
+    background-color: var(--bright);
+    color: var(--dark);
+
+    &:hover {
+      background-color: var(--emerald);
+      color: var(--bright);
+    }
+  }
+
+  .activeButton {
+    background-color: var(--emerald);
+    color: var(--bright);
+  }
+}
