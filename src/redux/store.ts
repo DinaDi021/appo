@@ -11,22 +11,16 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { genreReducer, moviesReducer, progressReducer } from "./slice";
+import { authReducer, progressReducer } from "./slice";
 
 const rootReducer = combineReducers({
-  movies: moviesReducer,
-  genres: genreReducer,
+  auth: authReducer,
   progress: progressReducer,
-  // credits: creditsReducer,
-  // searchMovies: searchMoviesReducer,
-  // categoriesMovies: categoriesMoviesReducer,
-  // themeSwitch: themeReducer,
 });
 
 const persistConfig = {
   key: "persist-key",
   storage,
-  whitelist: ["movies", "credits", "categoriesMovies", "genres"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

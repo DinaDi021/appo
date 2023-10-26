@@ -1,3 +1,2 @@
-export * from "./moviesSlice";
-export * from "./genresSlice";
 export * from "./progressSlice";
+export * from "./authSlice";

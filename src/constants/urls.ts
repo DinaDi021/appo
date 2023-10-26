@@ -1,29 +1,23 @@
-const baseURL = "https://api.themoviedb.org/3";
+const baseURL = process.env.REACT_APP_API;
 
-const movies = "/discover/movie";
-const topRated = "/movie/top_rated";
-const upcoming = "/movie/upcoming";
-const popular = "/movie/popular";
-const genre = "/genre/movie/list";
-const movie = "/movie";
-const search = "/search/movie";
+const register = "/register";
+const login = "/login";
+// const refresh = "/refresh";
+// const users = "/users";
 
 const urls = {
-  movies,
-  topRated,
-  upcoming,
-  popular,
-  genre,
-  search,
-  movie: {
-    byId: (id: number): string => `${movie}/${id}`,
-  },
-  video: {
-    byId: (id: number): string => `${movie}/${id}/videos`,
-  },
-  credits: {
-    byId: (id: number): string => `${movie}/${id}/credits`,
-  },
+  register: register,
+  login: login,
+  // refresh: refresh,
 };
+
+// const urls = {
+//   auth: {
+//     login: auth,
+//     refresh: `${auth}/refresh`,
+//     register: users,
+//     me: `${auth}/me`,
+//   },
+// };
 
 export { baseURL, urls };
