@@ -1,0 +1,44 @@
+.form {
+
+  &__login, &__register{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__register {
+    height: 320px;
+  }
+
+  &__login {
+    height: 200px;
+  }
+}
+
+.error{
+  margin-top: 10px;
+  color: red;
+  text-shadow: 0 5px 15px rgb(204, 214, 228);
+};
+
+.input {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  svg{
+    padding-left: 5px;
+  }
+
+  input{
+    width: 85%;
+    position: absolute;
+    padding: 10px 35px;
+  }
+
+  &:-webkit-autofill {
+    background-color: transparent !important;
+  }
+}

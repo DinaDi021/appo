@@ -7,25 +7,25 @@ const refreshTokenKey = "refresh";
 
 const authService = {
   register(user: IAuth): IRes<IUser> {
-    return apiService.post(urls.register, user);
+    return apiService.post(urls.auth.register, user);
   },
   async login(user: IAuth): Promise<ITokens> {
-    const { data } = await apiService.post<ITokens>(urls.login, user);
+    const { data } = await apiService.post<ITokens>(urls.auth.login, user);
     this.setTokens(data);
     return data;
   },
 
-  // async refresh(): Promise<void> {
-  //   const refresh = this.getRefreshToken();
-  //   const { data } = await apiService.post<ITokens>(urls.refresh, {
-  //     refresh,
-  //   });
-  //   this.setTokens(data);
-  // },
+  async refresh(): Promise<void> {
+    const refresh = this.getRefreshToken();
+    const { data } = await apiService.post<ITokens>(urls.auth.refresh, {
+      refresh,
+    });
+    this.setTokens(data);
+  },
 
   setTokens({ refresh, access }: ITokens): void {
     localStorage.setItem(accessTokenKey, access);
-    // localStorage.setItem(refreshTokenKey, refresh);
+    localStorage.setItem(refreshTokenKey, refresh);
   },
 
   getAccessToken(): string {

@@ -4,4 +4,5 @@ export interface IAuth {
   phone_number: string;
   email: string;
   password: string;
+  confirm_Password: string;
 }

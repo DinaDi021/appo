@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-import { baseURL } from "../constants";
+import { baseURL, urls } from "../constants";
 import { router } from "../router";
 import { authService } from "./authService";
 
@@ -19,8 +19,8 @@ apiService.interceptors.request.use((req) => {
 });
 
 let isRefreshing = false;
-//
-// const waitList: IWaitList[] = [];
+
+const waitList: IWaitList[] = [];
 apiService.interceptors.response.use(
   (res) => {
     return res;
@@ -32,9 +32,9 @@ apiService.interceptors.response.use(
       if (!isRefreshing) {
         isRefreshing = true;
         try {
-          // await authService.refresh();
-          // isRefreshing = false;
-          // afterRefresh();
+          await authService.refresh();
+          isRefreshing = false;
+          afterRefresh();
           return await apiService(originalRequest);
         } catch (e) {
           authService.deleteTokens();
@@ -43,32 +43,29 @@ apiService.interceptors.response.use(
           return await Promise.reject(error);
         }
       }
+      if (originalRequest.url === urls.auth.refresh) {
+        return await Promise.reject(error);
+      }
+
+      return await new Promise((resolve) => {
+        subscribeToWaitList(() => resolve(apiService(originalRequest)));
+      });
     }
+
+    return await Promise.reject(error);
   },
 );
-//   if (originalRequest.url === urls.refresh) {
-//     return await Promise.reject(error);
-//   }
-//
-//   return await new Promise((resolve) => {
-//     subscribeToWaitList(() => resolve(apiService(originalRequest)));
-//   });
-// }
+type IWaitList = () => void;
+const subscribeToWaitList = (cb: IWaitList): void => {
+  waitList.push(cb);
+};
 
-//   return await Promise.reject(error);
-// },
-// );
-// type IWaitList = () => void;
-// const subscribeToWaitList = (cb: IWaitList): void => {
-//   waitList.push(cb);
-// };
-//
-// const afterRefresh = (): void => {
-//   while (waitList.length) {
-//     const cb = waitList.pop();
-//     cb();
-//   }
-// };
+const afterRefresh = (): void => {
+  while (waitList.length) {
+    const cb = waitList.pop();
+    cb();
+  }
+};
 
 export type { IRes };
 export { apiService };

@@ -11,7 +11,7 @@ import { authService } from "../../services";
 
 interface IState {
   errors: {
-    username?: string[];
+    email?: string[];
     detail?: string;
   };
 }
