@@ -6,18 +6,18 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IAuth, ITokens, IUser } from "../../interfaces";
+import { IAuth } from "../../interfaces";
 import { authService } from "../../services";
 
 interface IState {
-  errors: {
+  error: {
     email?: string[];
-    detail?: string;
+    message?: string;
   };
 }
 
 const initialState: IState = {
-  errors: null,
+  error: null,
 };
 
 const register = createAsyncThunk<void, { user: IAuth }>(
@@ -32,18 +32,47 @@ const register = createAsyncThunk<void, { user: IAuth }>(
   },
 );
 
-const login = createAsyncThunk<
-  { user: IUser } | { tokens: ITokens },
-  { user: IAuth }
->("authSlice/login", async ({ user }) => {
-  try {
-    const userData = await authService.login(user);
-    return { user: userData, tokens: undefined };
-  } catch (e) {
-    const err = e as AxiosError;
-    return { tokens: err.response.data, user: undefined };
-  }
-});
+const login = createAsyncThunk<void, { user: IAuth }>(
+  "authSlice/login",
+  async ({ user }, { rejectWithValue }) => {
+    try {
+      await authService.login(user);
+    } catch (e) {
+      const err = e as AxiosError;
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
+const forgotPassword = createAsyncThunk<
+  void,
+  { email: string; resetUrl: string }
+>(
+  "authSlice/forgotPassword",
+  async ({ email, resetUrl }, { rejectWithValue }) => {
+    try {
+      await authService.forgotPassword(email, resetUrl);
+    } catch (e) {
+      const err = e as AxiosError;
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
+const resetPassword = createAsyncThunk<
+  void,
+  { email: string; token: string; password: string }
+>(
+  "authSlice/resetPassword",
+  async ({ email, token, password }, { rejectWithValue }) => {
+    try {
+      await authService.resetPassword(email, token, password);
+    } catch (e) {
+      const err = e as AxiosError;
+      return rejectWithValue(err.response?.data);
+    }
+  },
+);
 
 const authSlice = createSlice({
   name: "authSlice",
@@ -52,10 +81,10 @@ const authSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addMatcher(isRejected(), (state, action) => {
-        state.errors = action.payload;
+        state.error = action.payload;
       })
       .addMatcher(isFulfilled(), (state) => {
-        state.errors = null;
+        state.error = null;
       }),
 });
 
@@ -65,6 +94,8 @@ const authActions = {
   ...actions,
   register,
   login,
+  forgotPassword,
+  resetPassword,
 };
 
 export { authActions, authReducer };

@@ -23,6 +23,22 @@ const authService = {
     this.setTokens(data);
   },
 
+  async forgotPassword(email: string, resetUrl: string): Promise<void> {
+    await apiService.post(urls.auth.forgotPassword, { email, resetUrl });
+  },
+
+  async resetPassword(
+    email: string,
+    token: string,
+    newPassword: string,
+  ): Promise<void> {
+    await apiService.post(urls.auth.resetPassword, {
+      email,
+      token,
+      newPassword,
+    });
+  },
+
   setTokens({ refresh, access }: ITokens): void {
     localStorage.setItem(accessTokenKey, access);
     localStorage.setItem(refreshTokenKey, refresh);
