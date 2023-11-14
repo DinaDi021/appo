@@ -1,40 +1,39 @@
+import { joiResolver } from "@hookform/resolvers/joi";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IAuth } from "../../../interfaces";
 import { authActions } from "../../../redux";
-import styles from "./Form/Form.module.scss";
+import { registerSchema } from "../../../validators";
+import styles from "./Form.module.scss";
 
 const RegisterForm: FC = () => {
-  const { register, reset, handleSubmit } = useForm<IAuth>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAuth>({
+    resolver: joiResolver(registerSchema),
+  });
   const dispatch = useAppDispatch();
-  const { errors } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
-  const [isFormValid, setIsFormValid] = useState(true);
+  const { error } = useAppSelector((state) => state.auth);
   const registerUser: SubmitHandler<IAuth> = async (user) => {
-    const { password, confirm_Password } = user;
-
-    if (password !== confirm_Password) {
-      setIsFormValid(false);
-      return;
-    }
-
     const {
       meta: { requestStatus },
     } = await dispatch(authActions.register({ user }));
 
     if (requestStatus === "fulfilled") {
       reset();
-      navigate("/login");
+      navigate("/me");
     }
   };
-
-  //Add disabled button, when input empty
 
   return (
     <>
@@ -42,69 +41,104 @@ const RegisterForm: FC = () => {
         className={styles.form__register}
         onSubmit={handleSubmit(registerUser)}
       >
-        <div className={styles.input}>
-          <PersonRoundedIcon />
-          <input
-            type="text"
-            placeholder={"First Name"}
-            required={true}
-            {...register("firstname")}
-          />
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <PersonRoundedIcon />
+            <input
+              type="text"
+              placeholder={"First Name"}
+              required={true}
+              {...register("firstname")}
+            />
+          </label>
+          {errors.firstname && (
+            <div className={styles.form__error}>
+              {errors?.firstname && <span>invalid first Name</span>}
+            </div>
+          )}
         </div>
-        <div className={styles.input}>
-          <PersonRoundedIcon />
-          <input
-            type="text"
-            placeholder={"Last Name"}
-            required={true}
-            {...register("lastname")}
-          />
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <PersonRoundedIcon />
+            <input
+              type="text"
+              placeholder={"Last Name"}
+              required={true}
+              {...register("lastname")}
+            />
+          </label>
+          {errors.lastname && (
+            <div className={styles.form__error}>
+              {errors?.lastname && <span>invalid last Name</span>}
+            </div>
+          )}
         </div>
-        <div className={styles.input}>
-          <LockOutlinedIcon />
-          <input
-            type="text"
-            placeholder={"+380xxxxxxxx"}
-            required={true}
-            {...register("phone_number")}
-          />
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <LockOutlinedIcon />
+            <input
+              type="text"
+              placeholder={"+380xxxxxxxx"}
+              required={true}
+              {...register("phone_number")}
+            />
+          </label>
+          {errors.phone_number && (
+            <div className={styles.form__error}>
+              {errors?.phone_number && <span>invalid phone number</span>}
+            </div>
+          )}
         </div>
-        <div className={styles.input}>
-          <AlternateEmailOutlinedIcon />
-          <input
-            type="email"
-            placeholder={"Email"}
-            required={true}
-            {...register("email")}
-          />
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <AlternateEmailOutlinedIcon />
+            <input
+              type="email"
+              placeholder={"Email"}
+              required={true}
+              {...register("email")}
+            />
+          </label>
+          {errors.email && (
+            <div className={styles.form__error}>
+              {errors?.email && <span>invalid email</span>}
+            </div>
+          )}
         </div>
-        <div className={styles.input}>
-          <LockOutlinedIcon />
-          <input
-            type="password"
-            placeholder={"Password"}
-            required={true}
-            {...register("password")}
-            onChange={() => setIsFormValid(true)}
-          />
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <LockOutlinedIcon />
+            <input
+              type="password"
+              placeholder={"Password"}
+              required={true}
+              {...register("password")}
+            />
+          </label>
+          {errors.password && (
+            <div className={styles.form__error}>
+              {errors?.password && <span>invalid password</span>}
+            </div>
+          )}
         </div>
-        <div className={styles.input}>
-          <LockOutlinedIcon />
-          <input
-            type="password"
-            placeholder={"Confirm password"}
-            required={true}
-            {...register("confirm_Password")}
-            onChange={() => setIsFormValid(true)}
-          />
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <LockOutlinedIcon />
+            <input
+              type="password"
+              placeholder={"Confirm password"}
+              required={true}
+              {...register("confirm_Password")}
+            />
+          </label>
+          {errors.confirm_Password && (
+            <div className={styles.form__error}>
+              {errors?.confirm_Password && <span>passwords do not match</span>}
+            </div>
+          )}
         </div>
-
-        {!isFormValid && (
-          <span className={styles.error}>Password mismatch</span>
-        )}
-        <button disabled={!isFormValid}>Create Account</button>
-
-        {errors?.email && <span>email is invalid</span>}
+        {error && <span className={styles.errMessage}>{error.message}</span>}
+        <button>Create Account</button>
       </form>
     </>
   );

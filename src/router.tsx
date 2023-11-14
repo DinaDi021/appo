@@ -6,11 +6,13 @@ import {
   AboutUsPage,
   ContactsPage,
   CoursesPage,
+  ForgotPasswordPage,
   LoginPage,
   MainPage,
   NotFoundPage,
   PricePage,
   RegisterPage,
+  ResetPasswordPage,
   ServicesPage,
 } from "./pages";
 
@@ -52,12 +54,20 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
+        path: "me",
+        element: <LoginPage />,
+      },
+      {
         path: "register",
         element: <RegisterPage />,
       },
       {
         path: "forgotPassword",
-        element: <RegisterPage />,
+        element: <ForgotPasswordPage />,
+      },
+      {
+        path: "resetPassword",
+        element: <ResetPasswordPage />,
       },
     ],
   },

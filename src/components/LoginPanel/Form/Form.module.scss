@@ -1,0 +1,61 @@
+.form {
+
+  &__login, &__register {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__register {
+    height: 320px;
+  }
+
+  &__login {
+    height: 200px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__label {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+
+    svg {
+      padding-left: 5px;
+      z-index: 1;
+    }
+
+    input {
+      width: 85%;
+      position: absolute;
+      padding: 10px 35px;
+    }
+
+    &:-webkit-autofill {
+      background-color: transparent !important;
+    }
+  }
+
+  &__error {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+
+    color: red;
+    background: var(--basic-white);
+  }
+}
+
+.errMessage {
+  text-align: center;
+  color: red;
+}
+
