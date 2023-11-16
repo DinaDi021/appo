@@ -4,7 +4,7 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IAuth } from "../../../interfaces";
 import { authActions } from "../../../redux";
 import styles from "./Form.module.scss";
@@ -13,6 +13,7 @@ const LoginForm: FC = () => {
   const { register, reset, handleSubmit } = useForm<IAuth>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { error } = useAppSelector((state) => state.auth);
   const login: SubmitHandler<IAuth> = async (user) => {
     const {
       meta: { requestStatus },
@@ -20,7 +21,7 @@ const LoginForm: FC = () => {
 
     if (requestStatus === "fulfilled") {
       reset();
-      navigate("/me");
+      navigate("/main");
     }
   };
 
@@ -45,6 +46,7 @@ const LoginForm: FC = () => {
             {...register("password")}
           />
         </div>
+        {error && <span className={styles.errMessage}>{error.message}</span>}
         <button>Log in</button>
       </form>
     </>

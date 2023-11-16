@@ -9,3 +9,4 @@ export * from "./LoginPage/LoginPage";
 export * from "./RegisterPage/RegisterPage";
 export * from "./ForgotPasswordPage/ForgotPasswordPage";
 export * from "./ResetPasswordPage/ResetPasswordPage";
+export * from "./PersonalAccount/PersonalAccount";

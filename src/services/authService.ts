@@ -2,17 +2,18 @@ import { urls } from "../constants";
 import { IAuth, ITokens, IUser } from "../interfaces";
 import { apiService, IRes } from "./apiServices";
 
-const accessTokenKey = "access";
-const refreshTokenKey = "refresh";
+const accessTokenKey = "access_token";
+const refreshTokenKey = "refresh_token";
 
 const authService = {
   register(user: IAuth): IRes<IUser> {
     return apiService.post(urls.auth.register, user);
   },
-  async login(user: IAuth): Promise<ITokens> {
-    const { data } = await apiService.post<ITokens>(urls.auth.login, user);
-    this.setTokens(data);
-    return data;
+
+  async login(user: IAuth): Promise<void> {
+    const response = await apiService.post<ITokens>(urls.auth.login, user);
+    const tokens = response.data;
+    this.setTokens(tokens);
   },
 
   async refresh(): Promise<void> {
@@ -39,9 +40,9 @@ const authService = {
     });
   },
 
-  setTokens({ refresh, access }: ITokens): void {
-    localStorage.setItem(accessTokenKey, access);
-    localStorage.setItem(refreshTokenKey, refresh);
+  setTokens({ refresh_token, access_token }: ITokens): void {
+    localStorage.setItem(accessTokenKey, access_token);
+    localStorage.setItem(refreshTokenKey, refresh_token);
   },
 
   getAccessToken(): string {

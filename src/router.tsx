@@ -10,6 +10,7 @@ import {
   LoginPage,
   MainPage,
   NotFoundPage,
+  PersonalAccount,
   PricePage,
   RegisterPage,
   ResetPasswordPage,
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "me",
-        element: <LoginPage />,
+        element: <PersonalAccount />,
       },
       {
         path: "register",

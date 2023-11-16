@@ -6,7 +6,7 @@ const refresh = "/oauth/refresh";
 const forgotPassword = "/password/forgot";
 const resetPassword = "/password/reset";
 
-const users = "/users";
+const users = "/v1/users";
 
 const urls = {
   auth: {
