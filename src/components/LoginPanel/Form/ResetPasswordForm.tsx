@@ -24,8 +24,6 @@ const ResetPasswordForm: FC = () => {
   const navigate = useNavigate();
   const { email, token } = useParams();
 
-  console.log(email, token);
-
   const resetPassword: SubmitHandler<IResetPassword> = async (data) => {
     const { password } = data;
 
@@ -77,7 +75,7 @@ const ResetPasswordForm: FC = () => {
             </div>
           )}
         </div>
-        <button>confirm password change</button>
+        <button>Confirm password change</button>
       </form>
     </>
   );

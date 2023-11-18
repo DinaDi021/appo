@@ -13,17 +13,19 @@
   --basic-white: #FFFFFF;
   --basic-black: #000000;
 
-  --light-gray: #CCD6E4;
-  --medium-gray: #89B1CE;
+  --dusty-blue: #aae7e5;
+  --tiffany: #03b7ba;
+  --green-jungle-crayola: #3cb3a6;
 
-  --blue-grey-crayola: #55ABD1;
-  --blue-green-crayola: #08A1D3;
-  --shiny-blue: #3B7EA9;
-  --waters-of-bondi-beach: #0186BD;
 
-  --medium-persian-blue: #0169A1;
-  --midnight-blue-crayola: #21517A;
-  --navy: #012345;
+  --turquoise: #03817f;
+  --green-crayola-pine: #0d9483;
+  --medium-green: #336e5a;
+  --green-pine:#047268;
+
+  --green: #056250;
+  --dark-bluish-green: #044938;
+  --dark-green: #011f1a;
 }
 
 body {
@@ -31,19 +33,19 @@ body {
   box-sizing: border-box;
   height: 100%;
   overflow-x: hidden;
-  background-image: url("./assets/img/background/background-blue-water.jpg");
+  background-image: url("./assets/img/background/bc-main.jpg");
   backdrop-filter: blur(3px);
   background-size: cover;
-  color: var(--navy);
+  color: var(--dusty-blue);
 
   &::-webkit-scrollbar {
     width: 10px;
-    background-color: var(--medium-gray);
+    background-color: var(--medium-green);
 
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--shiny-blue);
+    background-color: var(--green-crayola-pine);
     border-radius: 10px;
   }
 }
@@ -54,7 +56,7 @@ a {
   transition: 0.5s;
 
   &:hover{
-    color: var(--midnight-blue-crayola);
+    color: var(--turquoise);
   }
 }
 
@@ -67,14 +69,14 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: var(--shiny-blue);
+  background-color: var(--green-pine);
   color: var(--basic-white);
   transition: 0.5s;
   box-shadow: 0 0 0 transparent;
 
   &:hover {
-    background-color: var(--midnight-blue-crayola);
-    box-shadow: 0 5px 15px rgb(33, 81, 122);
+    background-color: var(--turquoise);
+    box-shadow: 0 5px 15px rgb(23, 93, 85);
   }
 
   &:disabled {
@@ -92,15 +94,15 @@ input {
   cursor: pointer;
 
   &:hover {
-    border-bottom: 2px solid var(--midnight-blue-crayola)!important;
+    border-bottom: 2px solid var(--turquoise)!important;
   }
 
   &:focus {
-    border-bottom: 3px solid var(--navy)!important;
+    border-bottom: 3px solid var(--dark-green)!important;
   }
 
   &::placeholder {
-    color: var(--medium-gray);
+    color: var(--medium-green);
   }
 
 

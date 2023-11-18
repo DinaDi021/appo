@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-image: url("../assets/img/background/background-blue-water.jpg");
+  background-image: url("../assets/img/background/bc-main.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -20,7 +20,7 @@
 .info {
   display: flex;
   justify-content: center;
-  text-shadow: 2px 2px 4px rgba(59, 126, 169, 0.9);
+  text-shadow: 2px 2px 4px rgba(24, 95, 74, 0.9);
 
   h3 {
     width: 70%;
@@ -47,6 +47,6 @@
   }
 
   a {
-    color: var(--medium-persian-blue);
+    color: var(--turquoise);
   }
 }

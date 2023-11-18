@@ -11,6 +11,11 @@ const registerSchema = Joi.object({
   confirm_Password: Joi.any().valid(Joi.ref("password")).required(),
 });
 
+const loginShema = Joi.object({
+  email: Joi.string().regex(regex.EMAIL).trim().required(),
+  password: Joi.string().regex(regex.PASSWORD).trim(),
+});
+
 const forgotPasswordSchema = Joi.object({
   email: Joi.string().regex(regex.EMAIL).trim().required(),
 });
@@ -20,4 +25,9 @@ const resetPasswordSchema = Joi.object({
   confirm_Password: Joi.any().valid(Joi.ref("password")).required(),
 });
 
-export { registerSchema, forgotPasswordSchema, resetPasswordSchema };
+export {
+  registerSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  loginShema,
+};
