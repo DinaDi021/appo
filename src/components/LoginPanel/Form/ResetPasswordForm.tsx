@@ -1,8 +1,8 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useAppDispatch } from "../../../hooks";
 import { IResetPassword } from "../../../interfaces";
@@ -22,16 +22,20 @@ const ResetPasswordForm: FC = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { email, token } = useParams();
+
+  console.log(email, token);
+
   const resetPassword: SubmitHandler<IResetPassword> = async (data) => {
-    const { email, token, password } = data;
+    const { password } = data;
 
     const {
       meta: { requestStatus },
-    } = await dispatch(authActions.resetPassword({ email, token, password }));
+    } = await dispatch(authActions.resetPassword({ email, password, token }));
 
     if (requestStatus === "fulfilled") {
       reset();
-      navigate("/me");
+      navigate("/login");
     }
   };
 
@@ -43,12 +47,28 @@ const ResetPasswordForm: FC = () => {
       >
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <AlternateEmailOutlinedIcon />
+            <LockOutlinedIcon />
             <input
-              type="email"
-              placeholder={"Email"}
+              type="password"
+              placeholder={"Password"}
               required={true}
-              {...register("email")}
+              {...register("password")}
+            />
+          </label>
+          {errors.password && (
+            <div className={styles.form__error}>
+              {errors?.password && <span>invalid password</span>}
+            </div>
+          )}
+        </div>
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <LockOutlinedIcon />
+            <input
+              type="password"
+              placeholder={"Confirm password"}
+              required={true}
+              {...register("confirm_Password")}
             />
           </label>
           {errors.confirm_Password && (

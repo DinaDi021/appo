@@ -25,10 +25,11 @@ const ForgotPasswordForm: FC = () => {
 
   const forgotPassword: SubmitHandler<IForgotPassword> = async (data) => {
     const { email } = data;
-    const resetUrl = "https://ocean-beauty.netlify.app/resetPassword";
+    const url = `http://localhost:3000/resetPassword/${email}`;
+
     const {
       meta: { requestStatus },
-    } = await dispatch(authActions.forgotPassword({ email, resetUrl }));
+    } = await dispatch(authActions.forgotPassword({ email, url }));
 
     if (requestStatus === "fulfilled") {
       reset();

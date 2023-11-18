@@ -16,7 +16,6 @@ const forgotPasswordSchema = Joi.object({
 });
 
 const resetPasswordSchema = Joi.object({
-  email: Joi.string().regex(regex.EMAIL).trim().required(),
   password: Joi.string().regex(regex.PASSWORD).trim(),
   confirm_Password: Joi.any().valid(Joi.ref("password")).required(),
 });

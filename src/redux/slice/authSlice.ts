@@ -44,14 +44,11 @@ const login = createAsyncThunk<void, { user: IAuth }>(
   },
 );
 
-const forgotPassword = createAsyncThunk<
-  void,
-  { email: string; resetUrl: string }
->(
+const forgotPassword = createAsyncThunk<void, { email: string; url: string }>(
   "authSlice/forgotPassword",
-  async ({ email, resetUrl }, { rejectWithValue }) => {
+  async ({ email, url }, { rejectWithValue }) => {
     try {
-      await authService.forgotPassword(email, resetUrl);
+      await authService.forgotPassword(email, url);
     } catch (e) {
       const err = e as AxiosError;
       return rejectWithValue(err.response.data);
@@ -61,15 +58,15 @@ const forgotPassword = createAsyncThunk<
 
 const resetPassword = createAsyncThunk<
   void,
-  { email: string; token: string; password: string }
+  { email: string; password: string; token: string }
 >(
   "authSlice/resetPassword",
-  async ({ email, token, password }, { rejectWithValue }) => {
+  async ({ email, password, token }, { rejectWithValue }) => {
     try {
-      await authService.resetPassword(email, token, password);
+      await authService.resetPassword(email, password, token);
     } catch (e) {
       const err = e as AxiosError;
-      return rejectWithValue(err.response?.data);
+      return rejectWithValue(err.response.data);
     }
   },
 );

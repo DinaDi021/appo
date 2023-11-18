@@ -24,19 +24,19 @@ const authService = {
     this.setTokens(data);
   },
 
-  async forgotPassword(email: string, resetUrl: string): Promise<void> {
-    await apiService.post(urls.auth.forgotPassword, { email, resetUrl });
+  async forgotPassword(email: string, url: string): Promise<void> {
+    await apiService.post(urls.auth.forgotPassword, { email, url });
   },
 
   async resetPassword(
     email: string,
+    password: string,
     token: string,
-    newPassword: string,
   ): Promise<void> {
     await apiService.post(urls.auth.resetPassword, {
       email,
+      password,
       token,
-      newPassword,
     });
   },
 
