@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "../../../../hooks";
 import { IUser } from "../../../../interfaces";
-import { authActions } from "../../../../redux";
+import { authActions, usersActions } from "../../../../redux";
 
 interface IProps extends PropsWithChildren {
   user: IUser;
 }
 
 const AccountClientInfo: FC<IProps> = ({ user }) => {
-  const { firstname, lastname, birthdate, email, phone_number } = user.data;
+  const { id, firstname, lastname, birthdate, email, phone_number } = user.data;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -33,6 +33,16 @@ const AccountClientInfo: FC<IProps> = ({ user }) => {
     }
   };
 
+  const deleteAccount = async () => {
+    const {
+      meta: { requestStatus },
+    } = await dispatch(usersActions.deleteUserById({ id }));
+
+    if (requestStatus === "fulfilled") {
+      navigate("/login");
+    }
+  };
+
   return (
     <div>
       <h4>{email}</h4>
@@ -42,6 +52,7 @@ const AccountClientInfo: FC<IProps> = ({ user }) => {
       <h4>{phone_number}</h4>
       <button onClick={logOut}>Log out</button>
       <button onClick={logOutAll}>Log out in All devices</button>
+      <button onClick={deleteAccount}>Delete account</button>
     </div>
   );
 };

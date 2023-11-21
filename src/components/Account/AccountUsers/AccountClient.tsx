@@ -12,7 +12,7 @@ const AccountClient: FC = () => {
 
   useEffect(() => {
     if (user?.data) {
-      dispatch(usersActions.getUsersById({ id: user.data.id }));
+      dispatch(usersActions.getUserById({ id: user.data.id }));
     }
   }, [dispatch, user]);
 
