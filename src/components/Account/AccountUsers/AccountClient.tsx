@@ -11,12 +11,14 @@ const AccountClient: FC = () => {
   const { isLoading } = useAppSelector((state) => state.progress);
 
   useEffect(() => {
-    if (user) {
+    if (user?.data) {
       dispatch(usersActions.getUsersById({ id: user.data.id }));
     }
   }, [dispatch, user]);
 
-  console.log(user.data.id);
+  if (!user) {
+    return <p>User not logged in</p>;
+  }
 
   return (
     <div>

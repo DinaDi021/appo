@@ -29,6 +29,18 @@ const authService = {
     this.setTokens(data);
   },
 
+  async logout(): Promise<void> {
+    await apiService.delete(urls.auth.logout);
+    this.deleteTokens();
+    return;
+  },
+
+  async logoutAll(): Promise<void> {
+    await apiService.delete(urls.auth.logoutAll);
+    this.deleteTokens();
+    return;
+  },
+
   async forgotPassword(email: string, url: string): Promise<void> {
     await apiService.post(urls.auth.forgotPassword, { email, url });
   },

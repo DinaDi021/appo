@@ -47,6 +47,22 @@ const login = createAsyncThunk<IUser, { user: IAuth }>(
   },
 );
 
+const logout = createAsyncThunk<void, void>(
+  "authSlice/logout",
+  async (_, { dispatch }) => {
+    await authService.logout();
+    dispatch(authActions.resetUser());
+  },
+);
+
+const logoutAll = createAsyncThunk<void, void>(
+  "authSlice/logoutAll",
+  async (_, { dispatch }) => {
+    await authService.logoutAll();
+    dispatch(authActions.resetUser());
+  },
+);
+
 const forgotPassword = createAsyncThunk<void, { email: string; url: string }>(
   "authSlice/forgotPassword",
   async ({ email, url }, { rejectWithValue }) => {
@@ -77,11 +93,21 @@ const resetPassword = createAsyncThunk<
 const authSlice = createSlice({
   name: "authSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    resetUser: (state) => {
+      state.user = null;
+    },
+  },
   extraReducers: (build) =>
     build
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+      })
+      .addCase(logoutAll.fulfilled, (state) => {
+        state.user = null;
       })
       .addMatcher(isRejected(), (state, action) => {
         state.error = action.payload;
@@ -97,6 +123,8 @@ const authActions = {
   ...actions,
   register,
   login,
+  logout,
+  logoutAll,
   forgotPassword,
   resetPassword,
 };

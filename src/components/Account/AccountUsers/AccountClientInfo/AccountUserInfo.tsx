@@ -1,6 +1,9 @@
 import React, { FC, PropsWithChildren } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { useAppDispatch } from "../../../../hooks";
 import { IUser } from "../../../../interfaces";
+import { authActions } from "../../../../redux";
 
 interface IProps extends PropsWithChildren {
   user: IUser;
@@ -8,6 +11,27 @@ interface IProps extends PropsWithChildren {
 
 const AccountClientInfo: FC<IProps> = ({ user }) => {
   const { firstname, lastname, birthdate, email, phone_number } = user.data;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const logOut = async () => {
+    const {
+      meta: { requestStatus },
+    } = await dispatch(authActions.logout());
+
+    if (requestStatus === "fulfilled") {
+      navigate("/login");
+    }
+  };
+  const logOutAll = async () => {
+    const {
+      meta: { requestStatus },
+    } = await dispatch(authActions.logoutAll());
+
+    if (requestStatus === "fulfilled") {
+      navigate("/login");
+    }
+  };
 
   return (
     <div>
@@ -16,6 +40,8 @@ const AccountClientInfo: FC<IProps> = ({ user }) => {
       <h4>{firstname}</h4>
       <h4>{lastname}</h4>
       <h4>{phone_number}</h4>
+      <button onClick={logOut}>Log out</button>
+      <button onClick={logOutAll}>Log out in All devices</button>
     </div>
   );
 };
