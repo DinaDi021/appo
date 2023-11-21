@@ -25,7 +25,7 @@ const ForgotPasswordForm: FC = () => {
 
   const forgotPassword: SubmitHandler<IForgotPassword> = async (data) => {
     const { email } = data;
-    const url = `http://localhost:3000/resetPassword/${email}`;
+    const url = `https://appo-di-k.netlify.app/resetPassword/${email}`;
 
     const {
       meta: { requestStatus },

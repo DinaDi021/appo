@@ -1,11 +1,14 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { useAppSelector } from "../../hooks";
 import { LoginPanel } from "../LoginPanel";
 import { Logo } from "../Logo";
 import styles from "./Header.module.scss";
 
 const Header: FC = () => {
+  const { user } = useAppSelector((state) => state.auth);
+
   const links = [
     {
       path: "/main",
@@ -45,7 +48,11 @@ const Header: FC = () => {
             </Link>
           ))}
         </nav>
-        <LoginPanel />
+        {user ? (
+          <div className={styles.userIcon}>{user.data.firstname.charAt(0)}</div>
+        ) : (
+          <LoginPanel />
+        )}
       </div>
     </div>
   );

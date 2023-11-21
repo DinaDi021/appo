@@ -6,10 +6,11 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IAuth } from "../../interfaces";
+import { IAuth, IUser } from "../../interfaces";
 import { authService } from "../../services";
 
 interface IState {
+  user: IUser | null;
   error: {
     email?: string[];
     message?: string;
@@ -17,6 +18,7 @@ interface IState {
 }
 
 const initialState: IState = {
+  user: null,
   error: null,
 };
 
@@ -32,11 +34,12 @@ const register = createAsyncThunk<void, { user: IAuth }>(
   },
 );
 
-const login = createAsyncThunk<void, { user: IAuth }>(
+const login = createAsyncThunk<IUser, { user: IAuth }>(
   "authSlice/login",
   async ({ user }, { rejectWithValue }) => {
     try {
-      await authService.login(user);
+      const loggedInUser = await authService.login(user);
+      return loggedInUser;
     } catch (e) {
       const err = e as AxiosError;
       return rejectWithValue(err.response.data);
@@ -75,8 +78,11 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {},
-  extraReducers: (builder) =>
-    builder
+  extraReducers: (build) =>
+    build
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
       .addMatcher(isRejected(), (state, action) => {
         state.error = action.payload;
       })

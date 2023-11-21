@@ -1,6 +1,7 @@
 import { urls } from "../constants";
 import { IAuth, ITokens, IUser } from "../interfaces";
 import { apiService, IRes } from "./apiServices";
+import { usersService } from "./usersService";
 
 const accessTokenKey = "access_token";
 const refreshTokenKey = "refresh_token";
@@ -10,10 +11,14 @@ const authService = {
     return apiService.post(urls.auth.register, user);
   },
 
-  async login(user: IAuth): Promise<void> {
+  async login(user: IAuth): Promise<IUser> {
     const response = await apiService.post<ITokens>(urls.auth.login, user);
     const tokens = response.data;
     this.setTokens(tokens);
+
+    const userResponse = await usersService.getProfile(tokens.data.id);
+    const loggedInUser = userResponse.data;
+    return loggedInUser;
   },
 
   async refresh(): Promise<void> {
@@ -40,13 +45,14 @@ const authService = {
     });
   },
 
-  setTokens({ refresh_token, access_token }: ITokens): void {
-    localStorage.setItem(accessTokenKey, access_token);
-    localStorage.setItem(refreshTokenKey, refresh_token);
+  setTokens({ data }: ITokens): void {
+    localStorage.setItem(accessTokenKey, data.access_token);
+    localStorage.setItem(refreshTokenKey, data.refresh_token);
   },
 
   getAccessToken(): string {
-    return localStorage.getItem(accessTokenKey);
+    const access = localStorage.getItem(accessTokenKey);
+    return access;
   },
   getRefreshToken(): string {
     return localStorage.getItem(refreshTokenKey);
