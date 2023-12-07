@@ -1,20 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IPagination, IUser } from "../../interfaces";
+import { IPagination, IUpdateProfileParams, IUser } from "../../interfaces";
 import { usersService } from "../../services";
+import { authActions } from "./authSlice";
 import { progressActions } from "./progressSlice";
 
 interface IState {
   users: IUser[];
   user: IUser | null;
-  userForUpdate: IUser | null;
 }
 
 const initialState: IState = {
   users: [],
   user: null,
-  userForUpdate: null,
 };
 
 const getAllUsers = createAsyncThunk<IPagination<IUser>>(
@@ -45,6 +44,23 @@ const getUserById = createAsyncThunk<IUser, { id: number }>(
       return rejectWithValue(err.response.data);
     } finally {
       dispatch(progressActions.setIsLoading(false));
+    }
+  },
+);
+
+const updateUserById = createAsyncThunk<
+  IUser,
+  { id: number; params: IUpdateProfileParams }
+>(
+  "usersSlice/updateUserById",
+  async ({ id, params }, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await usersService.updateProfile(id, params);
+      dispatch(authActions.setLoggedInUser(data));
+      return data;
+    } catch (e) {
+      const err = e as AxiosError;
+      return rejectWithValue(err.response.data);
     }
   },
 );
@@ -80,6 +96,9 @@ const usersSlice = createSlice({
       })
       .addCase(getUserById.fulfilled, (state, action) => {
         state.user = action.payload;
+      })
+      .addCase(updateUserById.fulfilled, (state, action) => {
+        state.user = action.payload;
       }),
 });
 
@@ -89,6 +108,7 @@ const usersActions = {
   ...actions,
   getAllUsers,
   getUserById,
+  updateUserById,
   deleteUserById,
 };
 export { usersActions, usersReducer };

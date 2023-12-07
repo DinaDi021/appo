@@ -97,6 +97,9 @@ const authSlice = createSlice({
     resetUser: (state) => {
       state.user = null;
     },
+    setLoggedInUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: (build) =>
     build

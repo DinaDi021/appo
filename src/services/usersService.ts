@@ -1,5 +1,5 @@
 import { urls } from "../constants";
-import { IPagination, IUser } from "../interfaces";
+import { IPagination, IUpdateProfileParams, IUser } from "../interfaces";
 import { apiService, IRes } from "./apiServices";
 
 const usersService = {
@@ -7,6 +7,8 @@ const usersService = {
   getProfile: (id: number): IRes<IUser> => apiService.get(urls.users.byId(id)),
   deleteProfile: (id: number): IRes<void> =>
     apiService.delete(urls.users.byId(id)),
+  updateProfile: (id: number, params: IUpdateProfileParams): IRes<IUser> =>
+    apiService.patch(urls.users.byId(id), params),
 };
 
 export { usersService };
