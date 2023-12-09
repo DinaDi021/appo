@@ -10,6 +10,8 @@ const resetPassword = "/password/reset";
 
 const users = "/v1/users";
 
+const appointments = "appointments";
+
 const urls = {
   auth: {
     register: register,
@@ -23,6 +25,11 @@ const urls = {
   users: {
     all: users,
     byId: (id: number): string => `${users}/${id}`,
+  },
+  appointments: {
+    all: (userId: number): string => `${users}/${userId}/${appointments}`,
+    byId: (userId: number, appointmentId: number): string =>
+      `${users}/${userId}${appointments}/${appointmentId}`,
   },
 };
 
