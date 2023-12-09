@@ -11,3 +11,7 @@ export interface IAppointment {
   date: string;
   time: string;
 }
+
+export interface IAppointmentResponce {
+  data: IAppointment[];
+}

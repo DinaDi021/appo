@@ -12,19 +12,19 @@ interface IState {
 
 const initialState: IState = {
   allAppointments: [],
-    appointment: null,
+  appointment: null,
 };
 
 const getUserAllAppointments = createAsyncThunk<
-  IAppointment,
+  IAppointment[],
   { userId: number }
 >(
   "appointmentsSlice/getUserAllAppointments",
-  async ({ userId }, { rejectWithValue, dispatch }): Promise<IAppointment> => {
+  async ({ userId }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
       const { data } = await appointmentsService.getAllAppointments(userId);
-      return data;
+      return data.data;
     } catch (err) {
       const e = err as AxiosError;
       return rejectWithValue(e.response?.data);
@@ -78,8 +78,8 @@ const appointmentsSlice = createSlice({
   name: "appointmentsSlice",
   initialState,
   reducers: {},
-  extraReducers: (build) =>
-    build
+  extraReducers: (builder) =>
+    builder
       .addCase(getUserAllAppointments.fulfilled, (state, action) => {
         state.allAppointments = action.payload;
       })
