@@ -16,21 +16,14 @@ const AccountClient: FC = () => {
     if (user?.data) {
       dispatch(usersActions.getUserById({ id: user.data.id }));
     }
-  }, [dispatch, user]);
-
-  useEffect(() => {
-    if (user?.data) {
-      dispatch(
-        appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
-      );
-    }
+    dispatch(
+      appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
+    );
   }, [dispatch, user]);
 
   if (!user) {
     return <p>User not logged in</p>;
   }
-  console.log(user.data.id);
-  console.log(allAppointments);
 
   return (
     <div>

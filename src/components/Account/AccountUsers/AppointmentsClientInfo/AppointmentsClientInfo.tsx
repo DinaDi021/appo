@@ -1,6 +1,8 @@
 import React, { FC, PropsWithChildren } from "react";
 
+import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { IAppointment } from "../../../../interfaces";
+import { appointmentsActions } from "../../../../redux";
 
 interface IProps extends PropsWithChildren {
   appointment: IAppointment;
@@ -18,10 +20,21 @@ const AppointmentsClientInfo: FC<IProps> = ({ appointment }) => {
     date,
     time,
   } = appointment;
+  const { user } = useAppSelector((state) => state.auth);
+  const userId = user.data.id;
+  const appointmentId = id;
+
+  const dispatch = useAppDispatch();
+
+  const deleteAppo = async () => {
+    await dispatch(
+      appointmentsActions.deleteAppointmentById({ userId, appointmentId }),
+    );
+    dispatch(appointmentsActions.getUserAllAppointments({ userId }));
+  };
 
   return (
     <div>
-      <h4>{id}</h4>
       <h4>{sum}</h4>
       <h4>{payment}</h4>
       <h4>{title}</h4>
@@ -30,7 +43,7 @@ const AppointmentsClientInfo: FC<IProps> = ({ appointment }) => {
       <h4>{master_lastname}</h4>
       <h4>{date}</h4>
       <h4>{time}</h4>
-      <button>Delete appointments</button>
+      <button onClick={deleteAppo}>Delete appointments</button>
     </div>
   );
 };
