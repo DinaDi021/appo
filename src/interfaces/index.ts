@@ -3,5 +3,5 @@ export * from "./queryParamsInterface";
 export * from "./authInterface";
 export * from "./userInterface";
 export * from "./tokensInterface";
-export * from "./updateProfileParamsInterface";
+export * from "./updateParamsInterface";
 export * from "./appointmentInterface";

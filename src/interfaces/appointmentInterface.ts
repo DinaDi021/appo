@@ -12,6 +12,6 @@ export interface IAppointment {
   time: string;
 }
 
-export interface IAppointmentResponce {
+export interface IAppointmentResponse {
   data: IAppointment[];
 }

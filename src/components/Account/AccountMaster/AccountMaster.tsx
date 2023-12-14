@@ -3,13 +3,13 @@ import React, { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { usersActions } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
-import { AccountClientInfo } from "./AccountClientInfo/AccountUserInfo";
-import { AppointmentsClientInfo } from "./AppointmentsClientInfo/AppointmentsClientInfo";
+import { AccountMasterInfo } from "./AccountMasterInfo/AccountMasterInfo";
+import { SchedulesMasterInfo } from "./SchedulesMasterInfo/SchedulesMasterInfo";
 
-const AccountClient: FC = () => {
+const AccountMaster: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { allAppointments } = useAppSelector((state) => state.appointments);
+  const { allSchedules } = useAppSelector((state) => state.schedules);
   const { isLoading } = useAppSelector((state) => state.progress);
 
   useEffect(() => {
@@ -29,13 +29,13 @@ const AccountClient: FC = () => {
       ) : (
         <div>
           <h3>Contact Information </h3>
-          <AccountClientInfo key={user.data.id} user={user} />
+          <AccountMasterInfo key={user.data.id} user={user} />
           <h3>Post history</h3>
           <div>
-            {allAppointments.map((appointment) => (
-              <AppointmentsClientInfo
-                key={appointment.id}
-                appointment={appointment}
+            {allSchedules.map((schedule) => (
+              <SchedulesMasterInfo
+                key={schedule.schedule_id}
+                schedule={schedule}
               />
             ))}
           </div>
@@ -45,4 +45,4 @@ const AccountClient: FC = () => {
   );
 };
 
-export { AccountClient };
+export { AccountMaster };

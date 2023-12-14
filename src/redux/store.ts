@@ -15,6 +15,7 @@ import {
   appointmentsReducer,
   authReducer,
   progressReducer,
+  schedulesReducer,
   usersReducer,
 } from "./slice";
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   progress: progressReducer,
   users: usersReducer,
   appointments: appointmentsReducer,
+  schedules: schedulesReducer,
 });
 
 const persistConfig = {

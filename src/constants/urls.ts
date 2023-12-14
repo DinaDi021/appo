@@ -11,6 +11,7 @@ const resetPassword = "/password/reset";
 const users = "/v1/users";
 
 const appointments = "appointments";
+const schedules = "schedules";
 
 const urls = {
   auth: {
@@ -30,6 +31,11 @@ const urls = {
     all: (userId: number): string => `${users}/${userId}/${appointments}`,
     byId: (userId: number, appointmentId: number): string =>
       `${users}/${userId}/${appointments}/${appointmentId}`,
+  },
+  schedules: {
+    all: (userId: number): string => `${users}/${userId}/${schedules}`,
+    byId: (userId: number, scheduleId: number): string =>
+      `${users}/${userId}/${schedules}/${scheduleId}`,
   },
 };
 

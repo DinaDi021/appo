@@ -1,9 +1,9 @@
 import { urls } from "../constants";
-import { IAppointment, IAppointmentResponce } from "../interfaces";
+import { IAppointment, IAppointmentResponse } from "../interfaces";
 import { apiService, IRes } from "./apiServices";
 
 const appointmentsService = {
-  getAllAppointments: (userId: number): IRes<IAppointmentResponce> =>
+  getAllAppointments: (userId: number): IRes<IAppointmentResponse> =>
     apiService.get(urls.appointments.all(userId)),
   getAppointment: (userId: number, appointmentId: number): IRes<IAppointment> =>
     apiService.get(urls.appointments.byId(userId, appointmentId)),
