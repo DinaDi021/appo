@@ -10,6 +10,13 @@
     height: 320px;
   }
 
+  &__schedule {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
   &__login {
     height: 200px;
   }
@@ -63,3 +70,13 @@
   text-align: center;
 }
 
+.schedule__status{
+  display: flex;
+  padding: 10px 5px;
+  border-bottom: 1px solid gray;
+  border-radius: 8px;
+
+  svg {
+    padding-right: 5px;
+  }
+}

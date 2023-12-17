@@ -10,3 +10,7 @@ export * from "./RegisterPage/RegisterPage";
 export * from "./ForgotPasswordPage/ForgotPasswordPage";
 export * from "./ResetPasswordPage/ResetPasswordPage";
 export * from "./PersonalAccount/PersonalAccount";
+export * from "./AppointmentPage/AppointmentPage";
+export * from "./AppointmentPage/AppointmentPageDetails";
+export * from "./SchedulePages/SchedulePages";
+export * from "./SchedulePages/SchedulesPageDetails";

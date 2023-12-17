@@ -1,7 +1,7 @@
 import React from "react";
 
+import { AccountClient } from "../../components/Account/AccountClient";
 import { AccountMaster } from "../../components/Account/AccountMaster";
-import { AccountClient } from "../../components/Account/AccountUsers";
 import { useAppSelector } from "../../hooks";
 
 const PersonalAccount = () => {

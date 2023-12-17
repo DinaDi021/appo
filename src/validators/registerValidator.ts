@@ -24,6 +24,10 @@ const updateShema = Joi.object({
   email: Joi.string().regex(regex.EMAIL).trim().optional(),
 });
 
+const updateShemaSchedules = Joi.object({
+  date: Joi.string().regex(regex.DATE).optional(),
+  time: Joi.string().regex(regex.TIME).optional(),
+}).or("date", "time");
 const forgotPasswordSchema = Joi.object({
   email: Joi.string().regex(regex.EMAIL).trim().required(),
 });
@@ -39,4 +43,5 @@ export {
   forgotPasswordSchema,
   resetPasswordSchema,
   loginShema,
+  updateShemaSchedules,
 };

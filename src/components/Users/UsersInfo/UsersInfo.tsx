@@ -6,17 +6,17 @@ import React, { FC, PropsWithChildren, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "../../../../hooks";
-import { IUpdateProfileParams, IUser } from "../../../../interfaces";
-import { authActions, usersActions } from "../../../../redux";
-import { updateShema } from "../../../../validators";
-import styles from "../../../LoginPanel/Form/Form.module.scss";
+import { useAppDispatch } from "../../../hooks";
+import { IUpdateProfileParams, IUser } from "../../../interfaces";
+import { authActions, usersActions } from "../../../redux";
+import { updateShema } from "../../../validators";
+import styles from "../../LoginPanel/Form/Form.module.scss";
 
 interface IProps extends PropsWithChildren {
   user: IUser;
 }
 
-const AccountMasterInfo: FC<IProps> = ({ user }) => {
+const UsersInfo: FC<IProps> = ({ user }) => {
   const { id, firstname, lastname, birthdate, email, phone_number } = user.data;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -163,4 +163,4 @@ const AccountMasterInfo: FC<IProps> = ({ user }) => {
   );
 };
 
-export { AccountMasterInfo };
+export { UsersInfo };

@@ -1,20 +1,29 @@
 import React, { FC, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { usersActions } from "../../../redux";
+import { appointmentsActions, usersActions } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
-import { AccountClientInfo } from "./AccountClientInfo/AccountUserInfo";
-import { AppointmentsClientInfo } from "./AppointmentsClientInfo/AppointmentsClientInfo";
+import { UsersInfo } from "../../Users/UsersInfo/UsersInfo";
 
 const AccountClient: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { allAppointments } = useAppSelector((state) => state.appointments);
   const { isLoading } = useAppSelector((state) => state.progress);
+  const navigate = useNavigate();
+  const getSchedules = () => {
+    navigate("/me/schedules");
+  };
+  const getAppointments = () => {
+    navigate("/me/appointments");
+  };
 
   useEffect(() => {
     if (user?.data) {
       dispatch(usersActions.getUserById({ id: user.data.id }));
+      dispatch(
+        appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
+      );
     }
   }, [dispatch, user]);
 
@@ -29,16 +38,10 @@ const AccountClient: FC = () => {
       ) : (
         <div>
           <h3>Contact Information </h3>
-          <AccountClientInfo key={user.data.id} user={user} />
-          <h3>Post history</h3>
-          <div>
-            {allAppointments.map((appointment) => (
-              <AppointmentsClientInfo
-                key={appointment.id}
-                appointment={appointment}
-              />
-            ))}
-          </div>
+          <UsersInfo key={user.data.id} user={user} />
+          <button onClick={getSchedules}>My schedules</button>
+          <button onClick={getAppointments}>My appointments</button>
+          <Outlet />
         </div>
       )}
     </div>

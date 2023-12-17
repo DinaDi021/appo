@@ -4,6 +4,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { MainLayout } from "./layout";
 import {
   AboutUsPage,
+  AppointmentPage,
+  AppointmentPageDetails,
   ContactsPage,
   CoursesPage,
   ForgotPasswordPage,
@@ -14,6 +16,8 @@ import {
   PricePage,
   RegisterPage,
   ResetPasswordPage,
+  SchedulePages,
+  SchedulesPageDetails,
   ServicesPage,
 } from "./pages";
 
@@ -57,6 +61,24 @@ const router = createBrowserRouter([
       {
         path: "me",
         element: <PersonalAccount />,
+        children: [
+          {
+            path: "appointments",
+            element: <AppointmentPage />,
+          },
+          {
+            path: "appointments/:id",
+            element: <AppointmentPageDetails />,
+          },
+          {
+            path: "schedules",
+            element: <SchedulePages />,
+          },
+          {
+            path: "schedules/:id",
+            element: <SchedulesPageDetails />,
+          },
+        ],
       },
       {
         path: "register",

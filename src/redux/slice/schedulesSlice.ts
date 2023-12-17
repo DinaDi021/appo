@@ -9,11 +9,13 @@ import { progressActions } from "./progressSlice";
 interface IState {
   allSchedules: ISchedule[];
   schedule: ISchedule | null;
+  updatedSchedule: ISchedule | null;
 }
 
 const initialState: IState = {
   allSchedules: [],
   schedule: null,
+  updatedSchedule: null,
 };
 
 const getAllSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
@@ -95,7 +97,14 @@ const deleteScheduleById = createAsyncThunk<
 const schedulesSlice = createSlice({
   name: "schedulesSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setUpdatedParams: (state, action) => {
+      state.updatedSchedule = action.payload;
+    },
+    clearUpdatedParams: (state) => {
+      state.updatedSchedule = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getAllSchedules.fulfilled, (state, action) => {
@@ -103,6 +112,10 @@ const schedulesSlice = createSlice({
       })
       .addCase(getScheduleById.fulfilled, (state, action) => {
         state.schedule = action.payload;
+      })
+      .addCase(updateScheduleById.fulfilled, (state, action) => {
+        state.schedule = action.payload;
+        state.updatedSchedule = null;
       })
       .addCase(deleteScheduleById.fulfilled, (state) => {
         state.schedule = null;
