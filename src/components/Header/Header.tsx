@@ -15,6 +15,10 @@ const Header: FC = () => {
       label: "Main",
     },
     {
+      path: "/chooseMaster",
+      label: "Our Masters",
+    },
+    {
       path: "/aboutUs",
       label: "About us",
     },
@@ -49,7 +53,11 @@ const Header: FC = () => {
           ))}
         </nav>
         {user ? (
-          <div className={styles.userIcon}>{user.data.firstname.charAt(0)}</div>
+          <Link to={"/me"}>
+            <div className={styles.userIcon}>
+              {user.data.firstname.charAt(0)}
+            </div>
+          </Link>
         ) : (
           <LoginPanel />
         )}

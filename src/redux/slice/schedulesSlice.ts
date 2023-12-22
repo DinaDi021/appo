@@ -18,12 +18,12 @@ const initialState: IState = {
   updatedSchedule: null,
 };
 
-const getAllSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
-  "schedulesSlice/getAllSchedules",
+const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
+  "schedulesSlice/getAllUsersSchedules",
   async ({ userId }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
-      const { data } = await schedulesService.getAllSchedules(userId);
+      const { data } = await schedulesService.getAllUsersSchedules(userId);
       return data.data;
     } catch (err) {
       const e = err as AxiosError;
@@ -107,7 +107,7 @@ const schedulesSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(getAllSchedules.fulfilled, (state, action) => {
+      .addCase(getAllUsersSchedules.fulfilled, (state, action) => {
         state.allSchedules = action.payload;
       })
       .addCase(getScheduleById.fulfilled, (state, action) => {
@@ -126,7 +126,7 @@ const { reducer: schedulesReducer, actions } = schedulesSlice;
 
 const schedulesActions = {
   ...actions,
-  getAllSchedules,
+  getAllUsersSchedules,
   getScheduleById,
   updateScheduleById,
   deleteScheduleById,

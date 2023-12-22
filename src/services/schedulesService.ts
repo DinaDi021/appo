@@ -4,8 +4,8 @@ import { ISchedule, ISchedulesResponse } from "../interfaces/scheduleInterface";
 import { apiService, IRes } from "./apiServices";
 
 const schedulesService = {
-  getAllSchedules: (userId: number): IRes<ISchedulesResponse> =>
-    apiService.get(urls.schedules.all(userId)),
+  getAllUsersSchedules: (userId: number): IRes<ISchedulesResponse> =>
+    apiService.get(urls.schedules.usersAll(userId)),
   getSchedule: (userId: number, scheduleId: number): IRes<ISchedule> =>
     apiService.get(urls.schedules.byId(userId, scheduleId)),
   deleteSchedule: (userId: number, scheduleId: number): IRes<void> =>

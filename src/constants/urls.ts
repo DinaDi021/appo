@@ -33,7 +33,7 @@ const urls = {
       `${users}/${userId}/${appointments}/${appointmentId}`,
   },
   schedules: {
-    all: (userId: number): string => `${users}/${userId}/${schedules}`,
+    usersAll: (userId: number): string => `${users}/${userId}/${schedules}`,
     byId: (userId: number, scheduleId: number): string =>
       `${users}/${userId}/${schedules}/${scheduleId}`,
   },

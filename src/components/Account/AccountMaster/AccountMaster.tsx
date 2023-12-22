@@ -26,7 +26,7 @@ const AccountMaster: FC = () => {
   useEffect(() => {
     if (user?.data) {
       dispatch(usersActions.getUserById({ id: user.data.id }));
-      dispatch(schedulesActions.getAllSchedules({ userId: user.data.id }));
+      dispatch(schedulesActions.getAllUsersSchedules({ userId: user.data.id }));
       dispatch(
         appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
       );

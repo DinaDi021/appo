@@ -39,6 +39,19 @@
     color: var(--basic-white);
 }
 
+.userIcon {
+    border: 1px solid white;
+    border-radius: 30%;
+    padding: 10px 15px;
+    transition-delay: 0.7ms;
+
+    &:hover{
+        background-color: var(--turquoise);
+        color: var(--basic-white);
+        transition-delay: 0.8ms;
+}
+}
+
 //html[data-theme='light'] .container {
 //    background-color: var(--bright);
 //    border-bottom: 1px solid white;

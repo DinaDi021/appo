@@ -52,7 +52,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
         scheduleId: schedule_id,
       }),
     );
-    dispatch(schedulesActions.getAllSchedules({ userId }));
+    dispatch(schedulesActions.getAllUsersSchedules({ userId }));
   };
 
   const getDetails = () => {
