@@ -6,7 +6,7 @@ import {
   AboutUsPage,
   AppointmentPage,
   AppointmentPageDetails,
-  ChooseMasterPage,
+  AvailableSchedulesPage,
   ContactsPage,
   CoursesPage,
   ForgotPasswordPage,
@@ -36,8 +36,8 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "chooseMaster",
-        element: <ChooseMasterPage />,
+        path: "availableSchedules",
+        element: <AvailableSchedulesPage />,
       },
       {
         path: "aboutUs",

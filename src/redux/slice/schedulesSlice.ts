@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IUpdateSchedulesParams } from "../../interfaces";
+import { IMaster, IUpdateSchedulesParams } from "../../interfaces";
 import { ISchedule } from "../../interfaces/scheduleInterface";
 import { schedulesService } from "../../services/schedulesService";
 import { progressActions } from "./progressSlice";
@@ -10,12 +10,14 @@ interface IState {
   allSchedules: ISchedule[];
   schedule: ISchedule | null;
   updatedSchedule: ISchedule | null;
+  availableSchedules: IMaster[];
 }
 
 const initialState: IState = {
   allSchedules: [],
   schedule: null,
   updatedSchedule: null,
+  availableSchedules: [],
 };
 
 const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
@@ -24,6 +26,22 @@ const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
     try {
       dispatch(progressActions.setIsLoading(true));
       const { data } = await schedulesService.getAllUsersSchedules(userId);
+      return data.data;
+    } catch (err) {
+      const e = err as AxiosError;
+      return rejectWithValue(e.response?.data);
+    } finally {
+      dispatch(progressActions.setIsLoading(false));
+    }
+  },
+);
+
+const getAvailableSchedules = createAsyncThunk<IMaster[]>(
+  "schedulesSlice/getAvailableSchedules",
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      dispatch(progressActions.setIsLoading(true));
+      const { data } = await schedulesService.availableSchedules();
       return data.data;
     } catch (err) {
       const e = err as AxiosError;
@@ -107,6 +125,9 @@ const schedulesSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
+      .addCase(getAvailableSchedules.fulfilled, (state, action) => {
+        state.availableSchedules = action.payload;
+      })
       .addCase(getAllUsersSchedules.fulfilled, (state, action) => {
         state.allSchedules = action.payload;
       })
@@ -126,6 +147,7 @@ const { reducer: schedulesReducer, actions } = schedulesSlice;
 
 const schedulesActions = {
   ...actions,
+  getAvailableSchedules,
   getAllUsersSchedules,
   getScheduleById,
   updateScheduleById,

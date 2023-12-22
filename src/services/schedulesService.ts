@@ -1,9 +1,14 @@
 import { urls } from "../constants";
-import { IUpdateSchedulesParams } from "../interfaces";
+import {
+  IAvailableMasterResponse,
+  IUpdateSchedulesParams,
+} from "../interfaces";
 import { ISchedule, ISchedulesResponse } from "../interfaces/scheduleInterface";
 import { apiService, IRes } from "./apiServices";
 
 const schedulesService = {
+  availableSchedules: (): IRes<IAvailableMasterResponse> =>
+    apiService.get(urls.schedules.availableSchedules),
   getAllUsersSchedules: (userId: number): IRes<ISchedulesResponse> =>
     apiService.get(urls.schedules.usersAll(userId)),
   getSchedule: (userId: number, scheduleId: number): IRes<ISchedule> =>

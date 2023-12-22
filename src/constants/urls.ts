@@ -12,6 +12,7 @@ const users = "/v1/users";
 
 const appointments = "appointments";
 const schedules = "schedules";
+const availableSchedules = "/v1/schedules";
 
 const urls = {
   auth: {
@@ -33,6 +34,7 @@ const urls = {
       `${users}/${userId}/${appointments}/${appointmentId}`,
   },
   schedules: {
+    availableSchedules: availableSchedules,
     usersAll: (userId: number): string => `${users}/${userId}/${schedules}`,
     byId: (userId: number, scheduleId: number): string =>
       `${users}/${userId}/${schedules}/${scheduleId}`,

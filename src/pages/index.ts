@@ -14,4 +14,4 @@ export * from "./AppointmentPage/AppointmentPage";
 export * from "./AppointmentPage/AppointmentPageDetails";
 export * from "./SchedulePages/SchedulePages";
 export * from "./SchedulePages/SchedulesPageDetails";
-export * from "./ChooseMasterPage/ChooseMasterPage";
+export * from "./AvailableSchedulesPage/AvailableSchedulesPage";

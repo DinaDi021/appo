@@ -17,7 +17,7 @@ const initialState: IState = {
 };
 
 const getAllUsers = createAsyncThunk<IPagination<IUser>>(
-  "movieSlice/getAllTop",
+  "usersSlice/getAllUsers",
   async (_, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));

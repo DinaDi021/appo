@@ -15,8 +15,8 @@ const Header: FC = () => {
       label: "Main",
     },
     {
-      path: "/chooseMaster",
-      label: "Our Masters",
+      path: "/availableSchedules",
+      label: "Available Schedules",
     },
     {
       path: "/aboutUs",
