@@ -14,6 +14,9 @@ const appointments = "appointments";
 const schedules = "schedules";
 const v1 = "/v1";
 
+const cart = "carts";
+const checkout = "checkout";
+
 const urls = {
   auth: {
     register: register,
@@ -38,6 +41,14 @@ const urls = {
     usersAll: (userId: number): string => `${users}/${userId}/${schedules}`,
     byId: (userId: number, scheduleId: number): string =>
       `${users}/${userId}/${schedules}/${scheduleId}`,
+  },
+  cart: {
+    all: (userId: number): string => `${users}/${userId}/${cart}`,
+    byId: (userId: number, cartId: number): string =>
+      `${users}/${userId}/${cart}/${cartId}`,
+  },
+  checkout: {
+    all: (userId: number): string => `${users}/${userId}/${checkout}`,
   },
 };
 
