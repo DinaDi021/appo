@@ -15,3 +15,4 @@ export * from "./AppointmentPage/AppointmentPageDetails";
 export * from "./SchedulePages/SchedulePages";
 export * from "./SchedulePages/SchedulesPageDetails";
 export * from "./AvailableSchedulesPage/AvailableSchedulesPage";
+export * from "./AvailableSchedulesPage/AvailableSchedulesDetailsPage";

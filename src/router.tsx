@@ -6,6 +6,7 @@ import {
   AboutUsPage,
   AppointmentPage,
   AppointmentPageDetails,
+  AvailableSchedulesDetailsPage,
   AvailableSchedulesPage,
   ContactsPage,
   CoursesPage,
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "availableSchedules",
         element: <AvailableSchedulesPage />,
+      },
+      {
+        path: "availableSchedules/:id",
+        element: <AvailableSchedulesDetailsPage />,
       },
       {
         path: "aboutUs",

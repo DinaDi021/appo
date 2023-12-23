@@ -23,8 +23,8 @@ const SchedulesInfoDetails: FC<IProps> = ({ schedule }) => {
       {appointment ? (
         <div>
           <p>Title: {appointment.title}</p>
-          <p>Title: {appointment.category}</p>
-          <p>Title: {appointment.payment}</p>
+          <p>Category: {appointment.category}</p>
+          <p>Payment: {appointment.payment}</p>
         </div>
       ) : (
         <p>No appointment information available</p>

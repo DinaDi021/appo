@@ -11,6 +11,7 @@ interface IState {
   schedule: ISchedule | null;
   updatedSchedule: ISchedule | null;
   availableSchedules: IMaster[];
+  selectedMaster: IMaster | null;
 }
 
 const initialState: IState = {
@@ -18,6 +19,7 @@ const initialState: IState = {
   schedule: null,
   updatedSchedule: null,
   availableSchedules: [],
+  selectedMaster: null,
 };
 
 const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
@@ -121,6 +123,9 @@ const schedulesSlice = createSlice({
     },
     clearUpdatedParams: (state) => {
       state.updatedSchedule = null;
+    },
+    setSelectedMaster: (state, action) => {
+      state.selectedMaster = action.payload;
     },
   },
   extraReducers: (builder) =>
