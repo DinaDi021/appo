@@ -14,7 +14,7 @@ const appointments = "appointments";
 const schedules = "schedules";
 const v1 = "/v1";
 
-const cart = "carts";
+const carts = "carts";
 const checkout = "checkout";
 
 const urls = {
@@ -42,10 +42,10 @@ const urls = {
     byId: (userId: number, scheduleId: number): string =>
       `${users}/${userId}/${schedules}/${scheduleId}`,
   },
-  cart: {
-    all: (userId: number): string => `${users}/${userId}/${cart}`,
+  carts: {
+    all: (userId: number): string => `${users}/${userId}/${carts}`,
     byId: (userId: number, cartId: number): string =>
-      `${users}/${userId}/${cart}/${cartId}`,
+      `${users}/${userId}/${carts}/${cartId}`,
   },
   checkout: {
     all: (userId: number): string => `${users}/${userId}/${checkout}`,

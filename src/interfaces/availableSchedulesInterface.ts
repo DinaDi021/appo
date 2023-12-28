@@ -2,7 +2,7 @@ export interface IAvailableSchedule {
   schedule_id: number;
   date: string;
   time: string;
-  status: string;
+  status?: string;
 }
 
 export interface IPrice {

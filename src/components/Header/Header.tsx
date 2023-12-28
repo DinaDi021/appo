@@ -34,6 +34,10 @@ const Header: FC = () => {
       path: "/contacts",
       label: "Contacts",
     },
+    {
+      path: "/cart",
+      label: "Cart",
+    },
   ];
   const { pathname } = useLocation();
 

@@ -1,5 +1,5 @@
 export interface IItem {
-  id: number;
+  id?: number;
   schedule_id: number;
   service_id: number;
   price_id: number;
@@ -14,18 +14,22 @@ export interface IItem {
 }
 
 export interface ICart {
-  data: {
-    items: IItem[];
-    totalSum: number;
-  };
+  items: IItem[];
+  totalSum: number;
 }
 
 export interface ICheckout {
-  data: {
-    items: IItem[];
-    totalSum: {
-      full: number;
-      prepayment: number;
-    };
+  items: IItem[];
+  totalSum: {
+    full: number;
+    prepayment: number;
   };
+}
+
+export interface ICartResponse {
+  data: ICart;
+}
+
+export interface ICheckoutResponse {
+  data: ICheckout;
 }
