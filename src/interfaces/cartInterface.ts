@@ -20,19 +20,19 @@ export interface ICart {
 
 export interface ICheckout {
   items: IItem[];
-  totalSum: {
-    full: number;
-    prepayment: number;
-  };
+  totalSum: IPaymentType;
   totalCount: number;
+}
+export interface ICheckoutResponse {
+  data: ICheckout;
+}
+export interface IPaymentType {
+  full: number;
+  prepayment: number;
 }
 
 export interface ICartResponse {
   data: ICart;
-}
-
-export interface ICheckoutResponse {
-  data: ICheckout;
 }
 
 export interface IPayment {
@@ -43,4 +43,9 @@ export interface IPayment {
 
 export interface IPaymentResponse {
   data: IPayment;
+}
+
+export interface IPaymentParams {
+  result_url: string;
+  payment: string;
 }

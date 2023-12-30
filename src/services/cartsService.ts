@@ -3,6 +3,8 @@ import {
   ICartResponse,
   ICheckoutResponse,
   IItem,
+  IPaymentParams,
+  IPaymentResponse,
 } from "../interfaces/cartInterface";
 import { apiService, IRes } from "./apiServices";
 
@@ -15,6 +17,8 @@ const cartsService = {
     apiService.delete(urls.carts.byId(userId, cartId)),
   checkoutCart: (userId: number): IRes<ICheckoutResponse> =>
     apiService.get(urls.checkout.all(userId)),
+  payButton: (userId: number, params: IPaymentParams): IRes<IPaymentResponse> =>
+    apiService.get(urls.pay.all(userId), { params }),
 };
 
 export { cartsService };

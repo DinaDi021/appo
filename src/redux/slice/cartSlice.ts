@@ -6,11 +6,19 @@ import {
 } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { ICart, ICheckout, IItem } from "../../interfaces/cartInterface";
+import {
+  ICart,
+  ICheckout,
+  IItem,
+  IPayment,
+  IPaymentParams,
+} from "../../interfaces/cartInterface";
 import { cartsService } from "../../services/cartsService";
 import { progressActions } from "./progressSlice";
 
 interface IState {
+  payCart: IPayment;
+  checkoutCart: ICheckout;
   cart: ICart | null;
   item: IItem | null;
   selectedCategory: IItem | null;
@@ -22,6 +30,8 @@ interface IState {
 }
 
 const initialState: IState = {
+  payCart: null,
+  checkoutCart: null,
   cart: null,
   item: null,
   selectedCategory: null,
@@ -89,6 +99,25 @@ const checkoutCart = createAsyncThunk<ICheckout, { userId: number }>(
   },
 );
 
+const pay = createAsyncThunk<
+  IPayment,
+  { userId: number; params: IPaymentParams }
+>(
+  "cartsSlice/pay",
+  async ({ userId, params }, { rejectWithValue, dispatch }) => {
+    try {
+      dispatch(progressActions.setIsLoading(true));
+      const { data } = await cartsService.payButton(userId, params);
+      return data.data;
+    } catch (err) {
+      const e = err as AxiosError;
+      return rejectWithValue(e.response?.data);
+    } finally {
+      dispatch(progressActions.setIsLoading(false));
+    }
+  },
+);
+
 const cartsSlice = createSlice({
   name: "cartsSlice",
   initialState,
@@ -119,6 +148,12 @@ const cartsSlice = createSlice({
       .addCase(deleteItem.fulfilled, (state) => {
         state.item = null;
       })
+      .addCase(checkoutCart.fulfilled, (state, action) => {
+        state.checkoutCart = action.payload;
+      })
+      .addCase(pay.fulfilled, (state, action) => {
+        state.payCart = action.payload;
+      })
       .addMatcher(isRejected(), (state, action) => {
         state.error = action.payload;
       })
@@ -135,5 +170,6 @@ const cartsActions = {
   addItem,
   deleteItem,
   checkoutCart,
+  pay,
 };
 export { cartsActions, cartsReducer };

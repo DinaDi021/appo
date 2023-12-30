@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { cartsActions } from "../../redux";
@@ -9,6 +10,7 @@ const Cart: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { cart } = useAppSelector((state) => state.carts);
   const { isLoading } = useAppSelector((state) => state.progress);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user?.data) {
@@ -26,6 +28,11 @@ const Cart: FC = () => {
   const deleteAppointment = async (cartId: number) => {
     await dispatch(cartsActions.deleteItem({ userId: user.data.id, cartId }));
     dispatch(cartsActions.getAllItem({ userId: user.data.id }));
+  };
+
+  const checkoutCart = async () => {
+    await dispatch(cartsActions.checkoutCart({ userId: user.data.id }));
+    navigate("checkout");
   };
 
   return (
@@ -52,7 +59,7 @@ const Cart: FC = () => {
             ))}
             <h3>Total Sum: ${cart.totalSum}</h3>
             <h3>Total Count: {cart.totalCount}</h3>
-            <button>Confirm and receive payment</button>
+            <button onClick={checkoutCart}>Confirm and receive payment</button>
           </>
         )}
       </div>

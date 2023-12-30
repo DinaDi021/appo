@@ -16,6 +16,7 @@ const v1 = "/v1";
 
 const carts = "carts";
 const checkout = "checkout";
+const button = "button";
 
 const urls = {
   auth: {
@@ -49,6 +50,9 @@ const urls = {
   },
   checkout: {
     all: (userId: number): string => `${users}/${userId}/${checkout}`,
+  },
+  pay: {
+    all: (userId: number): string => `${users}/${userId}/${button}`,
   },
 };
 

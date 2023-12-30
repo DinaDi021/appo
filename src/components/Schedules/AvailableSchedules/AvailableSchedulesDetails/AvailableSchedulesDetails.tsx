@@ -41,7 +41,10 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
         date_time: selectedSchedule.date_time,
       };
 
-      await dispatch(cartsActions.addItem({ userId, data }));
+      dispatch(cartsActions.addItem({ userId, data })).then(() => {
+        dispatch(cartsActions.setSelectedSchedule(null));
+        dispatch(cartsActions.setSelectedPrice(null));
+      });
     }
   };
 
@@ -91,7 +94,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
           )}
           renderOption={(props, option) => (
             <li {...props}>
-              {option.title} - ${option.price}
+              {option.title} - ₴{option.price}
             </li>
           )}
         />

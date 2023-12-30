@@ -4,17 +4,20 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { MainLayout } from "./layout";
 import {
   AboutUsPage,
+  AfterPaymentPage,
   AppointmentPage,
   AppointmentPageDetails,
   AvailableSchedulesDetailsPage,
   AvailableSchedulesPage,
   CartPage,
+  CheckoutPage,
   ContactsPage,
   CoursesPage,
   ForgotPasswordPage,
   LoginPage,
   MainPage,
   NotFoundPage,
+  PayCartPage,
   PersonalAccount,
   PricePage,
   RegisterPage,
@@ -68,6 +71,20 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+        children: [
+          {
+            path: "checkout",
+            element: <CheckoutPage />,
+          },
+        ],
+      },
+      {
+        path: "cart/payment",
+        element: <AfterPaymentPage />,
+      },
+      {
+        path: "cart/checkout/liqPay",
+        element: <PayCartPage />,
       },
       {
         path: "login",

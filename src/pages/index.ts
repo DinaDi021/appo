@@ -17,3 +17,6 @@ export * from "./SchedulePages/SchedulesPageDetails";
 export * from "./AvailableSchedulesPage/AvailableSchedulesPage";
 export * from "./AvailableSchedulesPage/AvailableSchedulesDetailsPage";
 export * from "./CartPage/CartPage";
+export * from "./CartPage/AfterPaymentPage";
+export * from "./CartPage/CheckoutPage";
+export * from "./CartPage/PayCartPage";
