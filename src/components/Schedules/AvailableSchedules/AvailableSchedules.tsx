@@ -13,17 +13,22 @@ const AvailableSchedules: FC = () => {
     dispatch(schedulesActions.getAvailableSchedules());
   }, [dispatch]);
 
+  console.log(availableSchedules);
+
   if (!availableSchedules || availableSchedules.length === 0) {
     return <div>No available schedules</div>;
   }
+
   return (
     <div className={styles.available__container}>
-      {availableSchedules.map((availableSchedule) => (
-        <AvailableSchedulesMaster
-          key={availableSchedule.master_id}
-          availableSchedule={availableSchedule}
-        />
-      ))}
+      {availableSchedules.map((availableSchedule) =>
+        availableSchedule && Object.keys(availableSchedule).length !== 0 ? (
+          <AvailableSchedulesMaster
+            key={availableSchedule.master_id}
+            availableSchedule={availableSchedule}
+          />
+        ) : null,
+      )}
     </div>
   );
 };

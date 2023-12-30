@@ -1,7 +1,6 @@
 export interface IAvailableSchedule {
   schedule_id: number;
-  date: string;
-  time: string;
+  date_time: string;
   status?: string;
 }
 

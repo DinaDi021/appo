@@ -29,6 +29,13 @@
   }
 }
 
+.personalAccount{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .card {
   width: 50%;
   padding: 25px 15px;

@@ -3,6 +3,7 @@ import React from "react";
 import { AccountClient } from "../../components/Account/AccountClient";
 import { AccountMaster } from "../../components/Account/AccountMaster";
 import { useAppSelector } from "../../hooks";
+import styles from "../pages.module.scss";
 
 const PersonalAccount = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -19,9 +20,9 @@ const PersonalAccount = () => {
   };
 
   return (
-    <>
+    <div className={styles.personalAccount}>
       <>{renderAccountComponent()}</>
-    </>
+    </div>
   );
 };
 

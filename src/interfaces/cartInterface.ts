@@ -8,14 +8,14 @@ export interface IItem {
   category: string;
   master_firstname: string;
   master_lastname: string;
-  date: string;
-  time: string;
+  date_time: string;
   message?: string;
 }
 
 export interface ICart {
   items: IItem[];
   totalSum: number;
+  totalCount: number;
 }
 
 export interface ICheckout {
@@ -24,6 +24,7 @@ export interface ICheckout {
     full: number;
     prepayment: number;
   };
+  totalCount: number;
 }
 
 export interface ICartResponse {
@@ -32,4 +33,14 @@ export interface ICartResponse {
 
 export interface ICheckoutResponse {
   data: ICheckout;
+}
+
+export interface IPayment {
+  payment: string;
+  order_id: number;
+  html_button: string;
+}
+
+export interface IPaymentResponse {
+  data: IPayment;
 }

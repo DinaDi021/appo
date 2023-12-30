@@ -38,8 +38,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
         category: selectedPrice.category,
         master_firstname: master_firstname,
         master_lastname: master_lastname,
-        date: selectedSchedule.date,
-        time: selectedSchedule.time,
+        date_time: selectedSchedule.date_time,
       };
 
       await dispatch(cartsActions.addItem({ userId, data }));
@@ -57,7 +56,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
           id="auto-select"
           autoSelect
           options={schedules}
-          getOptionLabel={(schedule) => `${schedule.date} ${schedule.time}`}
+          getOptionLabel={(schedule) => `${schedule.date_time}`}
           sx={{ width: 300 }}
           value={selectedSchedule}
           onChange={(event, newValue) => {
@@ -70,12 +69,9 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
             <TextField {...params} label="Date and time" />
           )}
           renderOption={(props, option) => (
-            <li {...props}>
-              {option.date} {option.time}
-            </li>
+            <li {...props}>{option.date_time}</li>
           )}
         />
-
         <Autocomplete
           id="auto-select"
           autoSelect

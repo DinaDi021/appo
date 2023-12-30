@@ -41,6 +41,7 @@ const Cart: FC = () => {
             {cart.items.map((item) => (
               <div key={item.id}>
                 <p>Title: {item.title}</p>
+                <p>Data and time: {item.date_time}</p>
                 <p>Category: {item.category}</p>
                 <p>Price: ${item.price}</p>
                 <button onClick={() => deleteAppointment(item.id)}>
@@ -50,6 +51,7 @@ const Cart: FC = () => {
               </div>
             ))}
             <h3>Total Sum: ${cart.totalSum}</h3>
+            <h3>Total Count: {cart.totalCount}</h3>
             <button>Confirm and receive payment</button>
           </>
         )}
