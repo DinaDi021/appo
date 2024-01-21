@@ -22,7 +22,6 @@ const Cart: FC = () => {
     return <p>User not logged in</p>;
   }
 
-  console.log(cart);
   const isCartEmpty = cart === null || cart === undefined;
 
   const deleteAppointment = async (cartId: number) => {

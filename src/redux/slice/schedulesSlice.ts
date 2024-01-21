@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IMaster, IUpdateSchedulesParams } from "../../interfaces";
+import { IMaster, IUpdateSchedulesParams, QueryParams } from "../../interfaces";
 import { ISchedule } from "../../interfaces/scheduleInterface";
-import { schedulesService } from "../../services/schedulesService";
+import { schedulesService } from "../../services";
 import { progressActions } from "./progressSlice";
 
 interface IState {
@@ -38,12 +38,20 @@ const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
   },
 );
 
-const getAvailableSchedules = createAsyncThunk<IMaster[]>(
+const getAvailableSchedules = createAsyncThunk<
+  IMaster[],
+  { query: QueryParams }
+>(
   "schedulesSlice/getAvailableSchedules",
-  async (_, { rejectWithValue, dispatch }) => {
+  async ({ query }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
-      const { data } = await schedulesService.availableSchedules();
+      const { data } = await schedulesService.availableSchedules(
+        query.date,
+        query.service_id,
+        query.category,
+        query.master_id,
+      );
       return data.data;
     } catch (err) {
       const e = err as AxiosError;

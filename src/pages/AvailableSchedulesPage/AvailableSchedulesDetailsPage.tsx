@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { AvailableSchedulesDetails } from "../../components/Schedules/AvailableSchedules/AvailableSchedulesDetails/AvailableSchedulesDetails";
+import { AvailableSchedulesDetails } from "../../components/Schedules";
 import { useAppSelector } from "../../hooks";
 
 const AvailableSchedulesDetailsPage: FC = () => {

@@ -4,3 +4,4 @@ export * from "./usersSlice";
 export * from "./appointmentsSlice";
 export * from "./schedulesSlice";
 export * from "./cartSlice";
+export * from "./servicesSlice";

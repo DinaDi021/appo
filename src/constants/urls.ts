@@ -12,6 +12,7 @@ const users = "/v1/users";
 
 const appointments = "appointments";
 const schedules = "schedules";
+const services = "services";
 const v1 = "/v1";
 
 const carts = "carts";
@@ -31,6 +32,9 @@ const urls = {
   users: {
     all: users,
     byId: (id: number): string => `${users}/${id}`,
+  },
+  services: {
+    all: `${v1}/${services}`,
   },
   appointments: {
     all: (userId: number): string => `${users}/${userId}/${appointments}`,

@@ -17,6 +17,7 @@ import {
   cartsReducer,
   progressReducer,
   schedulesReducer,
+  servicesReducer,
   usersReducer,
 } from "./slice";
 import { filtersReducer } from "./slice/filtersSlice";
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   schedules: schedulesReducer,
   carts: cartsReducer,
   filters: filtersReducer,
+  services: servicesReducer,
 });
 
 const persistConfig = {

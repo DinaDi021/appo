@@ -1,7 +1,7 @@
 .available {
 
   &__container {
-    width: 80%;
+    width: 75%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
@@ -16,5 +16,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+  }
+
+  &__wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 }
