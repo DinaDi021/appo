@@ -33,8 +33,6 @@ const Filter: FC = () => {
       ? dates.map((date) => format(date, "yyyy-MM-dd"))
       : [format(dates, "yyyy-MM-dd")];
 
-    console.log(formattedDates);
-
     dispatch(filtersActions.setDateFilter(formattedDates));
   };
 

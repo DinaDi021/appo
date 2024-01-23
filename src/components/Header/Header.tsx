@@ -43,7 +43,6 @@ const Header: FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const handleClearFilterClick = () => {
-    console.log("Clearing filters...");
     dispatch(filtersActions.clearDateFilter());
     dispatch(filtersActions.clearMasterFilter());
     dispatch(filtersActions.clearCategoryFilter());
