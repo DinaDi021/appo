@@ -26,8 +26,6 @@ const Filter: FC = () => {
         )
       : services;
 
-  console.log(filterDate, filterService, filterCategories, filterMaster);
-
   const handleDateChange = (dates: Date[]) => {
     const formattedDates = Array.isArray(dates)
       ? dates.map((date) => format(date, "yyyy-MM-dd"))
@@ -56,7 +54,6 @@ const Filter: FC = () => {
   };
 
   const handleClearFilterClick = () => {
-    console.log("Clearing filters...");
     dispatch(filtersActions.clearDateFilter());
     dispatch(filtersActions.clearMasterFilter());
     dispatch(filtersActions.clearCategoryFilter());
