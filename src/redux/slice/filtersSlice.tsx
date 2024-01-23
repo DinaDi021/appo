@@ -4,7 +4,7 @@ interface IState {
   filterDate: string[] | null;
   filterService: number[] | null;
   filterCategories: string[] | null;
-  filterMaster: number[] | null;
+  filterMaster: number | null;
 }
 
 const initialState: IState = {

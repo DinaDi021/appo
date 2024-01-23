@@ -11,7 +11,7 @@ const schedulesService = {
     date: string[],
     service_id: number[],
     category: string[],
-    master_id: number[],
+    master_id: number,
   ): IRes<IAvailableMasterResponse> =>
     apiService.get(urls.schedules.availableSchedules, {
       params: {

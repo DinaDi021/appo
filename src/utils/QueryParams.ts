@@ -6,7 +6,7 @@ export const updateQueryParams = (
   filterDate: string[],
   filterService: number[],
   filterCategories: string[],
-  filterMaster: number[],
+  filterMaster: number,
 ) => {
   queryParams = { ...queryParams };
 

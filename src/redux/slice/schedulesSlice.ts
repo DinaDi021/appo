@@ -50,7 +50,7 @@ const getAvailableSchedules = createAsyncThunk<
         query.date,
         query.service_id,
         query.category,
-        query.master_id,
+        +query.master_id,
       );
       return data.data;
     } catch (err) {

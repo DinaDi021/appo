@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { QueryParams } from "../../../interfaces";
@@ -14,12 +14,13 @@ const AvailableSchedules: FC = () => {
   const { filterDate, filterService, filterCategories, filterMaster } =
     useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [query, setQuery] = useSearchParams();
   const queryParams: QueryParams = {
     date: [query.get("date")],
     service_id: query.getAll("service_id").map(Number),
     category: [query.get("category")],
-    master_id: query.getAll("master_id").map(Number),
+    master_id: +query.getAll("master_id"),
   };
 
   useEffect(() => {
@@ -33,10 +34,22 @@ const AvailableSchedules: FC = () => {
     );
 
     dispatch(schedulesActions.getAvailableSchedules({ query: queryParams }));
-  }, [dispatch, filterDate, filterService, filterCategories, filterMaster]);
+  }, [
+    dispatch,
+    filterService,
+    filterCategories,
+    filterMaster,
+    filterDate,
+    location.search,
+  ]);
 
   if (!availableSchedules || availableSchedules.length === 0) {
-    return <div>No available schedules</div>;
+    return (
+      <div className={styles.noavailable__wrapper}>
+        <Filter />
+        <div>No available schedules. Please choose different parameters.</div>
+      </div>
+    );
   }
 
   return (

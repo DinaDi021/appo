@@ -24,3 +24,12 @@
     width: 100%;
   }
 }
+
+.noavailable {
+  &__wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

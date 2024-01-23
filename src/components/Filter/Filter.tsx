@@ -1,9 +1,9 @@
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete/Autocomplete";
 import { DateCalendar } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import dayjs from "dayjs";
+import { format } from "date-fns";
 import React, { FC, SyntheticEvent, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -22,9 +22,13 @@ const Filter: FC = () => {
   console.log(filterDate, filterService, filterCategories, filterMaster);
 
   const handleDateChange = (dates: Date[]) => {
-    console.log(dates);
+    const formattedDates = Array.isArray(dates)
+      ? dates.map((date) => format(date, "yyyy-MM-dd"))
+      : [format(dates, "yyyy-MM-dd")];
 
-    dispatch(filtersActions.setDateFilter(dates));
+    console.log(formattedDates);
+
+    dispatch(filtersActions.setDateFilter(formattedDates));
   };
 
   const handleServiceChange = (
@@ -35,8 +39,8 @@ const Filter: FC = () => {
     dispatch(filtersActions.setServiceFilter(serviceIds));
   };
 
-  const handleMasterChange = (selectedMasters: number) => {
-    dispatch(filtersActions.setMasterFilter(selectedMasters));
+  const handleMasterChange = (selectedMasterId: number | null) => {
+    dispatch(filtersActions.setMasterFilter(selectedMasterId));
   };
 
   const handleCategoryChange = (
@@ -61,7 +65,7 @@ const Filter: FC = () => {
   return (
     <div className={styles.filter__container}>
       <div className={styles.filter__calendar}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateCalendar onChange={handleDateChange} />
         </LocalizationProvider>
       </div>
@@ -100,6 +104,9 @@ const Filter: FC = () => {
           }
           onChange={(event, value) =>
             handleMasterChange(value?.master_id ?? null)
+          }
+          isOptionEqualToValue={(option, value) =>
+            option?.master_id === value?.master_id
           }
           renderInput={(params) => <TextField {...params} label="Masters" />}
         />
