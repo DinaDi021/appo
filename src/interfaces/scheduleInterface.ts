@@ -2,8 +2,7 @@ import { IAppointment } from "./appointmentInterface";
 
 export interface ISchedule {
   schedule_id: number;
-  date: string;
-  time: string;
+  date_time: string;
   status: string;
   appointment?: IAppointment;
 }

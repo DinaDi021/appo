@@ -15,8 +15,7 @@ const AppointmentsInfoDetails: FC<IProps> = ({ appointment }) => {
     category,
     master_firstname,
     master_lastname,
-    date,
-    time,
+    date_time,
   } = appointment;
   const navigate = useNavigate();
 
@@ -32,8 +31,7 @@ const AppointmentsInfoDetails: FC<IProps> = ({ appointment }) => {
       <h4>{category}</h4>
       <h4>{master_firstname}</h4>
       <h4>{master_lastname}</h4>
-      <h4>{date}</h4>
-      <h4>{time}</h4>
+      <h4>{date_time}</h4>
       <Link to={"/me/appointments"}>
         <button onClick={getAppointments}>Back to all appointments</button>
       </Link>

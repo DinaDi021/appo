@@ -25,9 +25,8 @@ const updateShema = Joi.object({
 });
 
 const updateShemaSchedules = Joi.object({
-  date: Joi.string().regex(regex.DATE).optional(),
-  time: Joi.string().regex(regex.TIME).optional(),
-}).or("date", "time");
+  date_time: Joi.string().regex(regex.DATE_AND_TIME).optional(),
+});
 const forgotPasswordSchema = Joi.object({
   email: Joi.string().regex(regex.EMAIL).trim().required(),
 });

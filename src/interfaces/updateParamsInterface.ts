@@ -7,6 +7,5 @@ export interface IUpdateProfileParams {
 }
 
 export interface IUpdateSchedulesParams {
-  date: string;
-  time: string;
+  date_time: string;
 }

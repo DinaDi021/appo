@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { filtersActions } from "../../redux/slice/filtersSlice";
 import { LoginPanel } from "../LoginPanel";
 import { Logo } from "../Logo";
 import styles from "./Header.module.scss";
@@ -15,8 +16,8 @@ const Header: FC = () => {
       label: "Main",
     },
     {
-      path: "/chooseMaster",
-      label: "Our Masters",
+      path: "/availableSchedules",
+      label: "Available Schedules",
     },
     {
       path: "/aboutUs",
@@ -34,8 +35,26 @@ const Header: FC = () => {
       path: "/contacts",
       label: "Contacts",
     },
+    {
+      path: "/cart",
+      label: "Cart",
+    },
   ];
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+  const handleClearFilterClick = () => {
+    console.log("Clearing filters...");
+    dispatch(filtersActions.clearDateFilter());
+    dispatch(filtersActions.clearMasterFilter());
+    dispatch(filtersActions.clearCategoryFilter());
+    dispatch(filtersActions.clearServiceFilter());
+  };
+
+  const handleLinkClick = (path: string) => {
+    if (path === "/availableSchedules") {
+      handleClearFilterClick();
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -47,6 +66,7 @@ const Header: FC = () => {
               key={link.path}
               style={{ color: link.path === pathname ? "black" : "white" }}
               to={link.path}
+              onClick={() => handleLinkClick(link.path)}
             >
               {link.label}
             </Link>

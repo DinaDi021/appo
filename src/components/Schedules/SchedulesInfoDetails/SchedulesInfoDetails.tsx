@@ -8,7 +8,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const SchedulesInfoDetails: FC<IProps> = ({ schedule }) => {
-  const { schedule_id, status, date, time, appointment } = schedule;
+  const { schedule_id, status, date_time, appointment } = schedule;
   const navigate = useNavigate();
   const getSchedules = () => {
     navigate("/me/schedules");
@@ -17,14 +17,13 @@ const SchedulesInfoDetails: FC<IProps> = ({ schedule }) => {
   return (
     <div>
       <h4>{status}</h4>
-      <h4>{date}</h4>
-      <h4>{time}</h4>
+      <h4>{date_time}</h4>
       <h1>{schedule_id}</h1>
       {appointment ? (
         <div>
           <p>Title: {appointment.title}</p>
-          <p>Title: {appointment.category}</p>
-          <p>Title: {appointment.payment}</p>
+          <p>Category: {appointment.category}</p>
+          <p>Payment: {appointment.payment}</p>
         </div>
       ) : (
         <p>No appointment information available</p>

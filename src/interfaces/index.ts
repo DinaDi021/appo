@@ -5,3 +5,6 @@ export * from "./userInterface";
 export * from "./tokensInterface";
 export * from "./updateParamsInterface";
 export * from "./appointmentInterface";
+export * from "./availableSchedulesInterface";
+export * from "./servicesInterface";
+export * from "./queryParams";

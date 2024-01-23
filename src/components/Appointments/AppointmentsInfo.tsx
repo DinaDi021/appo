@@ -10,7 +10,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
-  const { id, title, date, time } = appointment;
+  const { id, title, date_time } = appointment;
   const { user } = useAppSelector((state) => state.auth);
   const userId = user.data.id;
   const appointmentId = id;
@@ -32,8 +32,7 @@ const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
     <>
       <div>
         <h4>{title}</h4>
-        <h4>{date}</h4>
-        <h4>{time}</h4>
+        <h4>{date_time}</h4>
         <button onClick={deleteAppo}>Delete appointments</button>
         <button onClick={getDetails}>Get details</button>
       </div>

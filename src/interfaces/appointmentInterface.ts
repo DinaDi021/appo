@@ -8,8 +8,7 @@ export interface IAppointment {
   category: string;
   master_firstname: string;
   master_lastname: string;
-  date: string;
-  time: string;
+  date_time: string;
 }
 
 export interface IAppointmentResponse {

@@ -1,0 +1,35 @@
+.available {
+
+  &__container {
+    width: 75%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__card {
+    width: 220px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &__wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.noavailable {
+  &__wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,5 +1,4 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import React, { FC, PropsWithChildren, useEffect } from "react";
@@ -18,7 +17,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
-  const { schedule_id, status, date, time } = schedule;
+  const { schedule_id, status, date_time } = schedule;
   const { user } = useAppSelector((state) => state.auth);
   const { updatedSchedule } = useAppSelector((state) => state.schedules);
   const userId = user.data.id;
@@ -36,12 +35,10 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
 
   useEffect(() => {
     if (schedule) {
-      setValue("date", date);
-      setValue("time", time);
+      setValue("date_time", date_time);
     }
     if (updatedSchedule && updatedSchedule.schedule_id === schedule_id) {
-      setValue("date", updatedSchedule.date);
-      setValue("time", updatedSchedule.time);
+      setValue("date_time", updatedSchedule.date_time);
     }
   }, [schedule_id, updatedSchedule, setValue]);
 
@@ -94,24 +91,13 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
             <EventOutlinedIcon />
             <input
               type="text"
-              placeholder={"XXXX-XX-XX"}
-              {...register("date")}
+              placeholder={"XXXX-XX-XX 00:00:00"}
+              {...register("date_time")}
             />
           </label>
-          {errors.date && (
+          {errors.date_time && (
             <div className={styles.form__error}>
-              {errors?.date && <span>invalid date</span>}
-            </div>
-          )}
-        </div>
-        <div className={styles.form__container}>
-          <label className={styles.form__label}>
-            <AccessTimeOutlinedIcon />
-            <input type="text" placeholder={"XX:XX"} {...register("time")} />
-          </label>
-          {errors.time && (
-            <div className={styles.form__error}>
-              {errors?.time && <span>invalid time</span>}
+              {errors?.date_time && <span>invalid date or time</span>}
             </div>
           )}
         </div>

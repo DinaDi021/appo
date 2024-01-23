@@ -9,6 +9,7 @@ import {
 } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
 import { UsersInfo } from "../../Users/UsersInfo/UsersInfo";
+import styles from "../Account.module.scss";
 
 const AccountMaster: FC = () => {
   const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ const AccountMaster: FC = () => {
       {isLoading ? (
         <IsLoading />
       ) : (
-        <div>
+        <div className={styles.account}>
           <h3>Contact Information </h3>
           <UsersInfo key={user.data.id} user={user} />
           <button onClick={getSchedules}>My schedules</button>

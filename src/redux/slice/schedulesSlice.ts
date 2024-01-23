@@ -1,21 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IUpdateSchedulesParams } from "../../interfaces";
+import { IMaster, IUpdateSchedulesParams, QueryParams } from "../../interfaces";
 import { ISchedule } from "../../interfaces/scheduleInterface";
-import { schedulesService } from "../../services/schedulesService";
+import { schedulesService } from "../../services";
 import { progressActions } from "./progressSlice";
 
 interface IState {
   allSchedules: ISchedule[];
   schedule: ISchedule | null;
   updatedSchedule: ISchedule | null;
+  availableSchedules: IMaster[];
+  selectedMaster: IMaster | null;
 }
 
 const initialState: IState = {
   allSchedules: [],
   schedule: null,
   updatedSchedule: null,
+  availableSchedules: [],
+  selectedMaster: null,
 };
 
 const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
@@ -24,6 +28,30 @@ const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
     try {
       dispatch(progressActions.setIsLoading(true));
       const { data } = await schedulesService.getAllUsersSchedules(userId);
+      return data.data;
+    } catch (err) {
+      const e = err as AxiosError;
+      return rejectWithValue(e.response?.data);
+    } finally {
+      dispatch(progressActions.setIsLoading(false));
+    }
+  },
+);
+
+const getAvailableSchedules = createAsyncThunk<
+  IMaster[],
+  { query: QueryParams }
+>(
+  "schedulesSlice/getAvailableSchedules",
+  async ({ query }, { rejectWithValue, dispatch }) => {
+    try {
+      dispatch(progressActions.setIsLoading(true));
+      const { data } = await schedulesService.availableSchedules(
+        query.date,
+        query.service_id,
+        query.category,
+        +query.master_id,
+      );
       return data.data;
     } catch (err) {
       const e = err as AxiosError;
@@ -104,9 +132,15 @@ const schedulesSlice = createSlice({
     clearUpdatedParams: (state) => {
       state.updatedSchedule = null;
     },
+    setSelectedMaster: (state, action) => {
+      state.selectedMaster = action.payload;
+    },
   },
   extraReducers: (builder) =>
     builder
+      .addCase(getAvailableSchedules.fulfilled, (state, action) => {
+        state.availableSchedules = action.payload;
+      })
       .addCase(getAllUsersSchedules.fulfilled, (state, action) => {
         state.allSchedules = action.payload;
       })
@@ -126,6 +160,7 @@ const { reducer: schedulesReducer, actions } = schedulesSlice;
 
 const schedulesActions = {
   ...actions,
+  getAvailableSchedules,
   getAllUsersSchedules,
   getScheduleById,
   updateScheduleById,
