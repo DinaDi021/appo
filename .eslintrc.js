@@ -43,5 +43,4 @@ module.exports = {
     }],
   },
   ignorePatterns: ['.eslintrc.js'],
-  "no-console": "off"
 };
