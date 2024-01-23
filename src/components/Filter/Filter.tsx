@@ -19,6 +19,13 @@ const Filter: FC = () => {
     useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
 
+  const filteredServices =
+    filterCategories && filterCategories.length > 0
+      ? services.filter((service) =>
+          filterCategories.includes(service.category),
+        )
+      : services;
+
   console.log(filterDate, filterService, filterCategories, filterMaster);
 
   const handleDateChange = (dates: Date[]) => {
@@ -66,7 +73,10 @@ const Filter: FC = () => {
     <div className={styles.filter__container}>
       <div className={styles.filter__calendar}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DateCalendar onChange={handleDateChange} />
+          <DateCalendar
+            onChange={handleDateChange}
+            value={filterDate ? new Date(filterDate[0]) : null}
+          />
         </LocalizationProvider>
       </div>
       <div>
@@ -75,6 +85,7 @@ const Filter: FC = () => {
           id="size-small-standard-multi"
           size="small"
           options={categories}
+          value={filterCategories || []}
           sx={{ width: 280 }}
           getOptionLabel={(option) => option}
           onChange={(event, value) => handleCategoryChange(event, value)}
@@ -86,7 +97,10 @@ const Filter: FC = () => {
           multiple
           id="size-small-standard-multi"
           size="small"
-          options={services}
+          options={filteredServices}
+          value={filteredServices.filter(
+            (service) => filterService?.includes(service.id),
+          )}
           sx={{ width: 280 }}
           getOptionLabel={(service) => service.title}
           onChange={(event, value) => handleServiceChange(event, value)}
@@ -98,6 +112,11 @@ const Filter: FC = () => {
           disablePortal
           id="combo-box-demo"
           options={availableSchedules}
+          value={
+            availableSchedules.find(
+              (schedule) => schedule.master_id === filterMaster,
+            ) || null
+          }
           sx={{ width: 280 }}
           getOptionLabel={(schedule) =>
             `${schedule.master_firstname} ${schedule.master_lastname}`
