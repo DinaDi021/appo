@@ -56,14 +56,12 @@ const AvailableSchedules: FC = () => {
     <div className={styles.available__wrapper}>
       <Filter />
       <div className={styles.available__container}>
-        {availableSchedules.map((availableSchedule) =>
-          availableSchedule && Object.keys(availableSchedule).length !== 0 ? (
-            <AvailableSchedulesMaster
-              key={availableSchedule.master_id}
-              availableSchedule={availableSchedule}
-            />
-          ) : null,
-        )}
+        {availableSchedules.map((availableSchedule) => (
+          <AvailableSchedulesMaster
+            key={availableSchedule.master_id}
+            availableSchedule={availableSchedule}
+          />
+        ))}
       </div>
     </div>
   );

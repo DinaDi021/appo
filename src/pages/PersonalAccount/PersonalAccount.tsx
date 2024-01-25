@@ -1,7 +1,6 @@
 import React from "react";
 
-import { AccountClient } from "../../components/Account/AccountClient";
-import { AccountMaster } from "../../components/Account/AccountMaster";
+import { AccountClient, AccountMaster } from "../../components";
 import { useAppSelector } from "../../hooks";
 import styles from "../pages.module.scss";
 
