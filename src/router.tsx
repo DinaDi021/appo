@@ -11,8 +11,6 @@ import {
   AvailableSchedulesPage,
   CartPage,
   CheckoutPage,
-  ContactsPage,
-  CoursesPage,
   ForgotPasswordPage,
   LoginPage,
   MainPage,
@@ -59,14 +57,6 @@ const router = createBrowserRouter([
       {
         path: "services/price",
         element: <PricePage />,
-      },
-      {
-        path: "courses",
-        element: <CoursesPage />,
-      },
-      {
-        path: "contacts",
-        element: <ContactsPage />,
       },
       {
         path: "cart",

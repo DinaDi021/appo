@@ -28,14 +28,6 @@ const Header: FC = () => {
       label: "Services",
     },
     {
-      path: "/courses",
-      label: "Courses",
-    },
-    {
-      path: "/contacts",
-      label: "Contacts",
-    },
-    {
       path: "/cart",
       label: "Cart",
     },
