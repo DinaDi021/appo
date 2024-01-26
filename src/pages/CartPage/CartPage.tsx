@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Outlet } from "react-router-dom";
 
-import { Cart } from "../../components/Cart/Cart";
+import { Cart } from "../../components";
 
 const CartPage: FC = () => {
   return (

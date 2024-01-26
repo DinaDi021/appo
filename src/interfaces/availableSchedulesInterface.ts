@@ -12,6 +12,14 @@ export interface IPrice {
   price: number;
 }
 
+export interface IAddPrice {
+  service_id: number;
+  price: number;
+}
+export interface IUpdatePriceParams {
+  price: number;
+}
+
 export interface IMaster {
   master_id: number;
   master_firstname: string;
@@ -23,4 +31,8 @@ export interface IMaster {
 
 export interface IAvailableMasterResponse {
   data: IMaster[];
+}
+
+export interface IPriceResponse {
+  data: IPrice[];
 }

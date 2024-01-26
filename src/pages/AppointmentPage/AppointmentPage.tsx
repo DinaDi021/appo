@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AppointmentsInfo } from "../../components/Appointments";
+import { AppointmentsInfo } from "../../components";
 import { useAppSelector } from "../../hooks";
 
 const AppointmentPage = () => {

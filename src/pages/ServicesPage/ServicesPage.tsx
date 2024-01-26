@@ -1,7 +1,13 @@
 import React from "react";
 
+import { Services } from "../../components";
+
 const ServicesPage = () => {
-  return <div>ServicesPage</div>;
+  return (
+    <div>
+      <Services />
+    </div>
+  );
 };
 
 export { ServicesPage };

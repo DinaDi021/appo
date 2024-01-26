@@ -103,6 +103,10 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "me/prices",
+        element: <PricePage />,
+      },
+      {
         path: "register",
         element: <RegisterPage />,
       },

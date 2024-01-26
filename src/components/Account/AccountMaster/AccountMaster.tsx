@@ -8,7 +8,7 @@ import {
   usersActions,
 } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
-import { UsersInfo } from "../../Users/UsersInfo/UsersInfo";
+import { UsersInfo } from "../../Users";
 import styles from "../Account.module.scss";
 
 const AccountMaster: FC = () => {
@@ -22,6 +22,10 @@ const AccountMaster: FC = () => {
   };
   const getAppointments = () => {
     navigate("/me/appointments");
+  };
+
+  const getMyPrices = () => {
+    navigate("/me/prices");
   };
 
   useEffect(() => {
@@ -46,6 +50,7 @@ const AccountMaster: FC = () => {
         <div className={styles.account}>
           <h3>Contact Information </h3>
           <UsersInfo key={user.data.id} user={user} />
+          <button onClick={getMyPrices}>My prices</button>
           <button onClick={getSchedules}>My schedules</button>
           <button onClick={getAppointments}>My appointments</button>
           <Outlet />
