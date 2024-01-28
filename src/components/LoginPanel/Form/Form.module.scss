@@ -1,5 +1,9 @@
 .form {
 
+  &__autocomplete {
+    display: flex;
+  }
+
   &__login, &__register {
     display: flex;
     flex-direction: column;
