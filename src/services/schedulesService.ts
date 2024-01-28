@@ -3,7 +3,11 @@ import {
   IAvailableMasterResponse,
   IUpdateSchedulesParams,
 } from "../interfaces";
-import { ISchedule, ISchedulesResponse } from "../interfaces/scheduleInterface";
+import {
+  IAddSchedule,
+  ISchedule,
+  ISchedulesResponse,
+} from "../interfaces/scheduleInterface";
 import { apiService, IRes } from "./apiServices";
 
 const schedulesService = {
@@ -27,6 +31,8 @@ const schedulesService = {
     apiService.get(urls.schedules.usersAll(userId)),
   getSchedule: (userId: number, scheduleId: number): IRes<ISchedule> =>
     apiService.get(urls.schedules.byId(userId, scheduleId)),
+  addSchedule: (userdId: number, data: IAddSchedule): IRes<ISchedule> =>
+    apiService.post(urls.schedules.usersAll(userdId), data),
   deleteSchedule: (userId: number, scheduleId: number): IRes<void> =>
     apiService.delete(urls.schedules.byId(userId, scheduleId)),
   updateSchedule: (

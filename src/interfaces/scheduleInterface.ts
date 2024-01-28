@@ -7,6 +7,10 @@ export interface ISchedule {
   appointment?: IAppointment;
 }
 
+export interface IAddSchedule {
+  date_time: string;
+}
+
 export interface ISchedulesResponse {
   data: ISchedule[];
 }

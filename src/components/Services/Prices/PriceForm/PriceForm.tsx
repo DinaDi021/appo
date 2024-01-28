@@ -25,7 +25,6 @@ const PriceForm: FC = () => {
   const [selectedService, setSelectedService] = useState<IServices | null>(
     null,
   );
-  console.log(selectedService);
 
   const addPrice = async (data: IAddPrice) => {
     if (selectedService) {

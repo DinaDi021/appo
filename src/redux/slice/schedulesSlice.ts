@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 import { IMaster, IUpdateSchedulesParams, QueryParams } from "../../interfaces";
-import { ISchedule } from "../../interfaces/scheduleInterface";
+import { IAddSchedule, ISchedule } from "../../interfaces/scheduleInterface";
 import { schedulesService } from "../../services";
 import { progressActions } from "./progressSlice";
 
@@ -81,6 +81,25 @@ const getScheduleById = createAsyncThunk<
   },
 );
 
+const addSchedule = createAsyncThunk<
+  ISchedule,
+  { userId: number; data: IAddSchedule }
+>(
+  "schedulesSlice/addSchedule",
+  async ({ userId, data }, { rejectWithValue, dispatch }) => {
+    try {
+      dispatch(progressActions.setIsLoading(true));
+      const response = await schedulesService.addSchedule(userId, data);
+      return response.data;
+    } catch (err) {
+      const e = err as AxiosError;
+      return rejectWithValue(e.response?.data);
+    } finally {
+      dispatch(progressActions.setIsLoading(false));
+    }
+  },
+);
+
 const updateScheduleById = createAsyncThunk<
   ISchedule,
   { userId: number; scheduleId: number; params: IUpdateSchedulesParams }
@@ -147,6 +166,9 @@ const schedulesSlice = createSlice({
       .addCase(getScheduleById.fulfilled, (state, action) => {
         state.schedule = action.payload;
       })
+      .addCase(addSchedule.fulfilled, (state, action) => {
+        state.allSchedules.push(action.payload);
+      })
       .addCase(updateScheduleById.fulfilled, (state, action) => {
         state.schedule = action.payload;
         state.updatedSchedule = null;
@@ -163,6 +185,7 @@ const schedulesActions = {
   getAvailableSchedules,
   getAllUsersSchedules,
   getScheduleById,
+  addSchedule,
   updateScheduleById,
   deleteScheduleById,
 };

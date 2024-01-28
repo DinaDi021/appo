@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IUpdateSchedulesParams } from "../../../interfaces";
 import { ISchedule } from "../../../interfaces/scheduleInterface";
 import { schedulesActions } from "../../../redux";
-import { updateShemaSchedules } from "../../../validators";
+import { schedulesShema } from "../../../validators";
 import styles from "../../LoginPanel/Form/Form.module.scss";
 
 interface IProps extends PropsWithChildren {
@@ -30,7 +30,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
     setValue,
     formState: { errors },
   } = useForm<IUpdateSchedulesParams>({
-    resolver: joiResolver(updateShemaSchedules),
+    resolver: joiResolver(schedulesShema),
   });
 
   useEffect(() => {
