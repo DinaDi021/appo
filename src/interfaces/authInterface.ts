@@ -12,4 +12,10 @@ export interface IResetPassword
   token: string;
 }
 
+export interface IChangePassword {
+  old_password: string;
+  new_password: string;
+  token: string;
+}
+
 export type IForgotPassword = Pick<IAuth, "email">;

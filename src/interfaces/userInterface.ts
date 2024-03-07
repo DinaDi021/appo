@@ -7,5 +7,6 @@ export interface IUser {
     email: string;
     phone_number: string;
     role: string;
+    image_url: string;
   };
 }

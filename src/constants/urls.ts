@@ -9,8 +9,12 @@ const logout = "/oauth/logout";
 const logoutAll = "/oauth/logout/all";
 const forgotPassword = "/password/forgot";
 const resetPassword = "/password/reset";
+const changePassword = "/password/change";
 
 const users = "users";
+
+const avatar = "avatar";
+const gallery = "galleries";
 
 const appointments = "appointments";
 const schedules = "schedules";
@@ -30,6 +34,7 @@ const urls = {
     logoutAll: logoutAll,
     forgotPassword: forgotPassword,
     resetPassword: resetPassword,
+    changePassword: changePassword,
   },
   users: {
     all: users,
@@ -42,6 +47,14 @@ const urls = {
     all: (userId: number): string => `${v1}/${users}/${userId}/${prices}`,
     byId: (userId: number, priceId: number): string =>
       `${v1}/${users}/${userId}/${prices}/${priceId}`,
+  },
+  avatar: {
+    byUserId: (userId: number): string => `${v1}/${users}/${userId}/${avatar}`,
+  },
+  gallery: {
+    all: (userId: number): string => `${v1}/${users}/${userId}/${gallery}`,
+    byId: (userId: number, galleryId: number): string =>
+      `${v1}/${users}/${userId}/${gallery}/${galleryId}`,
   },
   appointments: {
     all: (userId: number): string => `${v1}/${users}/${userId}/${appointments}`,

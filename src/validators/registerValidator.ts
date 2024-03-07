@@ -40,6 +40,11 @@ const resetPasswordSchema = Joi.object({
   confirm_Password: Joi.any().valid(Joi.ref("password")).required(),
 });
 
+const changePasswordSchema = Joi.object({
+  old_password: Joi.string().regex(regex.PASSWORD).trim(),
+  new_password: Joi.string().regex(regex.PASSWORD).trim(),
+});
+
 export {
   registerSchema,
   updateShema,
@@ -48,4 +53,5 @@ export {
   loginShema,
   schedulesShema,
   priceShema,
+  changePasswordSchema,
 };

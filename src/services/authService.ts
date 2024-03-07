@@ -57,6 +57,18 @@ const authService = {
     });
   },
 
+  async changePassword(
+    token: string,
+    old_password: string,
+    new_password: string,
+  ): Promise<void> {
+    await apiService.post(urls.auth.changePassword, {
+      token,
+      old_password,
+      new_password,
+    });
+  },
+
   setTokens({ data }: ITokens): void {
     localStorage.setItem(accessTokenKey, data.access_token);
     localStorage.setItem(refreshTokenKey, data.refresh_token);

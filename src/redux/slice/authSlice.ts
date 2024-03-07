@@ -90,6 +90,21 @@ const resetPassword = createAsyncThunk<
   },
 );
 
+const changePassword = createAsyncThunk<
+  void,
+  { token: string; old_password: string; new_password: string }
+>(
+  "authSlice/changePassword",
+  async ({ token, old_password, new_password }, { rejectWithValue }) => {
+    try {
+      await authService.changePassword(token, old_password, new_password);
+    } catch (e) {
+      const err = e as AxiosError;
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
 const authSlice = createSlice({
   name: "authSlice",
   initialState,
@@ -130,6 +145,7 @@ const authActions = {
   logoutAll,
   forgotPassword,
   resetPassword,
+  changePassword,
 };
 
 export { authActions, authReducer };

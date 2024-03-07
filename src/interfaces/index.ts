@@ -8,3 +8,4 @@ export * from "./appointmentInterface";
 export * from "./availableSchedulesInterface";
 export * from "./servicesInterface";
 export * from "./queryParams";
+export * from "./imageInterface";
