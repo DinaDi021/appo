@@ -20,12 +20,20 @@ const AccountMaster: FC = () => {
   const getSchedules = () => {
     navigate("/me/schedules");
   };
+
+  const addNewSchedules = () => {
+    navigate("/me/addSchedules");
+  };
   const getAppointments = () => {
     navigate("/me/appointments");
   };
 
   const getMyPrices = () => {
     navigate("/me/prices");
+  };
+
+  const getMyGallary = () => {
+    navigate("/me/gallery");
   };
 
   useEffect(() => {
@@ -50,8 +58,10 @@ const AccountMaster: FC = () => {
         <div className={styles.account}>
           <h3>Contact Information </h3>
           <UsersInfo key={user.data.id} user={user} />
+          <button onClick={getMyGallary}>My gallery</button>
           <button onClick={getMyPrices}>My prices</button>
           <button onClick={getSchedules}>My schedules</button>
+          <button onClick={addNewSchedules}>Add new time</button>
           <button onClick={getAppointments}>My appointments</button>
           <Outlet />
         </div>

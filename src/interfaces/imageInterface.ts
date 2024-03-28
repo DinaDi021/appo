@@ -4,5 +4,5 @@ export interface IImage {
 }
 
 export interface IImageResponse {
-  data: { [key: number]: IImage };
+  data: IImage[];
 }

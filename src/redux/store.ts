@@ -15,6 +15,7 @@ import {
   appointmentsReducer,
   authReducer,
   cartsReducer,
+  imagesReducer,
   progressReducer,
   schedulesReducer,
   servicesReducer,
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   carts: cartsReducer,
   filters: filtersReducer,
   services: servicesReducer,
+  images: imagesReducer,
 });
 
 const persistConfig = {

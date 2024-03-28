@@ -1,6 +1,5 @@
 import React from "react";
 
-import { SchedulesForm } from "../../components/Schedules/SchedulesForm/SchedulesForm";
 import { SchedulesMasterInfo } from "../../components/Schedules/SchedulesMasterInfo/SchedulesMasterInfo";
 import { useAppSelector } from "../../hooks";
 
@@ -9,12 +8,17 @@ const SchedulePages = () => {
 
   return (
     <>
-      <SchedulesForm />
-      <h4>Schedules:</h4>
       <div>
-        {allSchedules.map((schedule) => (
-          <SchedulesMasterInfo key={schedule.schedule_id} schedule={schedule} />
-        ))}
+        {allSchedules.length > 0 ? (
+          allSchedules.map((schedule) => (
+            <SchedulesMasterInfo
+              key={schedule.schedule_id}
+              schedule={schedule}
+            />
+          ))
+        ) : (
+          <p>No Schedules yet.</p>
+        )}
       </div>
     </>
   );

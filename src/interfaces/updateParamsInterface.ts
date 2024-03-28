@@ -1,9 +1,10 @@
 export interface IUpdateProfileParams {
-  firstname: string;
-  lastname: string;
-  birthdate: string;
-  phone_number: string;
-  email: string;
+  firstname?: string;
+  lastname?: string;
+  birthdate?: string;
+  phone_number?: string;
+  email?: string;
+  image_url?: string;
 }
 
 export interface IUpdateSchedulesParams {

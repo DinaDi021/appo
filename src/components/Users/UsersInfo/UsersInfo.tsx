@@ -2,14 +2,14 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import React, { FC, PropsWithChildren, useEffect } from "react";
+import React, { FC, PropsWithChildren, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import empty_person from "../../../assets/img/empty_person.jpg";
-import { useAppDispatch, useToggle } from "../../../hooks";
+import { useAppDispatch, useAppSelector, useToggle } from "../../../hooks";
 import { IUpdateProfileParams, IUser } from "../../../interfaces";
-import { authActions, usersActions } from "../../../redux";
+import { authActions, imagesActions, usersActions } from "../../../redux";
 import { updateShema } from "../../../validators";
 import { ChangePasswordForm } from "../../LoginPanel/Form/ChangePasswordForm";
 import styles from "../../LoginPanel/Form/Form.module.scss";
@@ -21,6 +21,7 @@ interface IProps extends PropsWithChildren {
 const UsersInfo: FC<IProps> = ({ user }) => {
   const { id, firstname, lastname, birthdate, email, phone_number, image_url } =
     user.data;
+  const { error } = useAppSelector((state) => state.images);
   const dispatch = useAppDispatch();
   const {
     value: isChangePasswordFormVisible,
@@ -35,6 +36,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
   } = useForm<IUpdateProfileParams>({
     resolver: joiResolver(updateShema),
   });
+  const fileInput = useRef<HTMLInputElement>();
 
   useEffect(() => {
     if (user) {
@@ -44,10 +46,10 @@ const UsersInfo: FC<IProps> = ({ user }) => {
       setValue("email", email);
       setValue("phone_number", phone_number);
     }
-  }, [setValue]);
+  }, [setValue, image_url]);
 
   const update: SubmitHandler<IUpdateProfileParams> = (params) => {
-    dispatch(usersActions.updateUserById({ id: user.data.id, params }));
+    dispatch(usersActions.updateUserById({ id: id, params }));
   };
 
   const logOut = async () => {
@@ -79,17 +81,32 @@ const UsersInfo: FC<IProps> = ({ user }) => {
     }
   };
 
-  // const deleteAvatar = async () => {
-  //   await dispatch(imagesActions.deleteAvatar({ userId: id }));
-  // };
+  const deleteImage = async () => {
+    await dispatch(imagesActions.deleteAvatar({ userId: id }));
+    dispatch(
+      usersActions.updateUserById({
+        id,
+        params: { image_url: null },
+      }),
+    );
+  };
+  const addImage = async () => {
+    const formData = new FormData();
+    const file: Blob = fileInput.current.files[0];
+    formData.append("image", file);
+    const result = await dispatch(
+      imagesActions.addAvatar({ userId: id, data: formData }),
+    );
 
-  // const addPhoto = async () => {
-  //   const formData = new FormData();
-  //   const file: Blob = fileInput.current.files[0];
-  //   formData.append("avatar", file);
-  //   await imagesService.postAvatar(id, formData);
-  //   setImage(URL.createObjectURL(file));
-  // };
+    if (result.payload && result.meta.requestStatus === "fulfilled") {
+      dispatch(
+        usersActions.updateUserById({
+          id,
+          params: { image_url: null },
+        }),
+      );
+    }
+  };
 
   const toggleChangePasswordVisibility = () => {
     toggleChangePasswordForm();
@@ -97,17 +114,27 @@ const UsersInfo: FC<IProps> = ({ user }) => {
 
   return (
     <div>
+      <div>{error && <p>{error.message}</p>}</div>
       <div>
         <div>
           <img
             className={styles.image__container}
-            src={image_url ? image_url : empty_person}
+            src={image_url || empty_person}
             alt={`Avatar ${id}`}
+            style={{ cursor: "pointer", width: "250px" }}
+            onClick={() => fileInput.current.click()}
           />
         </div>
-        {/*<div>*/}
-        {/*  <button onClick={deleteAvatar}>delete avatar</button>*/}
-        {/*</div>*/}
+        <input
+          type={"file"}
+          accept={"image/jpeg, image/png"}
+          style={{ display: "none" }}
+          onChange={addImage}
+          ref={fileInput}
+        />
+        <div>
+          <button onClick={deleteImage}>delete avatar</button>
+        </div>
       </div>
       <div>
         <form className={styles.form__register} onSubmit={handleSubmit(update)}>

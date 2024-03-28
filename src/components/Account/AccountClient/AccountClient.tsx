@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { appointmentsActions, usersActions } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
-import { UsersInfo } from "../../Users/UsersInfo/UsersInfo";
+import { UsersInfo } from "../../Users/";
 
 const AccountClient: FC = () => {
   const dispatch = useAppDispatch();

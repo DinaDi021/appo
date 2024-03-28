@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Checkout } from "../../components/Cart/Checkout";
+import { Checkout } from "../../components/";
 
 const CheckoutPage = () => {
   return (

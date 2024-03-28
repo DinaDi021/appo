@@ -11,3 +11,4 @@ export * from "./Appointments";
 export * from "./Schedules";
 export * from "./Users";
 export * from "./Services";
+export * from "./Gallery";

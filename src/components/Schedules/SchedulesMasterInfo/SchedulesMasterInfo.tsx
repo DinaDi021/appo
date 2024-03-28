@@ -81,6 +81,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
 
   return (
     <div>
+      <h4>Schedules:</h4>
       <div className={styles.schedule__status}>
         <AssignmentTurnedInOutlinedIcon />
         <h4>{status}</h4>
