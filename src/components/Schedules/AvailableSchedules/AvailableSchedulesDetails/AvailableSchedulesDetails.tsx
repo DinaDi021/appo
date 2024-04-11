@@ -3,11 +3,12 @@ import Autocomplete from "@mui/material/Autocomplete/Autocomplete";
 import React, { FC, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
+import empty_person from "../../../../assets/img/empty_person.jpg";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { IMaster } from "../../../../interfaces";
 import { IItem } from "../../../../interfaces/cartInterface";
+import styles from "../../../../pages/AvailableSchedulesPage/AvailableSchedulesPage.module.scss";
 import { cartsActions } from "../../../../redux";
-import styles from "../../../LoginPanel/Form/Form.module.scss";
 
 interface IProps extends PropsWithChildren {
   availableSchedule: IMaster;
@@ -17,7 +18,9 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
   const { master_firstname, master_lastname, schedules, prices } =
     availableSchedule;
   const { user } = useAppSelector((state) => state.auth);
+
   const userId = user.data.id;
+  const avatar = user.data.image_url;
   const { selectedSchedule, selectedPrice, error } = useAppSelector(
     (state) => state.carts,
   );
@@ -49,11 +52,17 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
   };
 
   return (
-    <div>
-      <h4>
-        {master_firstname} {master_lastname}
-      </h4>
-      <br />
+    <div className={styles.master__containner}>
+      <div className={styles.master__info}>
+        <h3>
+          {master_firstname} {master_lastname}
+        </h3>
+        <img
+          className={styles.master__avatar}
+          src={avatar || empty_person}
+          alt={`Avatar ${userId}`}
+        />
+      </div>
       <Stack spacing={1} sx={{ width: 300 }}>
         <Autocomplete
           id="auto-select"

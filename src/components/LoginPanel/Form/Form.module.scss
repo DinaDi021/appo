@@ -1,25 +1,31 @@
-.image{
-  &__container{
+.image {
+  &__container {
+    padding-bottom: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 250px;
-    height: 250px;
-    padding: 10px 0;
+    width: 240px;
+    height: 220px;
     object-fit: cover;
     object-position: center;
     border-radius: 25px;
+    transition: transform 0.7s ease, height 0.7s ease;
+    cursor: pointer;
   }
 
+  &__container:hover {
+    transition: 0.7s;
+    transform: scale(1.1);
+  }
 }
 
 .form {
-
   &__autocomplete {
     display: flex;
   }
 
-  &__login, &__register {
+  &__login,
+  &__register {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -29,6 +35,11 @@
     width: 240px;
     height: 320px;
   }
+
+  &__passwordVisible {
+    transition: 0.5s ease-in-out;
+  }
+
 
   &__schedule {
     height: 200px;
@@ -53,7 +64,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-
 
     svg {
       padding-left: 5px;
@@ -86,11 +96,11 @@
   color: red;
 }
 
-.emailMessage{
+.emailMessage {
   text-align: center;
 }
 
-.schedule__status{
+.schedule__status {
   display: flex;
   padding: 10px 5px;
   border-bottom: 1px solid gray;
@@ -100,4 +110,3 @@
     padding-right: 5px;
   }
 }
-

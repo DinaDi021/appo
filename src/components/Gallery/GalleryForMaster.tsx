@@ -1,18 +1,14 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { imagesActions } from "../../redux";
 import { GalleryDetails } from "./GalleryDetails/GalleryDetails";
 
-const Gallery: FC = () => {
+const GalleryForMaster: FC = () => {
   const { gallery, error } = useAppSelector((state) => state.images);
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const fileInput = useRef<HTMLInputElement>();
-
-  useEffect(() => {
-    dispatch(imagesActions.getGallery({ userId: user.data.id }));
-  }, [dispatch]);
 
   const addImage = async () => {
     const formData = new FormData();
@@ -64,4 +60,4 @@ const Gallery: FC = () => {
   );
 };
 
-export { Gallery };
+export { GalleryForMaster };

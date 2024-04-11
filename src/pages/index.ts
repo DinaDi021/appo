@@ -19,4 +19,5 @@ export * from "./CartPage/CartPage";
 export * from "./CartPage/AfterPaymentPage";
 export * from "./CartPage/CheckoutPage";
 export * from "./CartPage/PayCartPage";
-export * from "./GalleryPage/GalleryPage";
+export * from "./GalleryPage/GalleryPageForMaster";
+export * from "./UserInfoPage/UserInfoPage";

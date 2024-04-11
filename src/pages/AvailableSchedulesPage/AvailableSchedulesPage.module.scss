@@ -1,5 +1,10 @@
 .available {
 
+  &__page {
+    width: 90%;
+    display: flex;
+    align-items: flex-start;
+  }
   &__container {
     width: 75%;
     display: grid;
@@ -18,7 +23,7 @@
     align-items: flex-start;
   }
 
-  &__wrapper{
+  &__wrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -26,10 +31,36 @@
 }
 
 .noavailable {
-  &__wrapper{
+  &__wrapper {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &__text{
+    width: 50%;
+  }
+}
+
+.master {
+  &__container {
+    width: 30%;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__avatar {
+    width: 250px;
+    height: 250px;
+    padding: 10px 0;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
   }
 }

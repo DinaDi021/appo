@@ -1,0 +1,18 @@
+.user {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.changePasswordForm {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s, opacity 0.5s;
+}
+
+.changePasswordForm.visible {
+  opacity: 1;
+  max-height: 200px;
+}

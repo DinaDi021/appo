@@ -12,7 +12,7 @@ import {
   CartPage,
   CheckoutPage,
   ForgotPasswordPage,
-  GalleryPage,
+  GalleryPageForMaster,
   LoginPage,
   MainPage,
   NotFoundPage,
@@ -25,6 +25,7 @@ import {
   SchedulePages,
   SchedulesPageDetails,
   ServicesPage,
+  UserInfoPage,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         element: <PersonalAccount />,
         children: [
           {
+            path: "info",
+            element: <UserInfoPage />,
+          },
+          {
             path: "appointments",
             element: <AppointmentPage />,
           },
@@ -106,19 +111,19 @@ const router = createBrowserRouter([
             path: "schedules/:id",
             element: <SchedulesPageDetails />,
           },
-        ],
-      },
-      {
-        path: "me/prices",
-        element: <PricePage />,
-      },
-      {
-        path: "me/gallery",
-        element: <GalleryPage />,
-        children: [
           {
-            path: ":id",
-            element: <GalleryPage />,
+            path: "prices",
+            element: <PricePage />,
+          },
+          {
+            path: "gallery",
+            element: <GalleryPageForMaster />,
+            children: [
+              {
+                path: ":id",
+                element: <GalleryPageForMaster />,
+              },
+            ],
           },
         ],
       },

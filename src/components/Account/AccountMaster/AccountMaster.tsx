@@ -1,14 +1,15 @@
 import React, { FC, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
   appointmentsActions,
+  imagesActions,
   schedulesActions,
+  servicesActions,
   usersActions,
 } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
-import { UsersInfo } from "../../Users";
 import styles from "../Account.module.scss";
 
 const AccountMaster: FC = () => {
@@ -16,25 +17,7 @@ const AccountMaster: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { isLoading } = useAppSelector((state) => state.progress);
   const navigate = useNavigate();
-
-  const getSchedules = () => {
-    navigate("/me/schedules");
-  };
-
-  const addNewSchedules = () => {
-    navigate("/me/addSchedules");
-  };
-  const getAppointments = () => {
-    navigate("/me/appointments");
-  };
-
-  const getMyPrices = () => {
-    navigate("/me/prices");
-  };
-
-  const getMyGallary = () => {
-    navigate("/me/gallery");
-  };
+  const location = useLocation();
 
   useEffect(() => {
     if (user?.data) {
@@ -43,8 +26,11 @@ const AccountMaster: FC = () => {
       dispatch(
         appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
       );
+      dispatch(servicesActions.getAllPrices({ userId: user.data.id }));
+      dispatch(imagesActions.getGallery({ userId: user.data.id }));
     }
-  }, [dispatch, user]);
+    navigate("/me/info");
+  }, [dispatch, user, navigate]);
 
   if (!user) {
     return <p>User not logged in</p>;
@@ -56,13 +42,68 @@ const AccountMaster: FC = () => {
         <IsLoading />
       ) : (
         <div className={styles.account}>
-          <h3>Contact Information </h3>
-          <UsersInfo key={user.data.id} user={user} />
-          <button onClick={getMyGallary}>My gallery</button>
-          <button onClick={getMyPrices}>My prices</button>
-          <button onClick={getSchedules}>My schedules</button>
-          <button onClick={addNewSchedules}>Add new time</button>
-          <button onClick={getAppointments}>My appointments</button>
+          <div className={styles.account__side}>
+            <button
+              onClick={() => navigate("/me/info")}
+              className={
+                location.pathname === "/me/info"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              Contact Information
+            </button>
+            <button
+              onClick={() => navigate("/me/gallery")}
+              className={
+                location.pathname === "/me/gallery"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              My gallery
+            </button>
+            <button
+              onClick={() => navigate("/me/prices")}
+              className={
+                location.pathname === "/me/prices"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              My prices
+            </button>
+            <button
+              onClick={() => navigate("/me/schedules")}
+              className={
+                location.pathname === "/me/schedules"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              My schedules
+            </button>
+            <button
+              onClick={() => navigate("/me/addSchedules")}
+              className={
+                location.pathname === "/me/addSchedules"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              Add new time
+            </button>
+            <button
+              onClick={() => navigate("/me/appointments")}
+              className={
+                location.pathname === "/me/appointments"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              My appointments
+            </button>
+          </div>
           <Outlet />
         </div>
       )}

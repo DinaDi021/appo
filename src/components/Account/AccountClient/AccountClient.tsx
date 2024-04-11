@@ -1,19 +1,23 @@
 import React, { FC, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { appointmentsActions, usersActions } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
 import { UsersInfo } from "../../Users/";
+import styles from "../Account.module.scss";
 
 const AccountClient: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
   const { isLoading } = useAppSelector((state) => state.progress);
   const navigate = useNavigate();
+  const location = useLocation();
+
   const getSchedules = () => {
     navigate("/me/schedules");
   };
+
   const getAppointments = () => {
     navigate("/me/appointments");
   };
@@ -39,8 +43,26 @@ const AccountClient: FC = () => {
         <div>
           <h3>Contact Information </h3>
           <UsersInfo key={user.data.id} user={user} />
-          <button onClick={getSchedules}>My schedules</button>
-          <button onClick={getAppointments}>My appointments</button>
+          <button
+            onClick={getSchedules}
+            className={
+              location.pathname === "/me/schedules"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My schedules
+          </button>
+          <button
+            onClick={getAppointments}
+            className={
+              location.pathname === "/me/appointments"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My appointments
+          </button>
           <Outlet />
         </div>
       )}

@@ -1,20 +1,12 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { servicesActions } from "../../../redux";
+import { useAppSelector } from "../../../hooks";
 import styles from "../Services.module.scss";
 import { PriceDetails } from "./PriceDetails/PriceDetails";
 import { PriceForm } from "./PriceForm/PriceForm";
 
 const Prices: FC = () => {
-  const dispatch = useAppDispatch();
   const { allPrices } = useAppSelector((state) => state.services);
-  const { user } = useAppSelector((state) => state.auth);
-  const userId = user.data.id;
-
-  useEffect(() => {
-    dispatch(servicesActions.getAllPrices({ userId }));
-  }, [dispatch, userId]);
 
   if (!allPrices) {
     return (

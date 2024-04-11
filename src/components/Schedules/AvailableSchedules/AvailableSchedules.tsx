@@ -47,7 +47,9 @@ const AvailableSchedules: FC = () => {
     return (
       <div className={styles.noavailable__wrapper}>
         <Filter />
-        <div>No available schedules. Please choose different parameters.</div>
+        <div className={styles.noavailable__text}>
+          No available schedules. Please choose different parameters.
+        </div>
       </div>
     );
   }

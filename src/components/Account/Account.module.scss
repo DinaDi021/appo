@@ -1,0 +1,22 @@
+.account {
+  display: flex;
+
+  &__activeButton{
+    background-color: var(--green-jungle-crayola);
+    box-shadow: 0 5px 15px rgb(23, 93, 85);
+  }
+
+  &__side{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 60%;
+    }
+  }
+
+  &__main{
+  }
+}
