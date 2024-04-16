@@ -119,12 +119,12 @@ const UsersInfo: FC<IProps> = ({ user }) => {
 
   return (
     <div className={css.user__container}>
-      <div>
+      <div className={css.user__container__info}>
         <h3>Contact Information </h3>
         <div>{error && <p>{error.message}</p>}</div>
-        <div>
+        <div className={css.user__img__container}>
           <img
-            className={styles.image__container}
+            className={css.user__img__avatar}
             src={image_url || empty_person}
             alt={`Avatar ${id}`}
             onClick={() => fileInput.current.click()}
@@ -225,7 +225,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
         </div>
       </div>
 
-      <div>
+      <div className={css.user__container__action}>
         <h3>Your actions</h3>
         <div
           className={

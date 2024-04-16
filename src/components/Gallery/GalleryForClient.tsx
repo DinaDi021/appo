@@ -3,7 +3,6 @@ import React, { FC, PropsWithChildren, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMaster } from "../../interfaces";
 import { imagesActions } from "../../redux";
-// import { GalleryDetails } from "./GalleryDetails/GalleryDetails";
 import { Slider } from "./Slider";
 
 interface IProps extends PropsWithChildren {

@@ -1,0 +1,46 @@
+.gallery {
+  &__button {
+    cursor: pointer;
+    width: 250px;
+
+    &__del {
+      position: absolute;
+      bottom: 10px;
+      left: 5px;
+      margin: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      background-color: var(--basic-black);
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  &__item {
+    position: relative;
+    transition: transform 0.5s ease;
+
+    &:hover .gallery__button__del {
+      opacity: 0.85;
+    }
+
+    &__img{
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      opacity: 0.85;
+
+      &:hover{
+        opacity: 1;
+      }
+    }
+
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+}

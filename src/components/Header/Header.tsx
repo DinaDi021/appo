@@ -64,7 +64,7 @@ const Header: FC = () => {
           ))}
         </nav>
         {user ? (
-          <Link to={"/me"}>
+          <Link to={"/me/info"}>
             <div className={styles.userIcon}>
               {user.data.firstname.charAt(0)}
             </div>

@@ -2,6 +2,7 @@ import React, { FC, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { imagesActions } from "../../redux";
+import styles from "./Gallery.module.scss";
 import { GalleryDetails } from "./GalleryDetails/GalleryDetails";
 
 const GalleryForMaster: FC = () => {
@@ -30,10 +31,15 @@ const GalleryForMaster: FC = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.gallery__container}>
+        <h3>Gallery</h3>
+        <h4>
+          Is a place where you can upload photos of your work that clients can
+          view on the artist's profile.
+        </h4>
         <div>{error && <p>{error.message}</p>}</div>
         <button
-          style={{ cursor: "pointer", width: "250px" }}
+          className={styles.gallery__button_add}
           onClick={() => fileInput.current.click()}
         >
           Add new photos
@@ -47,7 +53,7 @@ const GalleryForMaster: FC = () => {
           multiple
         />
       </div>
-      <div>
+      <div className={styles.gallery__list}>
         {gallery.length > 0 ? (
           gallery.map((image) => (
             <GalleryDetails key={image.id} image={image} />

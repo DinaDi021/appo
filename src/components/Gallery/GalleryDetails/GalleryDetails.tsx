@@ -1,9 +1,10 @@
-import React, { FC, PropsWithChildren, useState } from "react";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import React, { FC, PropsWithChildren } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IImage } from "../../../interfaces";
 import { imagesActions } from "../../../redux";
-import styles from "../../LoginPanel/Form/Form.module.scss";
+import styles from "../Gallery.module.scss";
 
 interface IProps extends PropsWithChildren {
   image: IImage;
@@ -13,12 +14,6 @@ const GalleryDetails: FC<IProps> = ({ image }) => {
   const { id, image_url } = image;
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const [imageSize, setImageSize] = useState<{ width: number; height: number }>(
-    {
-      width: 320,
-      height: 320,
-    },
-  );
 
   const deleteImageFromGallery = async () => {
     await dispatch(
@@ -30,26 +25,19 @@ const GalleryDetails: FC<IProps> = ({ image }) => {
     dispatch(imagesActions.getGallery({ userId: user.data.id }));
   };
 
-  const toggleImageSize = () => {
-    setImageSize((prevSize) =>
-      prevSize.width === 320
-        ? { width: 750, height: 750 }
-        : { width: 320, height: 320 },
-    );
-  };
-
   return (
-    <div>
-      <div>
-        <img
-          className={styles.image__container}
-          src={image_url}
-          alt={`Picture ${id}`}
-          style={{ width: imageSize.width, height: imageSize.height }}
-          onClick={() => toggleImageSize()}
-        />
-        <button onClick={deleteImageFromGallery}>delete photo</button>
-      </div>
+    <div className={styles.gallery__item}>
+      <img
+        className={styles.gallery__item__img}
+        src={image_url}
+        alt={`Image ${id}`}
+      />
+      <button
+        className={styles.gallery__button__del}
+        onClick={deleteImageFromGallery}
+      >
+        <DeleteForeverIcon></DeleteForeverIcon>
+      </button>
     </div>
   );
 };

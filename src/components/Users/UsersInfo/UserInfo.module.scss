@@ -2,6 +2,39 @@
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+
+    &__info {
+      margin-bottom: 15px;
+    }
+
+    &__action {
+      width: 70%;
+    }
+  }
+
+  &__img{
+    &__container {
+      margin-bottom: 20px
+    }
+
+    &__avatar {
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 240px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 25px;
+      transition: transform 0.7s ease, height 0.7s ease;
+      cursor: pointer;
+    }
+
+    &__avatar:hover {
+      transition: 0.7s;
+      transform: scale(1.1);
+    }
   }
 }
 

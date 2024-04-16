@@ -104,7 +104,9 @@ const AccountMaster: FC = () => {
               My appointments
             </button>
           </div>
-          <Outlet />
+          <div className={styles.account__main}>
+            <Outlet />
+          </div>
         </div>
       )}
     </div>
