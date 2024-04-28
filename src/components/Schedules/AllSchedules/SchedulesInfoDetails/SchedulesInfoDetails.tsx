@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ISchedule } from "../../../interfaces/scheduleInterface";
+import { ISchedule } from "../../../../interfaces/scheduleInterface";
 
 interface IProps extends PropsWithChildren {
   schedule: ISchedule;

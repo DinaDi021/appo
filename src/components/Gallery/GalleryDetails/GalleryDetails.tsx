@@ -36,7 +36,7 @@ const GalleryDetails: FC<IProps> = ({ image }) => {
         className={styles.gallery__button__del}
         onClick={deleteImageFromGallery}
       >
-        <DeleteForeverIcon></DeleteForeverIcon>
+        <DeleteForeverIcon />
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import React, { FC, useState } from "react";
@@ -10,6 +10,7 @@ import { IAddPrice, IServices } from "../../../../interfaces";
 import { servicesActions } from "../../../../redux";
 import { priceShema } from "../../../../validators";
 import styles from "../../../LoginPanel/Form/Form.module.scss";
+import css from "../../Services.module.scss";
 
 const PriceForm: FC = () => {
   const {
@@ -40,11 +41,10 @@ const PriceForm: FC = () => {
   };
 
   return (
-    <div>
+    <div className={css.price__form}>
       <form className={styles.form__login} onSubmit={handleSubmit(addPrice)}>
         <div className={styles.form__container}>
           <label className={styles.form__autocomplete}>
-            <LockOutlinedIcon />
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -61,21 +61,21 @@ const PriceForm: FC = () => {
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <LockOutlinedIcon />
+            <MonetizationOnOutlinedIcon className={css.price__svg} />
             <input
               type="number"
-              placeholder={"XXXX"}
+              placeholder={"cost"}
               required={true}
               {...register("price")}
             />
           </label>
           {errors.price && (
             <div className={styles.form__error}>
-              {errors?.price && <span>invalid password</span>}
+              {errors?.price && <span>invalid number for price</span>}
             </div>
           )}
         </div>
-        <button>Add price</button>
+        <button className={css.price__form__button}>Add price</button>
       </form>
     </div>
   );

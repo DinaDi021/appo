@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { SchedulesInfoDetails } from "../../components/Schedules/SchedulesInfoDetails/SchedulesInfoDetails";
+import { SchedulesInfoDetails } from "../../components/Schedules/AllSchedules/SchedulesInfoDetails/SchedulesInfoDetails";
 import { useAppDispatch, useAppLocation, useAppSelector } from "../../hooks";
 import { ISchedule } from "../../interfaces/scheduleInterface";
 import { schedulesActions } from "../../redux";

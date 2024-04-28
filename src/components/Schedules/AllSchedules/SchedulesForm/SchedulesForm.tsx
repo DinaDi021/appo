@@ -3,11 +3,11 @@ import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { IAddSchedule } from "../../../interfaces/scheduleInterface";
-import { schedulesActions } from "../../../redux";
-import { schedulesShema } from "../../../validators";
-import styles from "../../LoginPanel/Form/Form.module.scss";
+import { useAppDispatch, useAppSelector } from "../../../../hooks";
+import { IAddSchedule } from "../../../../interfaces/scheduleInterface";
+import { schedulesActions } from "../../../../redux";
+import { schedulesShema } from "../../../../validators";
+import styles from "../../../LoginPanel/Form/Form.module.scss";
 
 const SchedulesForm: FC = () => {
   const {

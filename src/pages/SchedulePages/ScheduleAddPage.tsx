@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SchedulesForm } from "../../components/Schedules/SchedulesForm/SchedulesForm";
+import { SchedulesForm } from "../../components";
 
 const ScheduleAddPage = () => {
   return (
