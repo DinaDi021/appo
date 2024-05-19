@@ -4,9 +4,9 @@ export const updateQueryParams = (
   queryParams: QueryParams,
   setQuery: any,
   filterDate: string[],
-  filterService: number[],
-  filterCategories: string[],
-  filterMaster: number,
+  filterService?: number[],
+  filterCategories?: string[],
+  filterMaster?: number,
 ) => {
   queryParams = { ...queryParams };
 

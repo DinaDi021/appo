@@ -43,12 +43,15 @@ const getAllServices = createAsyncThunk<IData, void>(
   },
 );
 
-const getAllPrices = createAsyncThunk<IPrice[], { userId: number }>(
+const getAllPrices = createAsyncThunk<
+  IPrice[],
+  { userId: number; query?: string[] }
+>(
   "servicesSlice/getAllPrices",
-  async ({ userId }, { rejectWithValue, dispatch }) => {
+  async ({ userId, query }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
-      const { data } = await servicesService.getAllPrices(userId);
+      const { data } = await servicesService.getAllPrices(userId, query);
       return data.data;
     } catch (err) {
       const e = err as AxiosError;

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+import dayjs from "dayjs";
 
 import { IMaster, IUpdateSchedulesParams, QueryParams } from "../../interfaces";
 import { IAddSchedule, ISchedule } from "../../interfaces/scheduleInterface";
@@ -12,6 +13,7 @@ interface IState {
   updatedSchedule: ISchedule | null;
   availableSchedules: IMaster[];
   selectedMaster: IMaster | null;
+  dateForSchedules: string;
 }
 
 const initialState: IState = {
@@ -20,14 +22,21 @@ const initialState: IState = {
   updatedSchedule: null,
   availableSchedules: [],
   selectedMaster: null,
+  dateForSchedules: dayjs().toDate().toISOString(),
 };
 
-const getAllUsersSchedules = createAsyncThunk<ISchedule[], { userId: number }>(
+const getAllUsersSchedules = createAsyncThunk<
+  ISchedule[],
+  { userId: number; date?: string[] }
+>(
   "schedulesSlice/getAllUsersSchedules",
-  async ({ userId }, { rejectWithValue, dispatch }) => {
+  async ({ userId, date }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
-      const { data } = await schedulesService.getAllUsersSchedules(userId);
+      const { data } = await schedulesService.getAllUsersSchedules(
+        userId,
+        date,
+      );
       return data.data;
     } catch (err) {
       const e = err as AxiosError;
@@ -153,6 +162,9 @@ const schedulesSlice = createSlice({
     },
     setSelectedMaster: (state, action) => {
       state.selectedMaster = action.payload;
+    },
+    setSchedulesByDate: (state, action) => {
+      state.dateForSchedules = action.payload;
     },
   },
   extraReducers: (builder) =>

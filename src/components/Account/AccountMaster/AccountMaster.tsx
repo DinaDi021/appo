@@ -15,6 +15,7 @@ import styles from "../Account.module.scss";
 const AccountMaster: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
+  const { dateForSchedules } = useAppSelector((state) => state.schedules);
   const { isLoading } = useAppSelector((state) => state.progress);
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,15 +23,31 @@ const AccountMaster: FC = () => {
   useEffect(() => {
     if (user?.data) {
       dispatch(usersActions.getUserById({ id: user.data.id }));
-      dispatch(schedulesActions.getAllUsersSchedules({ userId: user.data.id }));
       dispatch(
         appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
       );
+      dispatch(servicesActions.getAllServices());
       dispatch(servicesActions.getAllPrices({ userId: user.data.id }));
       dispatch(imagesActions.getGallery({ userId: user.data.id }));
     }
-    navigate("/me/info");
   }, [dispatch, user, navigate]);
+
+  useEffect(() => {
+    if (dateForSchedules) {
+      dispatch(
+        schedulesActions.getAllUsersSchedules({
+          userId: user.data.id,
+          date: [dateForSchedules],
+        }),
+      );
+    }
+  }, [dispatch, user, dateForSchedules]);
+
+  useEffect(() => {
+    if (user && location.pathname === "/me") {
+      navigate("/me/info");
+    }
+  }, [user, location.pathname, navigate]);
 
   if (!user) {
     return <p>User not logged in</p>;

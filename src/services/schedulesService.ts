@@ -27,8 +27,17 @@ const schedulesService = {
         },
       },
     }),
-  getAllUsersSchedules: (userId: number): IRes<ISchedulesResponse> =>
-    apiService.get(urls.schedules.usersAll(userId)),
+  getAllUsersSchedules: (
+    userId: number,
+    date?: string[],
+  ): IRes<ISchedulesResponse> =>
+    apiService.get(urls.schedules.usersAll(userId), {
+      params: {
+        filter: {
+          date: date,
+        },
+      },
+    }),
   getSchedule: (userId: number, scheduleId: number): IRes<ISchedule> =>
     apiService.get(urls.schedules.byId(userId, scheduleId)),
   addSchedule: (userdId: number, data: IAddSchedule): IRes<ISchedule> =>

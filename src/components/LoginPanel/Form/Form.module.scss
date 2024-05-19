@@ -21,10 +21,19 @@
 
 
   &__schedule {
-    height: 200px;
+    width: 50%;
+    height: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+
+    &__title {
+      margin-bottom: 15px;
+    }
+
+    &__btn {
+      width: 258px;
+    }
   }
 
   &__login {

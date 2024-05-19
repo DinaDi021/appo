@@ -10,8 +10,14 @@ import { apiService, IRes } from "./apiServices";
 
 const servicesService = {
   getAll: (): IRes<IServicesResponse> => apiService.get(urls.services.all),
-  getAllPrices: (userId: number): IRes<IPriceResponse> =>
-    apiService.get(urls.prices.all(userId)),
+  getAllPrices: (userId: number, data?: string[]): IRes<IPriceResponse> =>
+    apiService.get(urls.prices.all(userId), {
+      params: {
+        filter: {
+          date: data,
+        },
+      },
+    }),
   getPriceById: (userId: number, priceId: number): IRes<IPrice> =>
     apiService.get(urls.prices.byId(userId, priceId)),
   addPrice: (userId: number, data: IAddPrice): IRes<IPrice> =>
