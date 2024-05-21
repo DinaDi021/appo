@@ -11,6 +11,7 @@ const AppointmentsInfoDetails: FC<IProps> = ({ appointment }) => {
   const {
     sum,
     payment,
+    paid_sum,
     title,
     category,
     master_firstname,
@@ -23,15 +24,24 @@ const AppointmentsInfoDetails: FC<IProps> = ({ appointment }) => {
     navigate("/me/appointments");
   };
 
+  const dataTimeWithoutSec = date_time.substring(0, 16);
+  const sumForToPay = sum - paid_sum;
+
   return (
     <div>
-      <h4>{sum}</h4>
-      <h4>{payment}</h4>
-      <h4>{title}</h4>
-      <h4>{category}</h4>
-      <h4>{master_firstname}</h4>
-      <h4>{master_lastname}</h4>
-      <h4>{date_time}</h4>
+      <h4>Category: {category}</h4>
+      <h4>Service: {title}</h4>
+      <h4>Price: {sum}</h4>
+      <h4>
+        Your master: {master_firstname} {master_lastname}
+      </h4>
+      <h4>Date and time: {dataTimeWithoutSec}</h4>
+      <h4>
+        Type your payment: {payment}
+        {payment === "prepayment" && ` - amount ${paid_sum}`}
+      </h4>
+      <h4>Amount to be paid: {sumForToPay}</h4>
+
       <Link to={"/me/appointments"}>
         <button onClick={getAppointments}>Back to all appointments</button>
       </Link>

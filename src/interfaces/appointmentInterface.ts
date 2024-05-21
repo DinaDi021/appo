@@ -3,6 +3,7 @@ export interface IAppointment {
   schedule_id: number;
   service_id: number;
   sum: number;
+  paid_sum: number;
   payment: "full" | "prepayment";
   title: string;
   category: string;

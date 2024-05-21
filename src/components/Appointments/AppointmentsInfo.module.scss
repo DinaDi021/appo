@@ -1,0 +1,84 @@
+.appointments {
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.card {
+  width: 100%;
+  height: 180px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--green-crayola-pine);
+  border-radius: 10px;
+
+  .card__infoWrapper {
+    width: 45%;
+    height: 100%;
+    background-image: url("../../assets/img/background/bc-main.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .card__info {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 15px;
+    color: var(--basic-white);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    backdrop-filter: blur(5px);
+
+
+
+  //&__info {
+  //  width: 45%;
+  //  height: calc(100% - 30px);
+  //  display: flex;
+  //  flex-direction: column;
+  //  align-items: flex-start;
+  //  justify-content: space-between;
+  //  padding: 15px;
+  //  color: var(--basic-white);
+  //  border-top-left-radius: 15px;
+  //  border-bottom-left-radius: 15px;
+  //  background-image: url("../../assets/img/background/bc-main.jpg");
+  //  backdrop-filter: blur(5px);
+  //  background-size: cover;
+  //  background-repeat: no-repeat;
+
+
+  &__date{
+    text-align: center;
+    padding: 8px 15px;
+    color: var(--basic-black);
+    border-radius: 10px;
+    background-color: var(--basic-white);
+  }
+  }
+
+  &__price {
+    width: 40%;
+    height: calc(100% - 30px);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__btnAction {
+    margin: 0;
+    padding: 5px 15px;
+  }
+}
