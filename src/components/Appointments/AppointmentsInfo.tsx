@@ -1,9 +1,10 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IAppointment } from "../../interfaces";
 import { appointmentsActions } from "../../redux";
+import { Modal } from "../Modal/Modal";
 import styles from "./AppointmentsInfo.module.scss";
 
 interface IProps extends PropsWithChildren {
@@ -26,11 +27,13 @@ const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
   const userId = user.data.id;
   const appointmentId = id;
   const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
 
   const dataTimeWithoutSec = date_time.substring(0, 16);
   const sumForToPay = sum - paid_sum;
 
   const deleteAppo = async () => {
+    setShowModal(false);
     await dispatch(
       appointmentsActions.deleteAppointmentById({ userId, appointmentId }),
     );
@@ -57,11 +60,19 @@ const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
             {payment === "prepayment" && ` - ${paid_sum}`}
           </h4>
           <h4>Amount to be paid: {sumForToPay}</h4>
-          <button onClick={deleteAppo} className={styles.card__btnAction}>
+          <button
+            onClick={() => setShowModal(true)}
+            className={styles.card__btnAction}
+          >
             <DeleteForeverIcon />
           </button>
         </div>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={deleteAppo}
+      />
     </>
   );
 };

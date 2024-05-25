@@ -6,7 +6,6 @@ import {
   AboutUsPage,
   AfterPaymentPage,
   AppointmentPage,
-  AppointmentPageDetails,
   AvailableSchedulesDetailsPage,
   AvailableSchedulesPage,
   CartPage,
@@ -94,10 +93,6 @@ const router = createBrowserRouter([
           {
             path: "appointments",
             element: <AppointmentPage />,
-          },
-          {
-            path: "appointments/:id",
-            element: <AppointmentPageDetails />,
           },
           {
             path: "schedules",
