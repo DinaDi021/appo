@@ -104,6 +104,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
               <label className={styles.schedules__form__label}>
                 <EventOutlinedIcon />
                 <input
+                  className={styles.schedules__form__input}
                   type="text"
                   {...register("date_time")}
                   defaultValue={time}

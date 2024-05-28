@@ -135,7 +135,11 @@ const deleteAvatar = createAsyncThunk<void, { userId: number }>(
 const imagesSlice = createSlice({
   name: "imagesSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setAvatar: (state, action) => {
+      state.avatar = action.payload;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getGallery.fulfilled, (state, action) => {

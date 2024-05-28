@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useRef } from "react";
 
 import styles from "./Modal.module.scss";
 
@@ -8,21 +8,35 @@ interface ModalProps {
   onConfirm: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, onClose, onConfirm }) => {
+const Modal: FC<ModalProps> = ({ show, onClose, onConfirm }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleOverlayClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    if (event.target === modalRef.current) {
+      onClose();
+    }
+  };
+
   if (!show) {
     return null;
   }
 
   return (
-    <div className={styles.modalOverlay}>
+    <div
+      className={styles.modalOverlay}
+      onClick={handleOverlayClick}
+      ref={modalRef}
+    >
       <div className={styles.modal}>
-        <div className={styles.modalContent}>
+        <div className={styles.modal__content}>
           <p>Are you sure you want to delete?</p>
-          <div className={styles.modalActions}>
-            <button onClick={onClose} className={styles.modalButton}>
+          <div className={styles.modal__actions}>
+            <button onClick={onClose} className={styles.modal__button}>
               Cancel
             </button>
-            <button onClick={onConfirm} className={styles.modalButtonConfirm}>
+            <button onClick={onConfirm} className={styles.modal__buttonConfirm}>
               Delete
             </button>
           </div>

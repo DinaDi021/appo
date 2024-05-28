@@ -1,4 +1,5 @@
 import { joiResolver } from "@hookform/resolvers/joi";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDateTimePicker } from "@mui/x-date-pickers/DesktopDateTimePicker/DesktopDateTimePicker";
@@ -12,6 +13,7 @@ import { IAddSchedule } from "../../../../interfaces/scheduleInterface";
 import { schedulesActions } from "../../../../redux";
 import { schedulesShema } from "../../../../validators";
 import styles from "../../../LoginPanel/Form/Form.module.scss";
+import { newTheme } from "../../../Theme/Theme";
 import css from "../AllSchedules.module.scss";
 
 const SchedulesForm: FC = () => {
@@ -41,6 +43,8 @@ const SchedulesForm: FC = () => {
     setAddedDateTime(data.date_time);
   };
 
+  const baseTheme = createTheme();
+
   return (
     <div>
       <h3 className={styles.form__schedule__title}>
@@ -61,21 +65,35 @@ const SchedulesForm: FC = () => {
                 fieldState: { error },
               }) => (
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DesktopDateTimePicker
-                    value={dayjs(value)}
-                    onChange={(newValue) => {
-                      onChange(
-                        newValue ? newValue.format("YYYY-MM-DD HH:mm:ss") : "",
-                      );
-                    }}
-                  />
-                  <TextField
-                    style={{ display: "none" }}
-                    value={value}
-                    onChange={(e) => onChange(e.target.value)}
-                    error={!!error}
-                    helperText={error ? error.message : null}
-                  />
+                  <ThemeProvider theme={newTheme(baseTheme)}>
+                    <DesktopDateTimePicker
+                      value={dayjs(value)}
+                      onChange={(newValue) => {
+                        onChange(
+                          newValue
+                            ? newValue.format("YYYY-MM-DD HH:mm:ss")
+                            : "",
+                        );
+                      }}
+                      showDaysOutsideCurrentMonth={true}
+                      sx={{
+                        ".MuiPickersYear-yearButton.Mui-selected:hover, .Mui-selected:hover.focus":
+                          {
+                            backgroundColor: "var(--turquoise) !important",
+                          },
+                        ".MuiPickersYear-yearButton.Mui-selected": {
+                          backgroundColor: "var(--green-pine) !important",
+                        },
+                      }}
+                    />
+                    <TextField
+                      style={{ display: "none" }}
+                      value={value}
+                      onChange={(e) => onChange(e.target.value)}
+                      error={!!error}
+                      helperText={error ? error.message : null}
+                    />
+                  </ThemeProvider>
                 </LocalizationProvider>
               )}
             />

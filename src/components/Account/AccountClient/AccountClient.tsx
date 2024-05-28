@@ -4,7 +4,6 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { appointmentsActions, usersActions } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
-import { UsersInfo } from "../../Users/";
 import styles from "../Account.module.scss";
 
 const AccountClient: FC = () => {
@@ -14,14 +13,6 @@ const AccountClient: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getSchedules = () => {
-    navigate("/me/schedules");
-  };
-
-  const getAppointments = () => {
-    navigate("/me/appointments");
-  };
-
   useEffect(() => {
     if (user?.data) {
       dispatch(usersActions.getUserById({ id: user.data.id }));
@@ -29,7 +20,8 @@ const AccountClient: FC = () => {
         appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
       );
     }
-  }, [dispatch, user]);
+    navigate("/me/info");
+  }, [dispatch, user, navigate]);
 
   if (!user) {
     return <p>User not logged in</p>;
@@ -40,30 +32,32 @@ const AccountClient: FC = () => {
       {isLoading ? (
         <IsLoading />
       ) : (
-        <div>
-          <h3>Contact Information </h3>
-          <UsersInfo key={user.data.id} user={user} />
-          <button
-            onClick={getSchedules}
-            className={
-              location.pathname === "/me/schedules"
-                ? styles.account__activeButton
-                : ""
-            }
-          >
-            My schedules
-          </button>
-          <button
-            onClick={getAppointments}
-            className={
-              location.pathname === "/me/appointments"
-                ? styles.account__activeButton
-                : ""
-            }
-          >
-            My appointments
-          </button>
-          <Outlet />
+        <div className={styles.account}>
+          <div className={styles.account__side}>
+            <button
+              onClick={() => navigate("/me/info")}
+              className={
+                location.pathname === "/me/info"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              Contact Information
+            </button>
+            <button
+              onClick={() => navigate("/me/appointments")}
+              className={
+                location.pathname === "/me/appointments"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              My appointments
+            </button>
+          </div>
+          <div className={styles.account__main}>
+            <Outlet />
+          </div>
         </div>
       )}
     </div>

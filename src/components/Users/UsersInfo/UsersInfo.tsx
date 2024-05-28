@@ -19,6 +19,7 @@ import { authActions, imagesActions, usersActions } from "../../../redux";
 import { updateShema } from "../../../validators";
 import { ChangePasswordForm } from "../../LoginPanel/Form/ChangePasswordForm";
 import styles from "../../LoginPanel/Form/Form.module.scss";
+import { Modal } from "../../Modal/Modal";
 import css from "./UserInfo.module.scss";
 
 interface IProps extends PropsWithChildren {
@@ -32,6 +33,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
   const dispatch = useAppDispatch();
   const [isChangePasswordFormVisible, setIsChangePasswordFormVisible] =
     useState(false);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -77,6 +79,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
   };
 
   const deleteAccount = async () => {
+    setShowModal(false);
     const {
       meta: { requestStatus },
     } = await dispatch(usersActions.deleteUserById({ id }));
@@ -104,10 +107,12 @@ const UsersInfo: FC<IProps> = ({ user }) => {
     );
 
     if (result.payload && result.meta.requestStatus === "fulfilled") {
+      const newImageUrl = result.payload as string;
+
       dispatch(
         usersActions.updateUserById({
           id,
-          params: { image_url: null },
+          params: { image_url: newImageUrl },
         }),
       );
     }
@@ -147,6 +152,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
               <label className={styles.form__label}>
                 <PersonRoundedIcon />
                 <input
+                  className={styles.form__input}
                   type="text"
                   placeholder={"First Name"}
                   {...register("firstname")}
@@ -162,6 +168,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
               <label className={styles.form__label}>
                 <PersonRoundedIcon />
                 <input
+                  className={styles.form__input}
                   type="text"
                   placeholder={"Last Name"}
                   {...register("lastname")}
@@ -177,6 +184,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
               <label className={styles.form__label}>
                 <PersonRoundedIcon />
                 <input
+                  className={styles.form__input}
                   type="text"
                   placeholder={"XXXX-XX-XX"}
                   {...register("birthdate")}
@@ -192,6 +200,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
               <label className={styles.form__label}>
                 <LockOutlinedIcon />
                 <input
+                  className={styles.form__input}
                   type="text"
                   placeholder={"+380xxxxxxxx"}
                   required={true}
@@ -208,6 +217,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
               <label className={styles.form__label}>
                 <AlternateEmailOutlinedIcon />
                 <input
+                  className={styles.form__input}
                   type="email"
                   placeholder={"Email"}
                   required={true}
@@ -243,8 +253,13 @@ const UsersInfo: FC<IProps> = ({ user }) => {
         </button>
         <button onClick={logOut}>Log out</button>
         <button onClick={logOutAll}>Log out in All devices</button>
-        <button onClick={deleteAccount}>Delete account</button>
+        <button onClick={() => setShowModal(true)}>Delete account</button>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={deleteAccount}
+      />
     </div>
   );
 };

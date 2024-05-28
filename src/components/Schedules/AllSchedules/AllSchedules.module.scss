@@ -1,5 +1,6 @@
-.schedules {
+@import "src/styles";
 
+.schedules {
   &__container {
     display: flex;
   }
@@ -64,22 +65,20 @@
     flex-direction: column;
     justify-content: space-around;
 
+    &__input {
+      @include customInputStyles;
+      width: 80%;
+      padding-left: 30px;
+      height: 35px;
+      position: absolute;
+    }
+
     &__label {
       width: 100%;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-
-      input {
-        width: 80%;
-        padding-left: 30px;
-        height: 35px;
-        position: absolute;
-      }
     }
-
   }
-
-
 }

@@ -11,6 +11,7 @@
 :root {
   --basic-white: #ffffff;
   --basic-black: #000000;
+  --basic-grey: #778899;
 
   --dusty-blue: #aae7e5;
   --tiffany: #03b7ba;
@@ -24,6 +25,33 @@
   --green: #056250;
   --dark-bluish-green: #044938;
   --dark-green: #011f1a;
+}
+
+@mixin customInputStyles {
+  border: none;
+  border-bottom: 1px solid var(--green-pine);
+  border-radius: 8px;
+  background-color: transparent;
+  outline: none;
+  color: var(--basic-black);
+  cursor: pointer;
+  transition: background-color 5000s ease-in-out 0s;
+
+  &:hover {
+    border-bottom: 2px solid var(--turquoise) !important;
+  }
+
+  &:focus {
+    border-bottom: 2px solid var(--turquoise) !important;
+  }
+
+  &::placeholder {
+    color: var(--basic-grey);
+  }
+
+  &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
 
 body {
@@ -84,34 +112,6 @@ button {
     opacity: 0.2;
   }
 }
-
-input {
-  border: none;
-  border-bottom: 1px solid var(--green-pine);
-  border-radius: 8px;
-  background-color: transparent;
-  outline: none;
-  color: var(--navy);
-  cursor: pointer;
-
-  &:hover {
-    border-bottom: 2px solid var(--turquoise) !important;
-  }
-
-  &:focus {
-    border-bottom: 2px solid var(--dark-green) !important;
-  }
-
-  &::placeholder {
-    color: var(--medium-green);
-  }
-
-  &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-}
-
 
 //swiper
 

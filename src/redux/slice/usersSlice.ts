@@ -87,6 +87,9 @@ const usersSlice = createSlice({
     clearUserById: (state) => {
       state.user = null;
     },
+    setUserInfo: (state, action) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: (build) =>
     build

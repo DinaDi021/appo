@@ -8,6 +8,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+  z-index: 5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal {
@@ -16,26 +27,36 @@
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
+  animation: slideIn 0.3s ease-in-out;
+
+  &__content {
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+
+  &__button {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  &__buttonConfirm {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+  }
 }
 
-.modalContent {
-  text-align: center;
-}
-
-.modalActions {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.modalButton {
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.modalButtonConfirm {
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: red;
-  color: white;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

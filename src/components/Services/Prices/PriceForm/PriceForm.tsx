@@ -63,6 +63,7 @@ const PriceForm: FC = () => {
           <label className={styles.form__label}>
             <MonetizationOnOutlinedIcon className={css.price__svg} />
             <input
+              className={css.price__form__input}
               type="number"
               placeholder={"cost"}
               required={true}

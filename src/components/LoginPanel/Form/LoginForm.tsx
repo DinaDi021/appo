@@ -12,12 +12,7 @@ import { loginShema } from "../../../validators";
 import styles from "./Form.module.scss";
 
 const LoginForm: FC = () => {
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IAuth>({
+  const { register, reset, handleSubmit } = useForm<IAuth>({
     resolver: joiResolver(loginShema),
   });
   const dispatch = useAppDispatch();
@@ -41,33 +36,35 @@ const LoginForm: FC = () => {
           <label className={styles.form__label}>
             <AlternateEmailOutlinedIcon />
             <input
+              className={styles.form__input}
               type="email"
               placeholder={"Email"}
               required={true}
               {...register("email")}
             />
           </label>
-          {errors.email && (
-            <div className={styles.form__error}>
-              {errors?.email && <span>invalid email</span>}
-            </div>
-          )}
+          {/*{errors.email && (*/}
+          {/*  <div className={styles.form__error}>*/}
+          {/*    {errors?.email && <span>invalid email</span>}*/}
+          {/*  </div>*/}
+          {/*)}*/}
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
             <LockOutlinedIcon />
             <input
+              className={styles.form__input}
               type="password"
               placeholder={"Password"}
               required={true}
               {...register("password")}
             />
           </label>
-          {errors.password && (
-            <div className={styles.form__error}>
-              {errors?.password && <span>invalid password</span>}
-            </div>
-          )}
+          {/*{errors.password && (*/}
+          {/*  <div className={styles.form__error}>*/}
+          {/*    {errors?.password && <span>invalid password</span>}*/}
+          {/*  </div>*/}
+          {/*)}*/}
         </div>
         {error && <span className={styles.errMessage}>{error.message}</span>}
         <button>Log in</button>

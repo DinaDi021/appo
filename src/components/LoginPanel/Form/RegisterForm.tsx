@@ -36,7 +36,7 @@ const RegisterForm: FC = () => {
   };
 
   return (
-    <>
+    <div>
       <form
         className={styles.form__register}
         onSubmit={handleSubmit(registerUser)}
@@ -45,6 +45,7 @@ const RegisterForm: FC = () => {
           <label className={styles.form__label}>
             <PersonRoundedIcon />
             <input
+              className={styles.form__input}
               type="text"
               placeholder={"First Name"}
               required={true}
@@ -61,6 +62,7 @@ const RegisterForm: FC = () => {
           <label className={styles.form__label}>
             <PersonRoundedIcon />
             <input
+              className={styles.form__input}
               type="text"
               placeholder={"Last Name"}
               required={true}
@@ -77,6 +79,7 @@ const RegisterForm: FC = () => {
           <label className={styles.form__label}>
             <LockOutlinedIcon />
             <input
+              className={styles.form__input}
               type="text"
               placeholder={"+380xxxxxxxx"}
               required={true}
@@ -93,6 +96,7 @@ const RegisterForm: FC = () => {
           <label className={styles.form__label}>
             <AlternateEmailOutlinedIcon />
             <input
+              className={styles.form__input}
               type="email"
               placeholder={"Email"}
               required={true}
@@ -109,6 +113,7 @@ const RegisterForm: FC = () => {
           <label className={styles.form__label}>
             <LockOutlinedIcon />
             <input
+              className={styles.form__input}
               type="password"
               placeholder={"Password"}
               required={true}
@@ -125,6 +130,7 @@ const RegisterForm: FC = () => {
           <label className={styles.form__label}>
             <LockOutlinedIcon />
             <input
+              className={styles.form__input}
               type="password"
               placeholder={"Confirm password"}
               required={true}
@@ -140,7 +146,7 @@ const RegisterForm: FC = () => {
         {error && <span className={styles.errMessage}>{error.message}</span>}
         <button>Create Account</button>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,6 @@
 import { joiResolver } from "@hookform/resolvers/joi";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import React, { FC, PropsWithChildren, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -77,10 +79,11 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
           <label className={styles.form__label}>
             <MonetizationOnOutlinedIcon className={css.price__svg} />
             <input
+              className={css.price__form__input}
               type="number"
               placeholder={"price"}
               {...register("price")}
-              style={{ width: "20%" }}
+              style={{ width: "75%" }}
             />
           </label>
           {errors.price && (
@@ -89,9 +92,15 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
             </div>
           )}
         </div>
-        <button>Update Schedule</button>
+        <div className={css.price__form__actionBtn}>
+          <button>
+            <EditIcon />
+          </button>
+          <button onClick={handleDeletePrice}>
+            <DeleteForeverIcon />
+          </button>
+        </div>
       </form>
-      <button onClick={handleDeletePrice}>Delete Price</button>
     </div>
   );
 };

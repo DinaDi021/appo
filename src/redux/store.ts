@@ -38,6 +38,15 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "persist-key",
   storage,
+  whitelist: [
+    "auth",
+    "appointments",
+    "schedules",
+    "carts",
+    "filters",
+    "services",
+    "images",
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -48,6 +48,7 @@ const ForgotPasswordForm: FC = () => {
             <label className={styles.form__label}>
               <AlternateEmailOutlinedIcon />
               <input
+                className={styles.form__input}
                 type="email"
                 placeholder={"Email"}
                 required={true}
