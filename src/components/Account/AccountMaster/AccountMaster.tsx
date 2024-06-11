@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
   appointmentsActions,
   imagesActions,
-  schedulesActions,
   servicesActions,
   usersActions,
 } from "../../../redux";
@@ -15,7 +14,6 @@ import styles from "../Account.module.scss";
 const AccountMaster: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { dateForSchedules } = useAppSelector((state) => state.schedules);
   const { isLoading } = useAppSelector((state) => state.progress);
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,17 +29,6 @@ const AccountMaster: FC = () => {
       dispatch(imagesActions.getGallery({ userId: user.data.id }));
     }
   }, [dispatch, user, navigate]);
-
-  useEffect(() => {
-    if (dateForSchedules) {
-      dispatch(
-        schedulesActions.getAllUsersSchedules({
-          userId: user.data.id,
-          date: [dateForSchedules],
-        }),
-      );
-    }
-  }, [dispatch, user, dateForSchedules]);
 
   useEffect(() => {
     if (user && location.pathname === "/me") {

@@ -81,4 +81,21 @@
       justify-content: flex-start;
     }
   }
+
+  &__added {
+    &__wrap {
+      margin: 10px 0;
+    }
+
+    &__date {
+      width: 235px;
+      padding: 8px 10px;
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      border: 2px solid var(--green-pine);
+    }
+  }
 }

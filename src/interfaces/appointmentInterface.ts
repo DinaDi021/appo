@@ -7,8 +7,10 @@ export interface IAppointment {
   payment: "full" | "prepayment";
   title: string;
   category: string;
-  master_firstname: string;
-  master_lastname: string;
+  firstname?: string;
+  master_firstname?: string;
+  lastname?: string;
+  master_lastname?: string;
   date_time: string;
 }
 

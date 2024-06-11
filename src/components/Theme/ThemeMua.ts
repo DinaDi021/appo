@@ -28,6 +28,17 @@ const newTheme = (theme: Theme) =>
           },
         },
       },
+      MuiList: {
+        styleOverrides: {
+          root: {
+            "&.MuiMultiSectionDigitalClockSection-root": {
+              "&::-webkit-scrollbar": {
+                width: "5px",
+              },
+            },
+          },
+        },
+      },
     },
   });
 

@@ -9,20 +9,24 @@ import { progressActions } from "./progressSlice";
 
 interface IState {
   allSchedules: ISchedule[];
+  allSchedulesByDate: ISchedule[];
   schedule: ISchedule | null;
   updatedSchedule: ISchedule | null;
   availableSchedules: IMaster[];
   selectedMaster: IMaster | null;
-  dateForSchedules: string;
+  filterDate: string;
+  addedDateTime: string;
 }
 
 const initialState: IState = {
   allSchedules: [],
+  allSchedulesByDate: [],
   schedule: null,
   updatedSchedule: null,
   availableSchedules: [],
   selectedMaster: null,
-  dateForSchedules: dayjs().toDate().toISOString(),
+  filterDate: dayjs().toDate().toISOString(),
+  addedDateTime: null,
 };
 
 const getAllUsersSchedules = createAsyncThunk<
@@ -164,7 +168,10 @@ const schedulesSlice = createSlice({
       state.selectedMaster = action.payload;
     },
     setSchedulesByDate: (state, action) => {
-      state.dateForSchedules = action.payload;
+      state.filterDate = action.payload;
+    },
+    setAddedDateTime: (state, action) => {
+      state.addedDateTime = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -173,7 +180,11 @@ const schedulesSlice = createSlice({
         state.availableSchedules = action.payload;
       })
       .addCase(getAllUsersSchedules.fulfilled, (state, action) => {
-        state.allSchedules = action.payload;
+        if (action.meta.arg.date) {
+          state.allSchedulesByDate = action.payload;
+        } else {
+          state.allSchedules = action.payload;
+        }
       })
       .addCase(getScheduleById.fulfilled, (state, action) => {
         state.schedule = action.payload;

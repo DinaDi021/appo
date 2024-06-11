@@ -23,7 +23,9 @@ interface IProps extends PropsWithChildren {
 const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
   const { schedule_id, status, date_time } = schedule;
   const { user } = useAppSelector((state) => state.auth);
-  const { updatedSchedule } = useAppSelector((state) => state.schedules);
+  const { updatedSchedule, filterDate } = useAppSelector(
+    (state) => state.schedules,
+  );
   const userId = user.data.id;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -54,7 +56,9 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
         scheduleId: schedule_id,
       }),
     );
-    dispatch(schedulesActions.getAllUsersSchedules({ userId }));
+    dispatch(
+      schedulesActions.getAllUsersSchedules({ userId, date: [filterDate] }),
+    );
   };
 
   const getDetails = () => {
@@ -83,7 +87,12 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
     );
     dispatch(schedulesActions.setUpdatedParams({ ...params, schedule_id }));
     toggleEdit();
-    dispatch(schedulesActions.getAllUsersSchedules({ userId: userId }));
+    dispatch(
+      schedulesActions.getAllUsersSchedules({
+        userId: userId,
+        date: [filterDate],
+      }),
+    );
   };
 
   const time = date_time.substring(11, 16);

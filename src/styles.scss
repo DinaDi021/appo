@@ -6,6 +6,15 @@
 * {
   font-family: "UbuntuRegular", sans-serif;
   margin: 0;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--green-crayola-pine);
+      border-radius: 10px;
+    }
 }
 
 :root {
@@ -69,7 +78,7 @@ body {
 
   &::-webkit-scrollbar {
     width: 10px;
-    background-color: var(--medium-green);
+    background-color: var(--green-pine);
   }
 
   &::-webkit-scrollbar-thumb {
@@ -265,19 +274,3 @@ button {
 .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.Mui-focused.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiAutocomplete-inputRoot .MuiOutlinedInput-notchedOutline {
   border-color: var(--turquoise)!important;
 }
-
-
-//.MuiAutocomplete-inputFocused {
-//  border-radius: 1px solid var(--turquoise);
-//}
-
-
-//
-//.footer {
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  width: 100vw;
-//  height: 10vh;
-//  border-top: 1px solid white;
-//}
