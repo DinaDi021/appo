@@ -15,12 +15,11 @@ interface IProps extends PropsWithChildren {
 }
 
 const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
-  const { master_firstname, master_lastname, schedules, prices } =
+  const { master_firstname, master_lastname, master_image, schedules, prices } =
     availableSchedule;
   const { user } = useAppSelector((state) => state.auth);
 
   const userId = user.data.id;
-  const avatar = user.data.image_url;
   const { selectedSchedule, selectedPrice, error } = useAppSelector(
     (state) => state.carts,
   );
@@ -59,7 +58,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
         </h3>
         <img
           className={styles.master__avatar}
-          src={avatar || empty_person}
+          src={master_image || empty_person}
           alt={`Avatar ${userId}`}
         />
       </div>
