@@ -9,8 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { schedulesActions } from "../../../redux";
 import styles from "../../Filter/Filter.module.scss";
-import { ServerDay } from "../../Theme/ServerDay";
-import { newTheme } from "../../Theme/ThemeMua";
+import { newTheme, ServerDay } from "../../Theme";
 import css from "./AllSchedules.module.scss";
 import { SchedulesMasterInfo } from "./SchedulesMasterInfo/SchedulesMasterInfo";
 

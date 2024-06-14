@@ -13,7 +13,7 @@ import { IAddSchedule } from "../../../../interfaces/scheduleInterface";
 import { schedulesActions } from "../../../../redux";
 import { schedulesShema } from "../../../../validators";
 import styles from "../../../LoginPanel/Form/Form.module.scss";
-import { newTheme } from "../../../Theme/ThemeMua";
+import { newTheme } from "../../../Theme";
 import css from "../AllSchedules.module.scss";
 
 const SchedulesForm: FC = () => {
