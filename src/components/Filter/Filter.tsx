@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete/Autocomplete";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -10,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IServices } from "../../interfaces";
 import { servicesActions } from "../../redux";
 import { filtersActions } from "../../redux/slice/filtersSlice";
+import { newTheme } from "../Theme";
 import styles from "./Filter.module.scss";
 
 const Filter: FC = () => {
@@ -64,67 +66,103 @@ const Filter: FC = () => {
     dispatch(servicesActions.getAllServices());
   }, [dispatch]);
 
+  const baseTheme = createTheme();
+
   return (
     <div className={styles.filter__container}>
       <div className={styles.filter__calendar}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DateCalendar
-            onChange={handleDateChange}
-            value={filterDate ? new Date(filterDate[0]) : null}
-          />
+          <ThemeProvider theme={newTheme(baseTheme)}>
+            <DateCalendar
+              onChange={handleDateChange}
+              value={filterDate ? new Date(filterDate[0]) : null}
+              sx={{
+                ".MuiPickersYear-yearButton.Mui-selected:hover, .Mui-selected:hover.focus":
+                  {
+                    backgroundColor: "var(--turquoise) !important",
+                  },
+                ".MuiPickersYear-yearButton.Mui-selected": {
+                  color: "var(--basic-white)",
+                  backgroundColor: "var(--green-pine) !important",
+                },
+                ".MuiPickersYear-yearButton": {
+                  color: "var(--basic-black)",
+                },
+                ".MuiPickersCalendarHeader-label": {
+                  color: "var(--basic-black)",
+                },
+              }}
+            />
+          </ThemeProvider>
         </LocalizationProvider>
       </div>
-      <div>
-        <Autocomplete
-          multiple
-          id="size-small-standard-multi"
-          size="small"
-          options={categories}
-          value={filterCategories || []}
-          sx={{ width: 280 }}
-          getOptionLabel={(option) => option}
-          onChange={(event, value) => handleCategoryChange(event, value)}
-          renderInput={(params) => <TextField {...params} label="Categories" />}
-        />
+      <div className={styles.filter__autocomplete}>
+        <div>
+          <ThemeProvider theme={newTheme(baseTheme)}>
+            <Autocomplete
+              multiple
+              id="size-small-standard-multi"
+              size="medium"
+              options={categories}
+              value={filterCategories || []}
+              sx={{ width: 280 }}
+              getOptionLabel={(option) => option}
+              onChange={(event, value) => handleCategoryChange(event, value)}
+              renderInput={(params) => (
+                <TextField {...params} label="Categories" />
+              )}
+            />
+          </ThemeProvider>
+        </div>
+        <div>
+          <ThemeProvider theme={newTheme(baseTheme)}>
+            <Autocomplete
+              multiple
+              id="size-small-standard-multi"
+              size="medium"
+              options={filteredServices}
+              value={filteredServices.filter((service) =>
+                filterService?.includes(service.id),
+              )}
+              sx={{ width: 280 }}
+              getOptionLabel={(service) => service.title}
+              onChange={(event, value) => handleServiceChange(event, value)}
+              renderInput={(params) => (
+                <TextField {...params} label="Services" />
+              )}
+            />
+          </ThemeProvider>
+        </div>
+        <div>
+          <ThemeProvider theme={newTheme(baseTheme)}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              size={"medium"}
+              options={availableSchedules}
+              value={
+                availableSchedules.find(
+                  (schedule) => schedule.master_id === filterMaster,
+                ) || null
+              }
+              sx={{ width: 280 }}
+              getOptionLabel={(schedule) =>
+                `${schedule.master_firstname} ${schedule.master_lastname}`
+              }
+              onChange={(event, value) =>
+                handleMasterChange(value?.master_id ?? null)
+              }
+              isOptionEqualToValue={(option, value) =>
+                option?.master_id === value?.master_id
+              }
+              renderInput={(params) => (
+                <TextField {...params} label="Masters" />
+              )}
+            />
+          </ThemeProvider>
+        </div>
       </div>
-      <div>
-        <Autocomplete
-          multiple
-          id="size-small-standard-multi"
-          size="small"
-          options={filteredServices}
-          value={filteredServices.filter(
-            (service) => filterService?.includes(service.id),
-          )}
-          sx={{ width: 280 }}
-          getOptionLabel={(service) => service.title}
-          onChange={(event, value) => handleServiceChange(event, value)}
-          renderInput={(params) => <TextField {...params} label="Services" />}
-        />
-      </div>
-      <div>
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={availableSchedules}
-          value={
-            availableSchedules.find(
-              (schedule) => schedule.master_id === filterMaster,
-            ) || null
-          }
-          sx={{ width: 280 }}
-          getOptionLabel={(schedule) =>
-            `${schedule.master_firstname} ${schedule.master_lastname}`
-          }
-          onChange={(event, value) =>
-            handleMasterChange(value?.master_id ?? null)
-          }
-          isOptionEqualToValue={(option, value) =>
-            option?.master_id === value?.master_id
-          }
-          renderInput={(params) => <TextField {...params} label="Masters" />}
-        />
-      </div>
+
       <div>
         <button onClick={() => handleClearFilterClick()}>Clear filters</button>
       </div>

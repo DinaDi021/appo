@@ -16,9 +16,33 @@ const newTheme = (theme: Theme) =>
           },
         },
       },
+      MuiFormLabel: {
+        styleOverrides: {
+          root: {
+            color: "var(--basic-black) !important",
+          },
+        },
+      },
+      MuiFormControl: {
+        styleOverrides: {
+          root: {
+            cursor: "pointer",
+          },
+        },
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            input: {
+              cursor: "pointer",
+            },
+          },
+        },
+      },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
+            borderRadius: "1rem !important",
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderColor: "var(--green-pine) !important",
             },
@@ -34,6 +58,21 @@ const newTheme = (theme: Theme) =>
             "&.MuiMultiSectionDigitalClockSection-root": {
               "&::-webkit-scrollbar": {
                 width: "5px",
+              },
+            },
+          },
+        },
+      },
+      MuiAutocomplete: {
+        styleOverrides: {
+          root: {
+            marginBottom: "10px",
+            cursor: "pointer",
+          },
+          listbox: {
+            li: {
+              "&:hover, &:focus, &:active, &:target, &:visited": {
+                backgroundColor: "var(--green-jungle-crayola)!important",
               },
             },
           },

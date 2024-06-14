@@ -2,6 +2,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -10,6 +11,7 @@ import { IAddPrice, IServices } from "../../../../interfaces";
 import { servicesActions } from "../../../../redux";
 import { priceShema } from "../../../../validators";
 import styles from "../../../LoginPanel/Form/Form.module.scss";
+import { newTheme } from "../../../Theme";
 import css from "../../Services.module.scss";
 
 const PriceForm: FC = () => {
@@ -40,23 +42,29 @@ const PriceForm: FC = () => {
     }
   };
 
+  const baseTheme = createTheme();
+
   return (
     <div className={css.price__form}>
       <form className={styles.form__login} onSubmit={handleSubmit(addPrice)}>
         <div className={styles.form__container}>
           <label className={styles.form__autocomplete}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={services}
-              sx={{ width: 280 }}
-              value={selectedService}
-              onChange={(_, value) => setSelectedService(value)}
-              getOptionLabel={(service) => service.title}
-              renderInput={(params) => (
-                <TextField {...params} label="Services" />
-              )}
-            />
+            <ThemeProvider theme={newTheme(baseTheme)}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={services}
+                sx={{
+                  width: 280,
+                }}
+                value={selectedService}
+                onChange={(_, value) => setSelectedService(value)}
+                getOptionLabel={(service) => service.title}
+                renderInput={(params) => (
+                  <TextField {...params} label="Services" />
+                )}
+              />
+            </ThemeProvider>
           </label>
         </div>
         <div className={styles.form__container}>

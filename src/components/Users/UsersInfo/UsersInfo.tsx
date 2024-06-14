@@ -5,10 +5,12 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import React, {
   FC,
   PropsWithChildren,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
+import Cropper, { Area } from "react-easy-crop";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +18,7 @@ import empty_person from "../../../assets/img/empty_person.jpg";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IUpdateProfileParams, IUser } from "../../../interfaces";
 import { authActions, imagesActions, usersActions } from "../../../redux";
+import { croppedImg, dataURLtoFile } from "../../../utils/CroppedImg";
 import { updateShema } from "../../../validators";
 import { ChangePasswordForm } from "../../LoginPanel/Form/ChangePasswordForm";
 import styles from "../../LoginPanel/Form/Form.module.scss";
@@ -44,6 +47,16 @@ const UsersInfo: FC<IProps> = ({ user }) => {
     resolver: joiResolver(updateShema),
   });
   const fileInput = useRef<HTMLInputElement>();
+
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedArea, setCroppedArea] = useState<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -98,23 +111,48 @@ const UsersInfo: FC<IProps> = ({ user }) => {
       }),
     );
   };
-  const addImage = async () => {
-    const formData = new FormData();
-    const file: Blob = fileInput.current.files[0];
-    formData.append("image", file);
-    const result = await dispatch(
-      imagesActions.addAvatar({ userId: id, data: formData }),
-    );
 
-    if (result.payload && result.meta.requestStatus === "fulfilled") {
-      const newImageUrl = result.payload as string;
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const imageDataUrl = await readFile(file);
+      setImageSrc(imageDataUrl);
+    }
+  };
 
-      dispatch(
-        usersActions.updateUserById({
-          id,
-          params: { image_url: newImageUrl },
-        }),
+  const readFile = (file: Blob): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => resolve(reader.result as string));
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const onCropComplete = useCallback(
+    (croppedArea: Area, croppedAreaPixels: Area) => {
+      setCroppedArea(croppedAreaPixels);
+    },
+    [],
+  );
+
+  const handleCrop = async () => {
+    if (imageSrc && croppedArea) {
+      const croppedImage = await croppedImg(imageSrc, croppedArea);
+      const file = dataURLtoFile(croppedImage, "croppedImage.jpg");
+      const formData = new FormData();
+      formData.append("image", file);
+      const result = await dispatch(
+        imagesActions.addAvatar({ userId: id, data: formData }),
       );
+      if (result.payload && result.meta.requestStatus === "fulfilled") {
+        const newImageUrl = result.payload as string;
+        dispatch(
+          usersActions.updateUserById({
+            id,
+            params: { image_url: newImageUrl },
+          }),
+        );
+      }
     }
   };
 
@@ -127,6 +165,26 @@ const UsersInfo: FC<IProps> = ({ user }) => {
       <div className={css.user__container__info}>
         <h3>Contact Information </h3>
         <div>{error && <p>{error.message}</p>}</div>
+        {imageSrc && (
+          <div className={css.crop__modal}>
+            <div className={css.crop__container}>
+              <div>
+                <Cropper
+                  image={imageSrc}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1}
+                  onCropChange={setCrop}
+                  onZoomChange={setZoom}
+                  onCropComplete={onCropComplete}
+                />
+              </div>
+              <button className={css.crop__button} onClick={handleCrop}>
+                Crop
+              </button>
+            </div>
+          </div>
+        )}
         <div className={css.user__img__container}>
           <img
             className={css.user__img__avatar}
@@ -138,7 +196,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
             type={"file"}
             accept={"image/jpeg, image/png"}
             style={{ display: "none" }}
-            onChange={addImage}
+            onChange={handleFileChange}
             ref={fileInput}
           />
           <button onClick={deleteImage}>Delete avatar</button>
