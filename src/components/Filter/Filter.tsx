@@ -93,8 +93,8 @@ const Filter: FC = () => {
           id="size-small-standard-multi"
           size="small"
           options={filteredServices}
-          value={filteredServices.filter(
-            (service) => filterService?.includes(service.id),
+          value={filteredServices.filter((service) =>
+            filterService?.includes(service.id),
           )}
           sx={{ width: 280 }}
           getOptionLabel={(service) => service.title}
