@@ -36,14 +36,16 @@ const AvailableSchedulesMaster: FC<IProps> = ({ availableSchedule }) => {
           src={master_image || empty_person}
           alt={`Avatar ${master_id}`}
         />
-        <h4>
-          {master_firstname} {master_lastname}
-        </h4>
-        <h4>Categories:</h4>
-        <div>
-          {categories.map((category, index) => (
-            <p key={index}>{category}</p>
-          ))}
+        <div className={styles.available__profile__info}>
+          <h4>
+            {master_firstname} {master_lastname}
+          </h4>
+          <h4>Categories:</h4>
+          <div className={styles.master__category}>
+            {categories.map((category, index) => (
+              <p key={index}>{category}</p>
+            ))}
+          </div>
         </div>
       </Link>
     </div>

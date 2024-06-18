@@ -57,14 +57,14 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
   return (
     <div className={styles.master__container}>
       <div className={styles.master__info}>
-        <h3>
-          {master_firstname} {master_lastname}
-        </h3>
         <img
           className={styles.master__avatar}
           src={master_image || empty_person}
           alt={`Avatar ${userId}`}
         />
+        <h3>
+          {master_firstname} {master_lastname}
+        </h3>
       </div>
       <Stack spacing={1} sx={{ width: 300 }}>
         <ThemeProvider theme={newTheme(baseTheme)}>
@@ -73,7 +73,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
             autoSelect
             options={schedules}
             getOptionLabel={(schedule) => `${schedule.date_time}`}
-            sx={{ width: 300 }}
+            sx={{ width: 300, marginBottom: "10px !important" }}
             value={selectedSchedule}
             onChange={(event, newValue) => {
               dispatch(cartsActions.setSelectedSchedule(newValue));
@@ -95,7 +95,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
             autoSelect
             options={prices}
             getOptionLabel={(price) => `${price.title} ${price.price}`}
-            sx={{ width: 300 }}
+            sx={{ width: 300, marginBottom: "10px !important" }}
             value={selectedPrice}
             onChange={(event, newValue) => {
               dispatch(cartsActions.setSelectedPrice(newValue));
@@ -115,9 +115,13 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
           />
         </ThemeProvider>
       </Stack>
-      <button onClick={addToCart}>Add to card</button>
-      {error && <span className={styles.errMessage}>{error.message}</span>}
-      <button onClick={getSchedules}>Get all Masters available schedule</button>
+      <div className={styles.master__button}>
+        <button onClick={addToCart}>Add to card</button>
+        {error && <span className={styles.errMessage}>{error.message}</span>}
+        <button onClick={getSchedules}>
+          Get all Masters available schedule
+        </button>
+      </div>
     </div>
   );
 };

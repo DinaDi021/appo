@@ -3,6 +3,7 @@ import React, { FC, PropsWithChildren, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IMaster } from "../../interfaces";
 import { imagesActions } from "../../redux";
+import styles from "./Gallery.module.scss";
 import { Slider } from "./Slider";
 
 interface IProps extends PropsWithChildren {
@@ -21,7 +22,13 @@ const GalleryForClient: FC<IProps> = ({ selectedMaster }) => {
 
   return (
     <>
-      {gallery.length > 0 ? <Slider slides={gallery} /> : <p>No photo yet.</p>}
+      {gallery.length > 0 ? (
+        <Slider slides={gallery} />
+      ) : (
+        <div className={styles.gallery__withoutPhoto}>
+          Master haven't have photo yet
+        </div>
+      )}
     </>
   );
 };

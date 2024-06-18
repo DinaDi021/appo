@@ -4,7 +4,8 @@
     flex-direction: column;
     width: 330px;
     padding: 10px;
-    border-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
     position: relative;
     z-index: 1;
     margin-right: 20px;
@@ -21,5 +22,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      width: 280px;
+    }
   }
 }

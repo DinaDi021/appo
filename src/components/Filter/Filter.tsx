@@ -162,8 +162,7 @@ const Filter: FC = () => {
           </ThemeProvider>
         </div>
       </div>
-
-      <div>
+      <div className={styles.filter__button}>
         <button onClick={() => handleClearFilterClick()}>Clear filters</button>
       </div>
     </div>

@@ -13,6 +13,9 @@ const newTheme = (theme: Theme) =>
             "&.Mui-selected:hover, &.Mui-selected:focus": {
               backgroundColor: "var(--turquoise) !important",
             },
+            "&.MuiButton-text": {
+              color: "var(--green-pine) !important",
+            },
           },
         },
       },
@@ -75,6 +78,14 @@ const newTheme = (theme: Theme) =>
                 backgroundColor: "var(--green-jungle-crayola)!important",
               },
             },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            color: "var(--basic-white)",
+            backgroundColor: "var(--green-pine)!important",
           },
         },
       },
