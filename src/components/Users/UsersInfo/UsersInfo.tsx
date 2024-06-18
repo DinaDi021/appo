@@ -199,7 +199,9 @@ const UsersInfo: FC<IProps> = ({ user }) => {
             onChange={handleFileChange}
             ref={fileInput}
           />
-          <button onClick={deleteImage}>Delete avatar</button>
+          <button className={css.user__img__del} onClick={deleteImage}>
+            Delete avatar
+          </button>
         </div>
         <div>
           <form

@@ -18,7 +18,6 @@
     }
 
     &__avatar {
-      padding-bottom: 10px;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -34,6 +33,10 @@
     &__avatar:hover {
       transition: 0.7s;
       transform: scale(1.1);
+    }
+
+    &__del {
+      margin-top: 20px;
     }
   }
 }
