@@ -33,7 +33,9 @@ const Prices: FC = () => {
   return (
     <div className={styles.price__container}>
       <h3 style={{ marginBottom: "10px" }}>Services and price</h3>
-      <h4>You can create price for your services</h4>
+      <h4 style={{ marginBottom: "10px" }}>
+        You can create price for your services
+      </h4>
       <PriceForm />
       <div
         className={styles.priceTable}

@@ -47,6 +47,7 @@ const ResetPasswordForm: FC = () => {
           <label className={styles.form__label}>
             <LockOutlinedIcon />
             <input
+              className={styles.form__input}
               type="password"
               placeholder={"Password"}
               required={true}
@@ -63,6 +64,7 @@ const ResetPasswordForm: FC = () => {
           <label className={styles.form__label}>
             <LockOutlinedIcon />
             <input
+              className={styles.form__input}
               type="password"
               placeholder={"Confirm password"}
               required={true}

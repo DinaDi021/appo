@@ -20,6 +20,12 @@
     gap: 20px;
   }
 
+  &__withoutPhoto {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+  }
+
   &__item {
     position: relative;
     transition: transform 0.5s ease;

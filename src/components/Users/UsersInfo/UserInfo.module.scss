@@ -49,3 +49,34 @@
   opacity: 1;
   max-height: 200px;
 }
+
+.crop {
+  &__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  &__container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &__button {
+    position: relative;
+    z-index: 2;
+  }
+}
