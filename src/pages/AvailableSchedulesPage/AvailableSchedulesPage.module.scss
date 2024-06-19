@@ -24,11 +24,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    transition: transform 0.3s ;
+    transition: linear 0.7s ;
     cursor: pointer;
 
     :hover {
-      transition: 0.3s;
+      transition: linear 0.7s ;
       transform: scale(1.1);
 
       > * {

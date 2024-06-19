@@ -59,7 +59,7 @@ const GalleryForMaster: FC = () => {
             <GalleryDetails key={image.id} image={image} />
           ))
         ) : (
-          <div className={styles.gallery__withoutPhoto}>No photo yet.</div>
+          <div>No photo yet.</div>
         )}
       </div>
     </>

@@ -4,9 +4,9 @@ import { Services } from "../../components";
 
 const ServicesPage = () => {
   return (
-    <div>
+    <>
       <Services />
-    </div>
+    </>
   );
 };
 

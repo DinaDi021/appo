@@ -8,31 +8,23 @@ export const updateQueryParams = (
   filterCategories?: string[],
   filterMaster?: number,
 ) => {
-  queryParams = { ...queryParams };
+  const newQueryParams: { [key: string]: string | string[] } = {};
 
   if (filterDate && filterDate.length > 0) {
-    queryParams.date = filterDate;
-  } else {
-    delete queryParams.date;
+    newQueryParams.date = filterDate;
   }
 
-  if (filterService !== null) {
-    queryParams.service_id = filterService;
-  } else {
-    delete queryParams.service_id;
+  if (filterService && filterService.length > 0) {
+    newQueryParams.service_id = filterService.map(String);
   }
 
   if (filterCategories && filterCategories.length > 0) {
-    queryParams.category = filterCategories;
-  } else {
-    delete queryParams.category;
+    newQueryParams.category = filterCategories;
   }
 
-  if (filterMaster !== null) {
-    queryParams.master_id = filterMaster;
-  } else {
-    delete queryParams.master_id;
+  if (filterMaster !== undefined && filterMaster !== null) {
+    newQueryParams.master_id = String(filterMaster);
   }
 
-  setQuery(queryParams);
+  setQuery(newQueryParams);
 };
