@@ -67,12 +67,18 @@ const Services: FC = () => {
               {services
                 .filter((service) => service.category === category)
                 .map((service) => (
-                  <p
+                  <div
                     key={service.id}
                     onClick={() => handleServiceClick([service.id])}
+                    className={styles.services__table__item}
                   >
-                    {service.title}
-                  </p>
+                    <h5 className={styles.services__table__item__title}>
+                      {service.title}
+                    </h5>
+                    <p className={styles.services__table__item__description}>
+                      {service.description}
+                    </p>
+                  </div>
                 ))}
             </div>
           </div>

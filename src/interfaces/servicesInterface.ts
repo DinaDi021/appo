@@ -7,6 +7,7 @@ export interface IServices {
   id: number;
   title: string;
   category: string;
+  description: string;
 }
 
 export interface IServicesResponse {
