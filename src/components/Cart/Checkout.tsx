@@ -1,9 +1,11 @@
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IPaymentType } from "../../interfaces/cartInterface";
 import { cartsActions } from "../../redux";
+import styles from "./Cart.module.scss";
 
 const Checkout: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -11,11 +13,12 @@ const Checkout: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [paymentType, setPaymentType] = useState<keyof IPaymentType>("full");
-  const url = `http://localhost:3000/cart/payment/`;
+  const url = `https://master--appo-di-k.netlify.app/cart/payment/`;
 
   const handlePaymentTypeChange = (type: keyof IPaymentType) => {
     setPaymentType(type);
   };
+
   const handlePaymentSubmit = async () => {
     await dispatch(
       cartsActions.pay({
@@ -27,45 +30,41 @@ const Checkout: FC = () => {
   };
 
   return (
-    <div>
-      {checkoutCart ? (
-        <>
-          <p>Total Items: {checkoutCart.totalCount}</p>
-          {checkoutCart.totalSum && (
-            <>
-              <p>Total Amount: ${checkoutCart.totalSum.full}</p>
-              <p>Total Amount: ${checkoutCart.totalSum.prepayment}</p>
-            </>
-          )}
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-      <h2>Payment Options</h2>
+    <div className={styles.checkout}>
+      <h3 className={styles.checkout__title}>Choose a payment type</h3>
       <div>
-        <label>
+        <label className={styles.checkout__select}>
           <input
+            className={styles.checkout__inputPay}
             type="radio"
             value="full"
             checked={paymentType === "full"}
             onChange={() => handlePaymentTypeChange("full")}
           />
-          Full Payment ₴{checkoutCart.totalSum.full}
+          <span className={styles.checkout__iconWrapper}>
+            <DoneAllIcon />
+          </span>
+          Full Payment {checkoutCart.totalSum.full}
         </label>
       </div>
       <div>
-        <label>
+        <label className={styles.checkout__select}>
           <input
+            className={styles.checkout__inputPay}
             type="radio"
             value="prepayment"
             checked={paymentType === "prepayment"}
             onChange={() => handlePaymentTypeChange("prepayment")}
           />
-          Prepayment ₴{checkoutCart.totalSum.prepayment}
+          <span className={styles.checkout__iconWrapper}>
+            <DoneAllIcon />
+          </span>
+          Prepayment {checkoutCart.totalSum.prepayment}
         </label>
       </div>
-
-      <button onClick={handlePaymentSubmit}>Go to Payment</button>
+      <button className={styles.checkout__button} onClick={handlePaymentSubmit}>
+        Make an order
+      </button>
     </div>
   );
 };

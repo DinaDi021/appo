@@ -74,7 +74,47 @@
       }
     }
   }
+
+  &__message {
+    transform: translateX(-25%);
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+
+    &__error, &__success {
+      animation-name: slideIn;
+      text-align: center;
+      color: var(--basic-black);
+    }
+
+  }
 }
+
+.hide {
+  animation-name: slideOut;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+
 
 .noavailable {
   &__wrapper {
@@ -136,14 +176,80 @@
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
+    position: relative;
+
+    &__add {
+      display: flex;
+      align-items: center;
+
+      svg {
+        width: 17px;
+        margin-right: 10px;
+      }
+    }
 
     button {
       width: 100%;
+      height: 32px;
     }
   }
 
   &__category {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+@keyframes cartAnimation {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(600%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-600%);
+    opacity: 0;
+  }
+  75% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.iconWrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.cart-animation {
+  animation: cartAnimation 2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-animation-text {
+  display: inline-block;
+  animation: fadeIn 0.5s ease-in-out forwards;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

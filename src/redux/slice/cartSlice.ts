@@ -13,7 +13,7 @@ import {
   IPayment,
   IPaymentParams,
 } from "../../interfaces/cartInterface";
-import { cartsService } from "../../services/cartsService";
+import { cartsService } from "../../services";
 import { progressActions } from "./progressSlice";
 
 interface IState {

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -9,6 +9,20 @@ import styles from "./Header.module.scss";
 
 const Header: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
+  const { cart } = useAppSelector((state) => state.carts);
+  const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+
+  const [shouldShake, setShouldShake] = useState(false);
+
+  useEffect(() => {
+    if (cart?.totalCount) {
+      setShouldShake(true);
+      setTimeout(() => {
+        setShouldShake(false);
+      }, 1300);
+    }
+  }, [cart?.totalCount]);
 
   const links = [
     {
@@ -29,11 +43,11 @@ const Header: FC = () => {
     },
     {
       path: "/cart",
-      label: "Cart",
+      label: cart?.totalCount > 0 ? `Cart (${cart.totalCount})` : "Cart",
+      isCardLink: true,
     },
   ];
-  const { pathname } = useLocation();
-  const dispatch = useAppDispatch();
+
   const handleClearFilterClick = () => {
     dispatch(filtersActions.clearDateFilter());
     dispatch(filtersActions.clearMasterFilter());
@@ -57,6 +71,11 @@ const Header: FC = () => {
               key={link.path}
               style={{ color: link.path === pathname ? "black" : "white" }}
               to={link.path}
+              className={
+                link.isCardLink
+                  ? `${styles.cartLink} ${shouldShake ? styles.shakeAnimation : ""}`
+                  : ""
+              }
               onClick={() => handleLinkClick(link.path)}
             >
               {link.label}

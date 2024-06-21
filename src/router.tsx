@@ -67,16 +67,18 @@ const router = createBrowserRouter([
           {
             path: "checkout",
             element: <CheckoutPage />,
+            children: [
+              {
+                path: "liqPay",
+                element: <PayCartPage />,
+              },
+            ],
           },
         ],
       },
       {
         path: "cart/payment",
         element: <AfterPaymentPage />,
-      },
-      {
-        path: "cart/checkout/liqPay",
-        element: <PayCartPage />,
       },
       {
         path: "login",

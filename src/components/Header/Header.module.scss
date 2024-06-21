@@ -51,50 +51,13 @@
     transition-delay: 0.8ms;
   }
 }
+.shakeAnimation {
+  animation: shake 1.3s ease-in-out;
+}
 
-//html[data-theme='light'] .container {
-//    background-color: var(--bright);
-//    border-bottom: 1px solid white;
-//}
-//
-//html[data-theme='dark'] .container {
-//    background-color: var(--darkGreen);
-//}
-//
-//@media screen and (max-width: 750px) {
-//    .container {
-//        justify-content: flex-start;
-//        height: 60px;
-//    }
-//
-//    .menuButton {
-//        display: flex;
-//    }
-//
-//    .menuIcon, .closeIcon {
-//        display: flex !important;
-//    }
-//
-//    .links {
-//        font-size: 20px;
-//        display: none;
-//    }
-//
-//    .linksMobile {
-//        width: 80%;
-//        display: flex;
-//        justify-content: space-around;
-//    }
-//}
-//
-//@media screen and (max-width: 500px) {
-//    .linksMobile {
-//        width: 80%;
-//        display: flex;
-//        flex-wrap: wrap;
-//    }
-//
-//    .linksMobile a {
-//        margin: 0 10px 5px 0;
-//    }
-//}
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-5px, -5px); }
+  20%, 40%, 60%, 80% { transform: translate(5px, 5px); }
+  100% { transform: translate(0, 0); }
+}

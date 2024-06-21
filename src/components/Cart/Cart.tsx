@@ -1,9 +1,11 @@
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { cartsActions } from "../../redux";
 import { IsLoading } from "../IsLoading";
+import styles from "./Cart.module.scss";
 
 const Cart: FC = () => {
   const dispatch = useAppDispatch();
@@ -30,39 +32,54 @@ const Cart: FC = () => {
   };
 
   const checkoutCart = async () => {
-    await dispatch(cartsActions.checkoutCart({ userId: user.data.id }));
-    navigate("checkout");
+    if (cart.totalSum > 0) {
+      await dispatch(cartsActions.checkoutCart({ userId: user.data.id }));
+      navigate("checkout");
+    }
   };
 
   return (
-    <div>
-      <div>
-        <h2>Your Cart</h2>
+    <>
+      <div className={styles.cart__appointment}>
         {isLoading ? (
           <IsLoading />
         ) : isCartEmpty ? (
-          <p>Your cart is empty.</p>
+          <p>Your cart is empty</p>
         ) : (
           <>
-            {cart.items.map((item) => (
-              <div key={item.id}>
-                <p>Title: {item.title}</p>
-                <p>Data and time: {item.date_time}</p>
-                <p>Category: {item.category}</p>
-                <p>Price: ${item.price}</p>
-                <button onClick={() => deleteAppointment(item.id)}>
-                  Delete appointment
-                </button>
-                <hr />
-              </div>
-            ))}
-            <h3>Total Sum: ${cart.totalSum}</h3>
-            <h3>Total Count: {cart.totalCount}</h3>
-            <button onClick={checkoutCart}>Confirm and receive payment</button>
+            <div className={styles.cart__appointment__main}>
+              {cart.items.map((item) => (
+                <div key={item.id} className={styles.cart__appointment__info}>
+                  <div className={styles.cart__appointment__button}>
+                    <button onClick={() => deleteAppointment(item.id)}>
+                      <DeleteForeverIcon />
+                    </button>
+                  </div>
+                  <div className={styles.cart__appointment__bc}>
+                    <div className={styles.cart__appointment__details}>
+                      <p>{item.title}</p>
+                      <p>
+                        Your master: {item.master_firstname}{" "}
+                        {item.master_lastname}
+                      </p>
+                      <p>{item.date_time}</p>
+                      <p>${item.price}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.cart__appointment__aside}>
+              <h3>Total to pay: ${cart.totalSum}</h3>
+              <h3>Total appointment: {cart.totalCount}</h3>
+              <button onClick={checkoutCart}>
+                Confirm and receive payment
+              </button>
+            </div>
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
