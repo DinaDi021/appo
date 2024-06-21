@@ -16,7 +16,7 @@ const Header: FC = () => {
   const [shouldShake, setShouldShake] = useState(false);
 
   useEffect(() => {
-    if (cart?.totalCount) {
+    if (user && cart?.totalCount) {
       setShouldShake(true);
       setTimeout(() => {
         setShouldShake(false);
@@ -43,7 +43,8 @@ const Header: FC = () => {
     },
     {
       path: "/cart",
-      label: cart?.totalCount > 0 ? `Cart (${cart.totalCount})` : "Cart",
+      label:
+        user && cart?.totalCount > 0 ? `Cart (${cart.totalCount})` : "Cart",
       isCardLink: true,
     },
   ];
