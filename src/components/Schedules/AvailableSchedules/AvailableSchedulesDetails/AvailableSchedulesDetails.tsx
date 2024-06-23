@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { FC, PropsWithChildren, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import empty_person from "../../../../assets/img/empty_person.jpg";
+import empty_person from "../../../../assets/img/empty_person.png";
 import { useAppDispatch, useAppSelector, useToggle } from "../../../../hooks";
 import { IMaster } from "../../../../interfaces";
 import { IItem } from "../../../../interfaces/cartInterface";

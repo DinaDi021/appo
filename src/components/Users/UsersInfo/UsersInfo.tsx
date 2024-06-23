@@ -14,7 +14,7 @@ import Cropper, { Area } from "react-easy-crop";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import empty_person from "../../../assets/img/empty_person.jpg";
+import empty_person from "../../../assets/img/empty_person.png";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IUpdateProfileParams, IUser } from "../../../interfaces";
 import { authActions, imagesActions, usersActions } from "../../../redux";

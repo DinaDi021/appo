@@ -3,28 +3,36 @@ import { QueryParams } from "../interfaces";
 export const updateQueryParams = (
   queryParams: QueryParams,
   setQuery: any,
-  filterDate: string[],
+  filterDate?: string[],
   filterService?: number[],
   filterCategories?: string[],
   filterMaster?: number,
 ) => {
-  const newQueryParams: { [key: string]: string | string[] } = {};
+  queryParams = { ...queryParams };
 
   if (filterDate && filterDate.length > 0) {
-    newQueryParams.date = filterDate;
+    queryParams.date = filterDate;
+  } else {
+    delete queryParams.date;
   }
 
-  if (filterService && filterService.length > 0) {
-    newQueryParams.service_id = filterService.map(String);
+  if (filterService !== null) {
+    queryParams.service_id = filterService;
+  } else {
+    delete queryParams.service_id;
   }
 
   if (filterCategories && filterCategories.length > 0) {
-    newQueryParams.category = filterCategories;
+    queryParams.category = filterCategories;
+  } else {
+    delete queryParams.category;
   }
 
-  if (filterMaster !== undefined && filterMaster !== null) {
-    newQueryParams.master_id = String(filterMaster);
+  if (filterMaster !== null) {
+    queryParams.master_id = filterMaster;
+  } else {
+    delete queryParams.master_id;
   }
 
-  setQuery(newQueryParams);
+  setQuery(queryParams);
 };

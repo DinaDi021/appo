@@ -5,6 +5,7 @@ interface IState {
   filterService: number[] | null;
   filterCategories: string[] | null;
   filterMaster: number | null;
+  filterRole: string[] | null;
 }
 
 const initialState: IState = {
@@ -12,6 +13,7 @@ const initialState: IState = {
   filterService: undefined,
   filterCategories: null,
   filterMaster: undefined,
+  filterRole: null,
 };
 
 const filtersSlice = createSlice({
@@ -41,6 +43,12 @@ const filtersSlice = createSlice({
     },
     clearMasterFilter: (state) => {
       state.filterMaster = null;
+    },
+    setRoleFilter: (state, action) => {
+      state.filterRole = action.payload;
+    },
+    clearRoleFilter: (state) => {
+      state.filterRole = null;
     },
   },
 });

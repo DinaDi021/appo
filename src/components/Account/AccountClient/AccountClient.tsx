@@ -14,7 +14,7 @@ const AccountClient: FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (user?.data) {
+    if (user) {
       dispatch(usersActions.getUserById({ id: user.data.id }));
       dispatch(
         appointmentsActions.getUserAllAppointments({ userId: user.data.id }),

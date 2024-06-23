@@ -15,7 +15,7 @@ const Cart: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user?.data) {
+    if (user) {
       dispatch(cartsActions.getAllItem({ userId: user.data.id }));
     }
   }, [dispatch, user]);

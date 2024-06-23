@@ -1,32 +1,51 @@
 .container {
-  padding: 10px;
-  margin-bottom: 15px;
-  height: 5vh;
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 35px;
+  height: 8vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center ;
 }
 
 .navigationMenu {
-  width: 80%;
+  width: 65%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .navigation {
-  width: 70%;
+  padding: 20px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  color: var(--green-pine);
+  background-color: var(--basic-white);
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border: 2px solid var(--green-pine);
 }
 
-.links {
-  width: 100%;
+.link {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: bold;
+
+  &__active {
+    color: var(--green-jungle-crayola);
+  }
+
+  &__inactive {
+    color: var(--green-pine);
+  }
+
+  &:hover {
+    color: var(--green-jungle-crayola);
+  }
 }
 
 .menuButton {
@@ -40,15 +59,17 @@
 }
 
 .userIcon {
-  border: 1px solid white;
-  border-radius: 30%;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px solid var(--green-pine);
   padding: 10px 15px;
-  transition-delay: 0.7ms;
+  transition: 0.8ms;
 
   &:hover {
     background-color: var(--turquoise);
     color: var(--basic-white);
-    transition-delay: 0.8ms;
+    transition: 0.8ms;
   }
 }
 .shakeAnimation {

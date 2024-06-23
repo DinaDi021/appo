@@ -6,7 +6,7 @@ import styles from "./MainLayout.module.scss";
 
 const MainLayout = () => {
   return (
-    <div>
+    <>
       <>
         <Header />
       </>
@@ -16,7 +16,7 @@ const MainLayout = () => {
       <>
         <Footer />
       </>
-    </div>
+    </>
   );
 };
 

@@ -37,7 +37,7 @@ const urls = {
     changePassword: changePassword,
   },
   users: {
-    all: users,
+    all: `${v1}/${users}`,
     byId: (id: number): string => `${v1}/${users}/${id}`,
   },
   services: {

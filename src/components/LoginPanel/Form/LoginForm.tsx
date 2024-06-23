@@ -1,4 +1,3 @@
-import { joiResolver } from "@hookform/resolvers/joi";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FC } from "react";
@@ -8,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IAuth } from "../../../interfaces";
 import { authActions } from "../../../redux";
-import { loginShema } from "../../../validators";
 import styles from "./Form.module.scss";
 
 const LoginForm: FC = () => {
-  const { register, reset, handleSubmit } = useForm<IAuth>({
-    resolver: joiResolver(loginShema),
-  });
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAuth>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { error } = useAppSelector((state) => state.auth);
@@ -43,11 +44,11 @@ const LoginForm: FC = () => {
               {...register("email")}
             />
           </label>
-          {/*{errors.email && (*/}
-          {/*  <div className={styles.form__error}>*/}
-          {/*    {errors?.email && <span>invalid email</span>}*/}
-          {/*  </div>*/}
-          {/*)}*/}
+          {errors.email && (
+            <div className={styles.form__error}>
+              {errors?.email && <span>invalid email</span>}
+            </div>
+          )}
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
@@ -60,11 +61,11 @@ const LoginForm: FC = () => {
               {...register("password")}
             />
           </label>
-          {/*{errors.password && (*/}
-          {/*  <div className={styles.form__error}>*/}
-          {/*    {errors?.password && <span>invalid password</span>}*/}
-          {/*  </div>*/}
-          {/*)}*/}
+          {errors.password && (
+            <div className={styles.form__error}>
+              {errors?.password && <span>invalid password</span>}
+            </div>
+          )}
         </div>
         {error && <span className={styles.errMessage}>{error.message}</span>}
         <button>Log in</button>

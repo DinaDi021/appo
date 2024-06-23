@@ -39,6 +39,83 @@
       margin-top: 20px;
     }
   }
+
+  &__card {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+
+    &__page {
+
+    }
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    &__title {
+      width: 100%;
+      text-align: center;
+      color: var(--basic-white);
+      margin-top: -20px;
+      padding: 20px;
+      margin-bottom: 10px;
+      background-image: url("../../../assets/img/background/bc-main.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    &__container {
+      display: flex;
+      width: 355px;
+      height: 150px;
+      border: 2px solid var(--green-pine);
+      border-radius: 15px;
+    }
+
+    &__img{
+      width: 150px;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-bottom-left-radius: 15px;
+      border-top-left-radius: 15px;
+    }
+
+      &__bc {
+        width: calc(85% - 10px);
+        color: var(--basic-white);
+        background-image: url("../../../assets/img/background/bc-main.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+
+    &__details {
+      width: 185px;
+      height: 100%;
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      border-left: 2px solid var(--green-pine);
+      backdrop-filter: blur(5px);
+      border-bottom-right-radius: 15px;
+      border-top-right-radius: 15px;
+
+      p{
+        overflow-wrap: break-word;
+      }
+    }
+  }
 }
 
 .changePasswordForm {

@@ -3,4 +3,5 @@ export interface QueryParams {
   service_id?: number[];
   category?: string[];
   master_id?: number;
+  role?: string[];
 }

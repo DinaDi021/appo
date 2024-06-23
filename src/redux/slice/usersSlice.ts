@@ -1,13 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
-import { IPagination, IUpdateProfileParams, IUser } from "../../interfaces";
+import {
+  IUpdateProfileParams,
+  IUser,
+  IUsers,
+  QueryParams,
+} from "../../interfaces";
 import { usersService } from "../../services";
 import { authActions } from "./authSlice";
 import { progressActions } from "./progressSlice";
 
 interface IState {
-  users: IUser[];
+  users: IUsers[];
   user: IUser | null;
 }
 
@@ -16,13 +21,13 @@ const initialState: IState = {
   user: null,
 };
 
-const getAllUsers = createAsyncThunk<IPagination<IUser>>(
+const getAllUsers = createAsyncThunk<IUsers[], { query?: QueryParams }>(
   "usersSlice/getAllUsers",
-  async (_, { rejectWithValue, dispatch }) => {
+  async ({ query }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
-      const { data } = await usersService.getAll();
-      return data;
+      const { data } = await usersService.getAll(query.role);
+      return data.data;
     } catch (err) {
       const e = err as AxiosError;
       return rejectWithValue(e.response?.data);
@@ -94,8 +99,7 @@ const usersSlice = createSlice({
   extraReducers: (build) =>
     build
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        const { data } = action.payload;
-        state.users = data;
+        state.users = action.payload;
       })
       .addCase(getUserById.fulfilled, (state, action) => {
         state.user = action.payload;

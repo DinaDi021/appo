@@ -1,9 +1,16 @@
 import { urls } from "../constants";
-import { IPagination, IUpdateProfileParams, IUser } from "../interfaces";
+import { IUpdateProfileParams, IUser, IUserResponse } from "../interfaces";
 import { apiService, IRes } from "./apiServices";
 
 const usersService = {
-  getAll: (): IRes<IPagination<IUser>> => apiService.get(urls.users.all),
+  getAll: (role: string[]): IRes<IUserResponse> =>
+    apiService.get(urls.users.all, {
+      params: {
+        filter: {
+          role: role,
+        },
+      },
+    }),
   getProfile: (id: number): IRes<IUser> => apiService.get(urls.users.byId(id)),
   deleteProfile: (id: number): IRes<void> =>
     apiService.delete(urls.users.byId(id)),

@@ -3,7 +3,6 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { MainLayout } from "./layout";
 import {
-  AboutUsPage,
   AfterPaymentPage,
   AppointmentPage,
   AvailableSchedulesDetailsPage,
@@ -25,6 +24,7 @@ import {
   SchedulesPageDetails,
   ServicesPage,
   UserInfoPage,
+  UserListPage,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -47,10 +47,6 @@ const router = createBrowserRouter([
       {
         path: "availableSchedules/:id",
         element: <AvailableSchedulesDetailsPage />,
-      },
-      {
-        path: "aboutUs",
-        element: <AboutUsPage />,
       },
       {
         path: "services",
@@ -92,6 +88,11 @@ const router = createBrowserRouter([
             path: "info",
             element: <UserInfoPage />,
           },
+          {
+            path: "usersInfo",
+            element: <UserListPage />,
+          },
+
           {
             path: "appointments",
             element: <AppointmentPage />,

@@ -3,8 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { filtersActions } from "../../redux/slice/filtersSlice";
-import { LoginPanel } from "../LoginPanel";
-import { Logo } from "../Logo";
+// import { LoginPanel } from "../LoginPanel";
 import styles from "./Header.module.scss";
 
 const Header: FC = () => {
@@ -34,10 +33,6 @@ const Header: FC = () => {
       label: "Available Schedules",
     },
     {
-      path: "/aboutUs",
-      label: "About us",
-    },
-    {
       path: "/services",
       label: "Services",
     },
@@ -46,6 +41,10 @@ const Header: FC = () => {
       label:
         user && cart?.totalCount > 0 ? `Cart (${cart.totalCount})` : "Cart",
       isCardLink: true,
+    },
+    {
+      path: "/me/info",
+      label: "Account",
     },
   ];
 
@@ -64,34 +63,36 @@ const Header: FC = () => {
 
   return (
     <div className={styles.container}>
-      <Logo />
       <div className={styles.navigationMenu}>
         <nav className={styles.navigation}>
           {links.map((link) => (
             <Link
               key={link.path}
-              style={{ color: link.path === pathname ? "black" : "white" }}
               to={link.path}
-              className={
+              className={`${styles.link} ${
+                link.path === pathname
+                  ? styles.link__active
+                  : styles.link__inactive
+              } ${
                 link.isCardLink
                   ? `${styles.cartLink} ${shouldShake ? styles.shakeAnimation : ""}`
                   : ""
-              }
+              }`}
               onClick={() => handleLinkClick(link.path)}
             >
               {link.label}
             </Link>
           ))}
+          {/*{user ? (*/}
+          {/*  <Link to={"/me/info"}>*/}
+          {/*    <div className={styles.userIcon}>*/}
+          {/*      {user.data.firstname.charAt(0)}*/}
+          {/*    </div>*/}
+          {/*  </Link>*/}
+          {/*) : (*/}
+          {/*  <LoginPanel />*/}
+          {/*)}*/}
         </nav>
-        {user ? (
-          <Link to={"/me/info"}>
-            <div className={styles.userIcon}>
-              {user.data.firstname.charAt(0)}
-            </div>
-          </Link>
-        ) : (
-          <LoginPanel />
-        )}
       </div>
     </div>
   );

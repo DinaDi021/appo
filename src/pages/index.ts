@@ -1,5 +1,4 @@
 export * from "./PricePage/PricePage";
-export * from "./AboutUsPage/AboutUs";
 export * from "./ServicesPage/ServicesPage";
 export * from "./MainPage/MainPage";
 export * from "./NotFoundPage/NotFoundPage";
@@ -19,4 +18,7 @@ export * from "./CartPage/AfterPaymentPage";
 export * from "./CartPage/CheckoutPage";
 export * from "./CartPage/PayCartPage";
 export * from "./GalleryPage/GalleryPageForMaster";
-export * from "./UserInfoPage/UserInfoPage";
+export * from "./UserPage/UserInfoPage";
+export * from "./AdminPages/UserListPage";
+export * from "./AdminPages/CreateMastersPage";
+export * from "./AdminPages/CreateServicesPage";

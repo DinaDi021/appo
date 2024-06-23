@@ -1,6 +1,9 @@
-import React from "react";
-
-import { AccountClient, AccountMaster } from "../../components";
+import {
+  AccountAdmin,
+  AccountClient,
+  AccountMaster,
+  LoginPanel,
+} from "../../components";
 import { useAppSelector } from "../../hooks";
 import styles from "../pages.module.scss";
 
@@ -13,8 +16,10 @@ const PersonalAccount = () => {
       return <AccountMaster />;
     } else if (userRole === "client") {
       return <AccountClient />;
+    } else if (userRole === "admin") {
+      return <AccountAdmin />;
     } else {
-      return <div>Unsupported user role</div>;
+      return <LoginPanel />;
     }
   };
 

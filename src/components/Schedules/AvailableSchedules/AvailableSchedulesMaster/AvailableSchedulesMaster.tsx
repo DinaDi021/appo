@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 
-import empty_person from "../../../../assets/img/empty_person.jpg";
+import empty_person from "../../../../assets/img/empty_person.png";
 import { useAppDispatch } from "../../../../hooks";
 import { IMaster } from "../../../../interfaces";
 import styles from "../../../../pages/AvailableSchedulesPage/AvailableSchedulesPage.module.scss";
