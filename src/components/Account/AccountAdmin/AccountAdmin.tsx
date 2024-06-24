@@ -65,9 +65,9 @@ const AccountAdmin: FC = () => {
               Contact Information
             </button>
             <button
-              onClick={() => navigate("/me/usersInfo")}
+              onClick={() => navigate("/me/admin/usersInfo")}
               className={
-                location.pathname === "/me/usersInfo"
+                location.pathname === "/me/admin/usersInfo"
                   ? styles.account__activeButton
                   : ""
               }
@@ -75,9 +75,9 @@ const AccountAdmin: FC = () => {
               All users
             </button>
             <button
-              onClick={() => navigate("/me/addMaster")}
+              onClick={() => navigate("/me/admin/addMasters")}
               className={
-                location.pathname === "/me/addMaster"
+                location.pathname === "/me/admin/addMasters"
                   ? styles.account__activeButton
                   : ""
               }
@@ -85,9 +85,9 @@ const AccountAdmin: FC = () => {
               Create Master
             </button>
             <button
-              onClick={() => navigate("/me/addService")}
+              onClick={() => navigate("/me/admin/addServices")}
               className={
-                location.pathname === "/me/addService"
+                location.pathname === "/me/admin/addServices"
                   ? styles.account__activeButton
                   : ""
               }

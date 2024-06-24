@@ -9,6 +9,8 @@ import {
   AvailableSchedulesPage,
   CartPage,
   CheckoutPage,
+  CreateMastersPage,
+  CreateServicesPage,
   ForgotPasswordPage,
   GalleryPageForMaster,
   LoginPage,
@@ -89,11 +91,6 @@ const router = createBrowserRouter([
             element: <UserInfoPage />,
           },
           {
-            path: "usersInfo",
-            element: <UserListPage />,
-          },
-
-          {
             path: "appointments",
             element: <AppointmentPage />,
           },
@@ -120,6 +117,23 @@ const router = createBrowserRouter([
               {
                 path: ":id",
                 element: <GalleryPageForMaster />,
+              },
+            ],
+          },
+          {
+            path: "admin",
+            children: [
+              {
+                path: "usersInfo",
+                element: <UserListPage />,
+              },
+              {
+                path: "addMasters",
+                element: <CreateMastersPage />,
+              },
+              {
+                path: "addServices",
+                element: <CreateServicesPage />,
               },
             ],
           },
