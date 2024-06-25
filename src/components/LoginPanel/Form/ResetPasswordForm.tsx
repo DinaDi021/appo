@@ -1,4 +1,5 @@
 import { joiResolver } from "@hookform/resolvers/joi";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -45,7 +46,7 @@ const ResetPasswordForm: FC = () => {
       >
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <LockOutlinedIcon />
+            <EmailOutlinedIcon />
             <input
               className={styles.form__input}
               type="password"

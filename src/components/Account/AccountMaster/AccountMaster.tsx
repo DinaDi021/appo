@@ -20,13 +20,11 @@ const AccountMaster: FC = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(usersActions.getUserById({ id: user.data.id }));
-      dispatch(
-        appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
-      );
+      dispatch(usersActions.getUserById({ id: user.id }));
+      dispatch(appointmentsActions.getUserAllAppointments({ userId: user.id }));
       dispatch(servicesActions.getAllServices());
-      dispatch(servicesActions.getAllPrices({ userId: user.data.id }));
-      dispatch(imagesActions.getGallery({ userId: user.data.id }));
+      dispatch(servicesActions.getAllPrices({ userId: user.id }));
+      dispatch(imagesActions.getGallery({ userId: user.id }));
     }
   }, [dispatch, user, navigate]);
 

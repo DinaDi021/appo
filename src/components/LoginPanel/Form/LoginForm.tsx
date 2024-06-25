@@ -1,6 +1,6 @@
-import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { FC } from "react";
+import React, { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,7 @@ const LoginForm: FC = () => {
       <form className={styles.form__login} onSubmit={handleSubmit(login)}>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <AlternateEmailOutlinedIcon />
+            <EmailOutlinedIcon />
             <input
               className={styles.form__input}
               type="email"

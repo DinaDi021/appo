@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 import {
+  IPagination,
   IUpdateProfileParams,
   IUser,
-  IUsers,
+  IUserResponse,
   QueryParams,
 } from "../../interfaces";
 import { usersService } from "../../services";
@@ -12,7 +13,7 @@ import { authActions } from "./authSlice";
 import { progressActions } from "./progressSlice";
 
 interface IState {
-  users: IUsers[];
+  users: IUser[];
   user: IUser | null;
 }
 
@@ -21,13 +22,19 @@ const initialState: IState = {
   user: null,
 };
 
-const getAllUsers = createAsyncThunk<IUsers[], { query?: QueryParams }>(
+const getAllUsers = createAsyncThunk<
+  IPagination<IUser>,
+  { query: QueryParams }
+>(
   "usersSlice/getAllUsers",
   async ({ query }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(progressActions.setIsLoading(true));
-      const { data } = await usersService.getAll(query.role);
-      return data.data;
+      const response = await usersService.getAll(query.role_id);
+      const { data } = response.data;
+      return {
+        data,
+      };
     } catch (err) {
       const e = err as AxiosError;
       return rejectWithValue(e.response?.data);
@@ -37,7 +44,7 @@ const getAllUsers = createAsyncThunk<IUsers[], { query?: QueryParams }>(
   },
 );
 
-const getUserById = createAsyncThunk<IUser, { id: number }>(
+const getUserById = createAsyncThunk<IUserResponse, { id: number }>(
   "usersSlice/getUsersById",
   async ({ id }, { rejectWithValue, dispatch }) => {
     try {
@@ -99,10 +106,11 @@ const usersSlice = createSlice({
   extraReducers: (build) =>
     build
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.users = action.payload;
+        const { data } = action.payload;
+        state.users = data;
       })
       .addCase(getUserById.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.data;
       })
       .addCase(updateUserById.fulfilled, (state, action) => {
         state.user = action.payload;

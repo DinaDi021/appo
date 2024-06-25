@@ -26,7 +26,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
   const { updatedSchedule, filterDate } = useAppSelector(
     (state) => state.schedules,
   );
-  const userId = user.data.id;
+  const userId = user.id;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { value: isEditing, change: toggleEdit } = useToggle(false);

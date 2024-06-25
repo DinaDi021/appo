@@ -8,7 +8,7 @@ const UserInfoPage: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   return (
     <div className={styles.page__userInfo}>
-      <UsersInfo key={user.data.id} user={user} />
+      <UsersInfo key={user.id} user={user} />
     </div>
   );
 };

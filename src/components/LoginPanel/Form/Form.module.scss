@@ -72,9 +72,12 @@
     width: 100%;
     padding: 10px 0;
     display: flex;
-
     color: red;
     background: var(--basic-white);
+  }
+
+  &__success {
+   text-align: center;
   }
 }
 

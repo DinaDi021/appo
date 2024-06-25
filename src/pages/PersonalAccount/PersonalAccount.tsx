@@ -9,7 +9,7 @@ import styles from "../pages.module.scss";
 
 const PersonalAccount = () => {
   const { user } = useAppSelector((state) => state.auth);
-  const userRole = user ? user.data.role : null;
+  const userRole = user ? user.role : null;
 
   const renderAccountComponent = () => {
     if (userRole === "master") {

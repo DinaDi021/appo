@@ -11,6 +11,11 @@ const registerSchema = Joi.object({
   confirm_Password: Joi.any().valid(Joi.ref("password")).required(),
 });
 
+const registerMasterSchema = Joi.object({
+  email: Joi.string().regex(regex.EMAIL).trim(),
+  phone_number: Joi.string().regex(regex.PHONE_NUMBER).trim(),
+});
+
 const loginShema = Joi.object({
   email: Joi.string().regex(regex.EMAIL).trim().required(),
   password: Joi.string().regex(regex.PASSWORD).trim(),
@@ -45,8 +50,15 @@ const changePasswordSchema = Joi.object({
   new_password: Joi.string().regex(regex.PASSWORD).trim(),
 });
 
+const addServices = Joi.object({
+  title: Joi.string().max(100).required(),
+  description: Joi.string().max(300).required(),
+  category: Joi.string().max(50).required(),
+});
+
 export {
   registerSchema,
+  registerMasterSchema,
   updateShema,
   forgotPasswordSchema,
   resetPasswordSchema,
@@ -54,4 +66,5 @@ export {
   schedulesShema,
   priceShema,
   changePasswordSchema,
+  addServices,
 };

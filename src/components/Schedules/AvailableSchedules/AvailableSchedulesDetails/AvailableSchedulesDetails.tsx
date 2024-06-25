@@ -24,7 +24,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
   const { user } = useAppSelector((state) => state.auth);
   const successToggle = useToggle(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const userId = user?.data.id;
+  const userId = user?.id;
   const { selectedSchedule, selectedPrice, error } = useAppSelector(
     (state) => state.carts,
   );
@@ -58,7 +58,7 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
             setIsSuccess(false);
             successToggle.change();
           }, 8000);
-          dispatch(cartsActions.getAllItem({ userId: user.data.id }));
+          dispatch(cartsActions.getAllItem({ userId: user.id }));
         }
       });
     }

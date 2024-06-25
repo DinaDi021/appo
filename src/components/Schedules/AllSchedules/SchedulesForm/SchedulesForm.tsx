@@ -29,13 +29,13 @@ const SchedulesForm: FC = () => {
   const addSchedule = async (data: IAddSchedule) => {
     await dispatch(
       schedulesActions.addSchedule({
-        userId: user.data.id,
+        userId: user.id,
         data: { ...data },
       }),
     );
     await dispatch(
       schedulesActions.getAllUsersSchedules({
-        userId: user.data.id,
+        userId: user.id,
       }),
     );
     dispatch(schedulesActions.setAddedDateTime(data.date_time));

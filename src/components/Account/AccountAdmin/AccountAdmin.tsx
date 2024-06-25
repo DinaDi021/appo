@@ -8,7 +8,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { QueryParams } from "../../../interfaces";
-import { usersActions } from "../../../redux";
+import { adminActions, usersActions } from "../../../redux";
 import { IsLoading } from "../../IsLoading";
 import styles from "../Account.module.scss";
 
@@ -21,21 +21,23 @@ const AccountAdmin: FC = () => {
   const location = useLocation();
   const [query, setQuery] = useSearchParams();
   const queryParams: QueryParams = {
-    role: [query.get("role")],
+    role_id: query.getAll("role_id").map(Number),
   };
+
+  const roleIds = filterRole?.map((role) => role.id);
 
   useEffect(() => {
     if (user) {
-      if (filterRole !== null) {
-        queryParams.role = filterRole;
-        setQuery({ query: filterRole });
+      if (roleIds && roleIds.length > 0) {
+        setQuery({ role_id: roleIds.map(String) });
       } else {
-        delete queryParams.role;
+        setQuery({});
       }
-      dispatch(usersActions.getUserById({ id: user.data.id }));
+      dispatch(usersActions.getUserById({ id: user.id }));
       dispatch(usersActions.getAllUsers({ query: queryParams }));
+      dispatch(adminActions.getAllRoles());
     }
-  }, [dispatch, user, filterRole, setQuery, location.search]);
+  }, [dispatch, user, filterRole, location.search]);
 
   useEffect(() => {
     if (user && location.pathname === "/me") {

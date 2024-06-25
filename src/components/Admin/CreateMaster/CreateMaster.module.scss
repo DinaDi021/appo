@@ -1,0 +1,53 @@
+.addMaster {
+
+  &__page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  &__wrapper {
+    height: 100%;
+    border-radius: 15px;
+    border: 1px solid var(--green-crayola-pine);
+  }
+
+  &__title {
+    width: calc(100% - 30px);
+    padding: 15px;
+    text-align: center;
+    color: var(--basic-white);
+    background-image: url("../../../assets/img/background/bc-main.jpg");
+    background-size: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 1px solid var(--green-crayola-pine);
+  }
+
+  &__form {
+    &__section {
+      padding: 15px;
+    }
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+
+      * {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.addService {
+  &__wrapper {
+    width: 35%;
+    height: 100%;
+    border-radius: 15px;
+    border: 1px solid var(--green-crayola-pine);
+  }
+
+}

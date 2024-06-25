@@ -1,7 +1,8 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -80,7 +81,7 @@ const RegisterForm: FC = () => {
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <LockOutlinedIcon />
+            <PhoneIphoneIcon />
             <input
               className={styles.form__input}
               type="text"
@@ -97,7 +98,7 @@ const RegisterForm: FC = () => {
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <AlternateEmailOutlinedIcon />
+            <EmailOutlinedIcon />
             <input
               className={styles.form__input}
               type="email"

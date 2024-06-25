@@ -15,10 +15,8 @@ const AccountClient: FC = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(usersActions.getUserById({ id: user.data.id }));
-      dispatch(
-        appointmentsActions.getUserAllAppointments({ userId: user.data.id }),
-      );
+      dispatch(usersActions.getUserById({ id: user.id }));
+      dispatch(appointmentsActions.getUserAllAppointments({ userId: user.id }));
     }
     navigate("/me/info");
   }, [dispatch, user, navigate]);

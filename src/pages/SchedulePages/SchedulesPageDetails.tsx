@@ -10,7 +10,7 @@ const SchedulesPageDetails = () => {
   const { state } = useAppLocation<ISchedule>();
   const { id } = useParams<{ id: string }>();
   const { user } = useAppSelector((state) => state.auth);
-  const userId = user.data.id;
+  const userId = user.id;
   const [schedule, setSchedule] = useState<ISchedule | null>(null);
   const dispatch = useAppDispatch();
 

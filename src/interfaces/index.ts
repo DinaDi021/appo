@@ -9,3 +9,4 @@ export * from "./availableSchedulesInterface";
 export * from "./servicesInterface";
 export * from "./queryParams";
 export * from "./imageInterface";
+export * from "./adminInterface";

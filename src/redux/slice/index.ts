@@ -6,3 +6,5 @@ export * from "./schedulesSlice";
 export * from "./cartSlice";
 export * from "./servicesSlice";
 export * from "./imagesSlice";
+export * from "./adminSlice";
+export * from "./filtersSlice";

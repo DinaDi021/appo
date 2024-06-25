@@ -33,12 +33,12 @@ const PriceForm: FC = () => {
     if (selectedService) {
       await dispatch(
         servicesActions.addPrice({
-          userId: user.data.id,
+          userId: user.id,
           data: { service_id: selectedService.id, ...data },
         }),
       );
       reset();
-      await dispatch(servicesActions.getAllPrices({ userId: user.data.id }));
+      await dispatch(servicesActions.getAllPrices({ userId: user.id }));
     }
   };
 

@@ -4,24 +4,23 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { FC, SyntheticEvent } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { filtersActions } from "../../../redux/slice/filtersSlice";
+import { IRoles } from "../../../interfaces";
+import { filtersActions } from "../../../redux";
 import { newTheme } from "../../Theme";
-import styles from "../UsersInfo/UserInfo.module.scss";
+import styles from "../../Users/UsersInfo/UserInfo.module.scss";
 import { AllUsersInfo } from "./AllUsersInfo/AllUsersInfo";
 
 const AllUsers: FC = () => {
   const { users } = useAppSelector((state) => state.users);
+  const { roles } = useAppSelector((state) => state.admin);
   const { filterRole } = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
 
-  const roles: string[] = ["admin", "master", "client"];
-
-  const handleRoleChange = (
-    event: SyntheticEvent,
-    selectedRole: string[] | null,
-  ) => {
-    dispatch(filtersActions.setRoleFilter(selectedRole));
+  const handleRoleChange = (event: SyntheticEvent, value: IRoles[]) => {
+    dispatch(filtersActions.setRoleFilter(value));
   };
+  const isOptionEqualToValue = (option: IRoles, value: IRoles) =>
+    option.id === value.id;
 
   const baseTheme = createTheme();
 
@@ -36,9 +35,11 @@ const AllUsers: FC = () => {
             id="role-autocomplete"
             size={"medium"}
             options={roles}
-            value={filterRole || []}
+            getOptionLabel={(role: IRoles) => role.role}
+            value={filterRole}
+            onChange={handleRoleChange}
+            isOptionEqualToValue={isOptionEqualToValue}
             sx={{ width: 280 }}
-            onChange={(event, value) => handleRoleChange(event, value)}
             renderInput={(params) => <TextField {...params} label="Roles" />}
           />
         </ThemeProvider>

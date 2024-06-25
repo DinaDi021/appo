@@ -24,10 +24,10 @@ export interface IMaster {
   master_id: number;
   master_firstname: string;
   master_lastname: string;
-  master_image: string;
-  schedules: IAvailableSchedule[];
-  prices: IPrice[];
-  categories: string[];
+  master_image?: string;
+  schedules?: IAvailableSchedule[];
+  prices?: IPrice[];
+  categories?: string[];
 }
 
 export interface IAvailableMasterResponse {

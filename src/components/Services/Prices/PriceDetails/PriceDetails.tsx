@@ -21,7 +21,7 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
   const { updatedPrice } = useAppSelector((state) => state.services);
-  const userId = user.data.id;
+  const userId = user.id;
   const {
     register,
     handleSubmit,

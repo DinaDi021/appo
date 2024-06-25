@@ -25,6 +25,11 @@ const carts = "carts";
 const checkout = "checkout";
 const button = "button";
 
+const admin = "admin";
+const master = "master";
+const service = "service";
+const roles = "roles";
+
 const urls = {
   auth: {
     register: register,
@@ -78,6 +83,11 @@ const urls = {
   },
   pay: {
     all: (userId: number): string => `${v1}/${users}/${userId}/${button}`,
+  },
+  roles: `${v1}/${roles}`,
+  admin: {
+    master: `${v1}/${admin}/${master}`,
+    service: `${v1}/${admin}/${service}`,
   },
 };
 

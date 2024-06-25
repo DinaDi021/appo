@@ -12,16 +12,17 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import {
+  adminReducer,
   appointmentsReducer,
   authReducer,
   cartsReducer,
+  filtersReducer,
   imagesReducer,
   progressReducer,
   schedulesReducer,
   servicesReducer,
   usersReducer,
 } from "./slice";
-import { filtersReducer } from "./slice/filtersSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   filters: filtersReducer,
   services: servicesReducer,
   images: imagesReducer,
+  admin: adminReducer,
 });
 
 const persistConfig = {

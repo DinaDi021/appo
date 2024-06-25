@@ -1,7 +1,7 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import React, {
   FC,
   PropsWithChildren,
@@ -31,7 +31,7 @@ interface IProps extends PropsWithChildren {
 
 const UsersInfo: FC<IProps> = ({ user }) => {
   const { id, firstname, lastname, birthdate, email, phone_number, image_url } =
-    user.data;
+    user;
   const { error } = useAppSelector((state) => state.images);
   const dispatch = useAppDispatch();
   const [isChangePasswordFormVisible, setIsChangePasswordFormVisible] =
@@ -258,7 +258,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
             </div>
             <div className={styles.form__container}>
               <label className={styles.form__label}>
-                <LockOutlinedIcon />
+                <PhoneIphoneIcon />
                 <input
                   className={styles.form__input}
                   type="text"

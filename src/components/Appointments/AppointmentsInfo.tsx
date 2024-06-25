@@ -24,7 +24,7 @@ const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
     date_time,
   } = appointment;
   const { user } = useAppSelector((state) => state.auth);
-  const userId = user.data.id;
+  const userId = user.id;
   const appointmentId = id;
   const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState(false);

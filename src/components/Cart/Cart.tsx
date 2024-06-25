@@ -16,7 +16,7 @@ const Cart: FC = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(cartsActions.getAllItem({ userId: user.data.id }));
+      dispatch(cartsActions.getAllItem({ userId: user.id }));
     }
   }, [dispatch, user]);
 
@@ -27,13 +27,13 @@ const Cart: FC = () => {
   const isCartEmpty = cart === null || cart === undefined;
 
   const deleteAppointment = async (cartId: number) => {
-    await dispatch(cartsActions.deleteItem({ userId: user.data.id, cartId }));
-    dispatch(cartsActions.getAllItem({ userId: user.data.id }));
+    await dispatch(cartsActions.deleteItem({ userId: user.id, cartId }));
+    dispatch(cartsActions.getAllItem({ userId: user.id }));
   };
 
   const checkoutCart = async () => {
     if (cart.totalSum > 0) {
-      await dispatch(cartsActions.checkoutCart({ userId: user.data.id }));
+      await dispatch(cartsActions.checkoutCart({ userId: user.id }));
       navigate("checkout");
     }
   };

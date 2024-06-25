@@ -22,7 +22,7 @@ const Checkout: FC = () => {
   const handlePaymentSubmit = async () => {
     await dispatch(
       cartsActions.pay({
-        userId: user.data.id,
+        userId: user.id,
         params: { result_url: url, payment: paymentType },
       }),
     );

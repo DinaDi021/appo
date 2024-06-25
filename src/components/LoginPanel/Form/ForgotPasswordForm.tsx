@@ -1,5 +1,5 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -25,7 +25,7 @@ const ForgotPasswordForm: FC = () => {
 
   const forgotPassword: SubmitHandler<IForgotPassword> = async (data) => {
     const { email } = data;
-    const url = `https://appo-di-k.netlify.app/resetPassword/${email}`;
+    const url = `https://appo-di-k.netlify.app/forgotPassword/${email}`;
 
     const {
       meta: { requestStatus },
@@ -46,7 +46,7 @@ const ForgotPasswordForm: FC = () => {
         >
           <div className={styles.form__container}>
             <label className={styles.form__label}>
-              <AlternateEmailOutlinedIcon />
+              <EmailOutlinedIcon />
               <input
                 className={styles.form__input}
                 type="email"

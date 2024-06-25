@@ -18,11 +18,11 @@ const GalleryDetails: FC<IProps> = ({ image }) => {
   const deleteImageFromGallery = async () => {
     await dispatch(
       imagesActions.deletePictureFromGalleryById({
-        userId: user.data.id,
+        userId: user.id,
         galleryId: id,
       }),
     );
-    dispatch(imagesActions.getGallery({ userId: user.data.id }));
+    dispatch(imagesActions.getGallery({ userId: user.id }));
   };
 
   return (

@@ -1,11 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 
 import empty_person from "../../../../assets/img/empty_person.png";
-import { IUsers } from "../../../../interfaces";
-import styles from "../../UsersInfo/UserInfo.module.scss";
+import { IUser } from "../../../../interfaces";
+import styles from "../../../Users/UsersInfo/UserInfo.module.scss";
 
 interface IProps extends PropsWithChildren {
-  user: IUsers;
+  user: IUser;
 }
 
 const AllUsersInfo: FC<IProps> = ({ user }) => {

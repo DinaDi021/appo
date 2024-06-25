@@ -29,12 +29,12 @@ const AllSchedules = () => {
     if (currentDateParam !== formattedDate) {
       dispatch(
         schedulesActions.getAllUsersSchedules({
-          userId: user.data.id,
+          userId: user.id,
           date: [formattedDate],
         }),
       );
       setQuery({ date: formattedDate });
-      dispatch(schedulesActions.getAllUsersSchedules({ userId: user.data.id }));
+      dispatch(schedulesActions.getAllUsersSchedules({ userId: user.id }));
     }
   }, [dispatch, user, filterDate, query, setQuery]);
 

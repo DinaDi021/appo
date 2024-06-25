@@ -19,13 +19,13 @@ const GalleryForMaster: FC = () => {
     }
     const result = await dispatch(
       imagesActions.addPicturesToGallery({
-        userId: user.data.id,
+        userId: user.id,
         data: formData,
       }),
     );
 
     if (result.payload && result.meta.requestStatus === "fulfilled") {
-      dispatch(imagesActions.getGallery({ userId: user.data.id }));
+      dispatch(imagesActions.getGallery({ userId: user.id }));
     }
   };
 

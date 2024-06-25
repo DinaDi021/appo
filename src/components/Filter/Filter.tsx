@@ -9,8 +9,7 @@ import React, { FC, SyntheticEvent, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IServices } from "../../interfaces";
-import { servicesActions } from "../../redux";
-import { filtersActions } from "../../redux/slice/filtersSlice";
+import { filtersActions, servicesActions } from "../../redux";
 import { newTheme } from "../Theme";
 import styles from "./Filter.module.scss";
 

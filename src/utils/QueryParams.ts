@@ -7,6 +7,7 @@ export const updateQueryParams = (
   filterService?: number[],
   filterCategories?: string[],
   filterMaster?: number,
+  filterRole?: number[],
 ) => {
   queryParams = { ...queryParams };
 
@@ -32,6 +33,12 @@ export const updateQueryParams = (
     queryParams.master_id = filterMaster;
   } else {
     delete queryParams.master_id;
+  }
+
+  if (filterRole !== null) {
+    queryParams.role_id = filterRole;
+  } else {
+    delete queryParams.role_id;
   }
 
   setQuery(queryParams);
