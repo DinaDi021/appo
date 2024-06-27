@@ -28,11 +28,20 @@
       border-radius: 25px;
       transition: transform 0.7s ease, height 0.7s ease;
       cursor: pointer;
+
+      &:hover {
+        transition: 0.7s;
+        transform: scale(1.1);
+      }
     }
 
-    &__avatar:hover {
-      transition: 0.7s;
-      transform: scale(1.1);
+    &__error {
+      margin: 15px 0;
+      width: 240px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: red;
     }
 
     &__del {

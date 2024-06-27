@@ -17,6 +17,7 @@ interface IState {
   error: {
     message?: string;
   };
+  imageError: string | null;
 }
 
 const initialState: IState = {
@@ -24,6 +25,7 @@ const initialState: IState = {
   gallery: [],
   picture: null,
   error: null,
+  imageError: null,
 };
 
 const getGallery = createAsyncThunk<IImage[], { userId: number }>(
@@ -138,6 +140,12 @@ const imagesSlice = createSlice({
   reducers: {
     setAvatar: (state, action) => {
       state.avatar = action.payload;
+    },
+    setImageError: (state, action) => {
+      state.imageError = action.payload;
+    },
+    clearImageError: (state) => {
+      state.imageError = null;
     },
   },
   extraReducers: (builder) =>

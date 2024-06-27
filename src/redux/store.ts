@@ -47,7 +47,6 @@ const persistConfig = {
     "carts",
     "filters",
     "services",
-    "images",
   ],
 };
 

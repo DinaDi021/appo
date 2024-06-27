@@ -1,11 +1,5 @@
 import { urls } from "../constants";
-import {
-  IAuth,
-  ITokens,
-  ITokensResponse,
-  IUser,
-  IUserResponse,
-} from "../interfaces";
+import { IAuth, ITokens, ITokensResponse, IUserResponse } from "../interfaces";
 import { apiService, IRes } from "./apiServices";
 import { usersService } from "./usersService";
 
@@ -13,7 +7,7 @@ const accessTokenKey = "access_token";
 const refreshTokenKey = "refresh_token";
 
 const authService = {
-  register(user: IAuth): IRes<IUser> {
+  register(user: IAuth): IRes<IUserResponse> {
     return apiService.post(urls.auth.register, user);
   },
 
@@ -22,19 +16,20 @@ const authService = {
       urls.auth.login,
       user,
     );
-    const tokens = response.data;
-    this.setTokens(tokens.data);
+    const tokensResponse = response.data;
+    this.setTokens(tokensResponse.data);
 
-    const userResponse = await usersService.getProfile(tokens.data.id);
+    const userResponse = await usersService.getProfile(tokensResponse.data.id);
     return userResponse.data;
   },
 
   async refresh(): Promise<void> {
     const refresh = this.getRefreshToken();
-    const { data } = await apiService.post<ITokensResponse>(urls.auth.refresh, {
+    const response = await apiService.post<ITokensResponse>(urls.auth.refresh, {
       refresh,
     });
-    this.setTokens(data.data);
+    const tokensResponse = response.data;
+    this.setTokens(tokensResponse.data);
   },
 
   async logout(): Promise<void> {

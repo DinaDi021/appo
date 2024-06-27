@@ -61,18 +61,21 @@ const getUserById = createAsyncThunk<IUserResponse, { id: number }>(
 );
 
 const updateUserById = createAsyncThunk<
-  IUser,
+  IUserResponse,
   { id: number; params: IUpdateProfileParams }
 >(
   "usersSlice/updateUserById",
   async ({ id, params }, { rejectWithValue, dispatch }) => {
     try {
+      dispatch(progressActions.setIsLoading(true));
       const { data } = await usersService.updateProfile(id, params);
-      dispatch(authActions.setLoggedInUser(data));
+      dispatch(authActions.setLoggedInUser(data.data));
       return data;
     } catch (e) {
       const err = e as AxiosError;
       return rejectWithValue(err.response.data);
+    } finally {
+      dispatch(progressActions.setIsLoading(false));
     }
   },
 );
@@ -106,14 +109,13 @@ const usersSlice = createSlice({
   extraReducers: (build) =>
     build
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        const { data } = action.payload;
-        state.users = data;
+        state.users = action.payload.data;
       })
       .addCase(getUserById.fulfilled, (state, action) => {
         state.user = action.payload.data;
       })
       .addCase(updateUserById.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.data;
       }),
 });
 

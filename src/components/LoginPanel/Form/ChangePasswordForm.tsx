@@ -1,10 +1,10 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { useAppDispatch, useToggle } from "../../../hooks";
+import { useAppDispatch, useAppSelector, useToggle } from "../../../hooks";
 import { IChangePassword } from "../../../interfaces";
 import { authActions } from "../../../redux";
 import { changePasswordSchema } from "../../../validators";
@@ -22,9 +22,11 @@ const ChangePasswordForm: FC = () => {
 
   const dispatch = useAppDispatch();
   const { token } = useParams();
+  const { error } = useAppSelector((state) => state.auth);
   const { value: changePasswordSuccess, change: toggleChangePasswordSuccess } =
     useToggle(false);
-  const navigate = useNavigate();
+  const [errorPasswordMessage, setErrorPasswordMessage] =
+    useState<string>(null);
 
   const changePassword: SubmitHandler<IChangePassword> = async (data) => {
     const { old_password, new_password } = data;
@@ -38,14 +40,17 @@ const ChangePasswordForm: FC = () => {
     if (requestStatus === "fulfilled") {
       reset();
       toggleChangePasswordSuccess();
-      navigate("/login");
+      setErrorPasswordMessage(null);
+    }
+    if (requestStatus === "rejected") {
+      setErrorPasswordMessage(error?.message);
     }
   };
 
   return (
     <>
       <form
-        className={styles.form__login}
+        className={styles.form__changePassword}
         onSubmit={handleSubmit(changePassword)}
       >
         <div className={styles.form__container}>
@@ -78,14 +83,19 @@ const ChangePasswordForm: FC = () => {
           </label>
           {errors.new_password && (
             <div className={styles.form__error}>
-              {errors?.new_password && <span>passwords do not match</span>}
+              {errors?.new_password && <span>invalid password</span>}
             </div>
           )}
         </div>
         <button>Confirm password change</button>
       </form>
+      {errorPasswordMessage && (
+        <div className={styles.form__error}>{errorPasswordMessage}</div>
+      )}
       {changePasswordSuccess && (
-        <p style={{ color: "green" }}>Password changed successfully!</p>
+        <div className={styles.form__success}>
+          Password changed successfully!
+        </div>
       )}
     </>
   );

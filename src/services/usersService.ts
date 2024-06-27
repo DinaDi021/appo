@@ -20,8 +20,10 @@ const usersService = {
     apiService.get(urls.users.byId(id)),
   deleteProfile: (id: number): IRes<void> =>
     apiService.delete(urls.users.byId(id)),
-  updateProfile: (id: number, params: IUpdateProfileParams): IRes<IUser> =>
-    apiService.patch(urls.users.byId(id), params),
+  updateProfile: (
+    id: number,
+    params: IUpdateProfileParams,
+  ): IRes<IUserResponse> => apiService.patch(urls.users.byId(id), params),
 };
 
 export { usersService };

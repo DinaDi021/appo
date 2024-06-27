@@ -31,8 +31,6 @@ const CreateMasterForm = () => {
       adminActions.addMaster({ data: { email, phone_number, url } }),
     );
 
-    console.log("Request status:", requestStatus);
-
     if (requestStatus === "fulfilled") {
       dispatch(adminActions.setIsSuccess());
       setTimeout(() => {

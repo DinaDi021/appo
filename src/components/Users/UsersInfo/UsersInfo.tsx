@@ -4,7 +4,7 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import React, {
   FC,
-  PropsWithChildren,
+  // PropsWithChildren,
   useCallback,
   useEffect,
   useRef,
@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 import empty_person from "../../../assets/img/empty_person.png";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { IUpdateProfileParams, IUser } from "../../../interfaces";
+import { IUpdateProfileParams } from "../../../interfaces";
 import { authActions, imagesActions, usersActions } from "../../../redux";
 import { croppedImg, dataURLtoFile } from "../../../utils/CroppedImg";
 import { updateShema } from "../../../validators";
@@ -25,11 +25,8 @@ import styles from "../../LoginPanel/Form/Form.module.scss";
 import { Modal } from "../../Modal/Modal";
 import css from "./UserInfo.module.scss";
 
-interface IProps extends PropsWithChildren {
-  user: IUser;
-}
-
-const UsersInfo: FC<IProps> = ({ user }) => {
+const UsersInfo: FC = () => {
+  const { user } = useAppSelector((state) => state.auth);
   const { id, firstname, lastname, birthdate, email, phone_number, image_url } =
     user;
   const { error } = useAppSelector((state) => state.images);
@@ -37,6 +34,7 @@ const UsersInfo: FC<IProps> = ({ user }) => {
   const [isChangePasswordFormVisible, setIsChangePasswordFormVisible] =
     useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [imageError, setImageError] = useState<string>(null);
   const navigate = useNavigate();
   const {
     register,
@@ -66,7 +64,13 @@ const UsersInfo: FC<IProps> = ({ user }) => {
       setValue("email", email);
       setValue("phone_number", phone_number);
     }
-  }, [setValue, image_url]);
+  }, [setValue]);
+
+  useEffect(() => {
+    if (error) {
+      setImageError(error.message);
+    }
+  }, [error]);
 
   const update: SubmitHandler<IUpdateProfileParams> = (params) => {
     dispatch(usersActions.updateUserById({ id: id, params }));
@@ -152,6 +156,10 @@ const UsersInfo: FC<IProps> = ({ user }) => {
             params: { image_url: newImageUrl },
           }),
         );
+        dispatch(imagesActions.clearImageError());
+      }
+      if (result.payload && result.meta.requestStatus === "rejected") {
+        dispatch(imagesActions.setImageError(error?.message));
       }
     }
   };
@@ -164,7 +172,6 @@ const UsersInfo: FC<IProps> = ({ user }) => {
     <div className={css.user__container}>
       <div className={css.user__container__info}>
         <h3>Contact Information </h3>
-        <div>{error && <p>{error.message}</p>}</div>
         {imageSrc && (
           <div className={css.crop__modal}>
             <div className={css.crop__container}>
@@ -192,6 +199,9 @@ const UsersInfo: FC<IProps> = ({ user }) => {
             alt={`Avatar ${id}`}
             onClick={() => fileInput.current.click()}
           />
+          <div className={css.user__img__error}>
+            {imageError && <p>{imageError}</p>}
+          </div>
           <input
             type={"file"}
             accept={"image/jpeg, image/png"}

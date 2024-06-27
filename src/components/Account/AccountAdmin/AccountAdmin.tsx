@@ -1,10 +1,5 @@
 import React, { FC, useEffect } from "react";
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { QueryParams } from "../../../interfaces";
@@ -18,7 +13,6 @@ const AccountAdmin: FC = () => {
   const { isLoading } = useAppSelector((state) => state.progress);
   const { filterRole } = useAppSelector((state) => state.filters);
   const navigate = useNavigate();
-  const location = useLocation();
   const [query, setQuery] = useSearchParams();
   const queryParams: QueryParams = {
     role_id: query.getAll("role_id").map(Number),
@@ -38,12 +32,6 @@ const AccountAdmin: FC = () => {
       dispatch(adminActions.getAllRoles());
     }
   }, [dispatch, user, filterRole, location.search]);
-
-  useEffect(() => {
-    if (user && location.pathname === "/me") {
-      navigate("/me/info");
-    }
-  }, [user, location.pathname, navigate]);
 
   if (!user) {
     return <p>User not logged in</p>;

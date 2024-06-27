@@ -1,3 +1,4 @@
+import { joiResolver } from "@hookform/resolvers/joi";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import React, { FC } from "react";
@@ -7,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IAuth } from "../../../interfaces";
 import { authActions } from "../../../redux";
+import { loginShema } from "../../../validators";
 import styles from "./Form.module.scss";
 
 const LoginForm: FC = () => {
@@ -15,7 +17,9 @@ const LoginForm: FC = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAuth>();
+  } = useForm<IAuth>({
+    resolver: joiResolver(loginShema),
+  });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { error } = useAppSelector((state) => state.auth);
@@ -26,7 +30,7 @@ const LoginForm: FC = () => {
 
     if (requestStatus === "fulfilled") {
       reset();
-      navigate("/me");
+      navigate("/me/info");
     }
   };
 

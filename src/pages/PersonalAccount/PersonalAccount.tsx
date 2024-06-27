@@ -1,10 +1,6 @@
-import {
-  AccountAdmin,
-  AccountClient,
-  AccountMaster,
-  LoginPanel,
-} from "../../components";
+import { AccountAdmin, AccountClient, AccountMaster } from "../../components";
 import { useAppSelector } from "../../hooks";
+import { LoginPage } from "../LoginPage/LoginPage";
 import styles from "../pages.module.scss";
 
 const PersonalAccount = () => {
@@ -18,8 +14,9 @@ const PersonalAccount = () => {
       return <AccountClient />;
     } else if (userRole === "admin") {
       return <AccountAdmin />;
-    } else {
-      return <LoginPanel />;
+    }
+    if (!userRole) {
+      return <LoginPage />;
     }
   };
 

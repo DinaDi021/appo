@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { LoginForm } from "../../components/LoginPanel/Form";
+import { LoginForm } from "../../components";
 import styles from "../pages.module.scss";
 
 const LoginPage = () => {

@@ -34,7 +34,7 @@ const RegisterForm: FC = () => {
       const loginResponse = await dispatch(authActions.login({ user }));
       if (loginResponse.meta.requestStatus === "fulfilled") {
         reset();
-        navigate("/me");
+        navigate("/me/info");
       }
     }
   };

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
@@ -16,7 +16,6 @@ const AccountMaster: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { isLoading } = useAppSelector((state) => state.progress);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     if (user) {
@@ -27,12 +26,6 @@ const AccountMaster: FC = () => {
       dispatch(imagesActions.getGallery({ userId: user.id }));
     }
   }, [dispatch, user, navigate]);
-
-  useEffect(() => {
-    if (user && location.pathname === "/me") {
-      navigate("/me/info");
-    }
-  }, [user, location.pathname, navigate]);
 
   if (!user) {
     return <p>User not logged in</p>;

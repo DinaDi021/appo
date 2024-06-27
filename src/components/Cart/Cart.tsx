@@ -1,10 +1,11 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { cartsActions } from "../../redux";
 import { IsLoading } from "../IsLoading";
+import css from "../LoginPanel/Form/Form.module.scss";
 import styles from "./Cart.module.scss";
 
 const Cart: FC = () => {
@@ -12,13 +13,14 @@ const Cart: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { cart } = useAppSelector((state) => state.carts);
   const { isLoading } = useAppSelector((state) => state.progress);
+  const [showMessage, setShowMessage] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
       dispatch(cartsActions.getAllItem({ userId: user.id }));
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, showMessage]);
 
   if (!user) {
     return <p>User not logged in</p>;
@@ -27,13 +29,23 @@ const Cart: FC = () => {
   const isCartEmpty = cart === null || cart === undefined;
 
   const deleteAppointment = async (cartId: number) => {
+    const itemToDelete = cart.items.find((item) => item.id === cartId);
     await dispatch(cartsActions.deleteItem({ userId: user.id, cartId }));
     dispatch(cartsActions.getAllItem({ userId: user.id }));
+    if (itemToDelete && itemToDelete.message) {
+      setShowMessage(false);
+    }
   };
 
   const checkoutCart = async () => {
-    await dispatch(cartsActions.checkoutCart({ userId: user.id }));
-    navigate("checkout");
+    const validItems = cart.items.filter((item) => item.message);
+    if (validItems.length > 0) {
+      setShowMessage(true);
+    }
+    if (cart.totalCount > 0 && !showMessage) {
+      await dispatch(cartsActions.checkoutCart({ userId: user.id }));
+      navigate("checkout");
+    }
   };
 
   return (
@@ -82,6 +94,14 @@ const Cart: FC = () => {
                 Confirm and receive payment
               </button>
             </div>
+            {showMessage && (
+              <div
+                className={css.form__error}
+                style={{ justifyContent: "center" }}
+              >
+                You have to delete unavaliable appointment
+              </div>
+            )}
           </>
         )}
       </div>
