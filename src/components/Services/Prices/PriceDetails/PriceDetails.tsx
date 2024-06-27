@@ -2,7 +2,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import React, { FC, PropsWithChildren, useEffect } from "react";
+import React, { FC, PropsWithChildren, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
@@ -10,6 +10,7 @@ import { IPrice, IUpdatePriceParams } from "../../../../interfaces";
 import { servicesActions } from "../../../../redux";
 import { priceShema } from "../../../../validators";
 import styles from "../../../LoginPanel/Form/Form.module.scss";
+import { Modal } from "../../../Modal/Modal";
 import css from "../../Services.module.scss";
 
 interface IProps extends PropsWithChildren {
@@ -30,6 +31,7 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
   } = useForm<IUpdatePriceParams>({
     resolver: joiResolver(priceShema),
   });
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (onePrice) {
@@ -54,6 +56,7 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
   };
 
   const handleDeletePrice = async () => {
+    setShowModal(false);
     await dispatch(
       servicesActions.deletePriceById({
         userId,
@@ -93,14 +96,25 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
           )}
         </div>
         <div className={css.price__form__actionBtn}>
-          <button>
+          <button type="submit">
             <EditIcon />
           </button>
-          <button onClick={handleDeletePrice}>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowModal(true);
+            }}
+          >
             <DeleteForeverIcon />
           </button>
         </div>
       </form>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleDeletePrice}
+      />
     </div>
   );
 };

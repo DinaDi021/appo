@@ -59,10 +59,10 @@
     border: 1px solid var(--green-crayola-pine);
 
     &__header {
-      width: 100%;
+      width: calc(100% - 30px);
+      padding: 15px;
       display: flex;
       justify-content: center;
-      padding: 15px 0;
       color: var(--basic-white);
       background-image: url("../../assets/img/background/bc-main.jpg");
       background-size: cover;

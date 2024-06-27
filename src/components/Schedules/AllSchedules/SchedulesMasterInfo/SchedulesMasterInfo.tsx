@@ -5,7 +5,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import InfoIcon from "@mui/icons-material/Info";
-import React, { FC, PropsWithChildren, useEffect } from "react";
+import React, { FC, PropsWithChildren, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,7 @@ import { IUpdateSchedulesParams } from "../../../../interfaces";
 import { ISchedule } from "../../../../interfaces/scheduleInterface";
 import { schedulesActions } from "../../../../redux";
 import { schedulesShema } from "../../../../validators";
+import { Modal } from "../../../Modal/Modal";
 import styles from "../AllSchedules.module.scss";
 
 interface IProps extends PropsWithChildren {
@@ -30,6 +31,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { value: isEditing, change: toggleEdit } = useToggle(false);
+  const [showModal, setShowModal] = useState(false);
 
   const {
     register,
@@ -50,6 +52,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
   }, [schedule_id, updatedSchedule, setValue]);
 
   const deleteSchedule = async () => {
+    setShowModal(false);
     await dispatch(
       schedulesActions.deleteScheduleById({
         userId,
@@ -64,18 +67,6 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
   const getDetails = () => {
     navigate(`${schedule_id}`, { state: schedule });
   };
-
-  // delete client's appointment from master account
-
-  // const deleteAppo = async () => {
-  //   await dispatch(
-  //     appointmentsActions.deleteAppointmentById({
-  //       userId,
-  //       appointmentId: appointment.id,
-  //     }),
-  //   );
-  //   dispatch(appointmentsActions.getUserAllAppointments({ userId }));
-  // };
 
   const onSubmit: SubmitHandler<IUpdateSchedulesParams> = async (params) => {
     await dispatch(
@@ -142,7 +133,11 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
               <button onClick={toggleEdit}>
                 <EditIcon />
               </button>
-              <button onClick={deleteSchedule}>
+              <button
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
                 <DeleteForeverIcon />
               </button>
               <button onClick={getDetails}>
@@ -152,6 +147,11 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
           </div>
         )}
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={deleteSchedule}
+      />
     </div>
   );
 };
