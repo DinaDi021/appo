@@ -32,10 +32,8 @@ const Cart: FC = () => {
   };
 
   const checkoutCart = async () => {
-    if (cart.totalSum > 0) {
-      await dispatch(cartsActions.checkoutCart({ userId: user.id }));
-      navigate("checkout");
-    }
+    await dispatch(cartsActions.checkoutCart({ userId: user.id }));
+    navigate("checkout");
   };
 
   return (
@@ -57,13 +55,21 @@ const Cart: FC = () => {
                   </div>
                   <div className={styles.cart__appointment__bc}>
                     <div className={styles.cart__appointment__details}>
-                      <p>{item.title}</p>
-                      <p>
-                        Your master: {item.master_firstname}{" "}
-                        {item.master_lastname}
-                      </p>
-                      <p>{item.date_time}</p>
-                      <p>${item.price}</p>
+                      <div className={styles.cart__appointment__data}>
+                        <p>{item.title}</p>
+                        <p>
+                          Your master: {item.master_firstname}{" "}
+                          {item.master_lastname}
+                        </p>
+                        <p>{item.date_time}</p>
+                        <p>${item.price}</p>
+                      </div>
+
+                      {item.message && (
+                        <div className={styles.cart__appointment__message}>
+                          <p>{item.message}</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

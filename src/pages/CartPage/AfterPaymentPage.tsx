@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const AfterPaymentPage = () => {
   return (
     <div>
-      <h2>your payment has been sent for processing</h2>
       <Link to={"/me/appointments"}>
         <button>Check appointment</button>
       </Link>

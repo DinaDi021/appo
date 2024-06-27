@@ -67,7 +67,10 @@
     }
 
     &__details {
-      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       color: var(--basic-white);
       backdrop-filter: blur(8px);
       border-left: 1px solid var(--green-crayola-pine);
@@ -77,6 +80,20 @@
       p:not(:last-child) {
         margin-bottom: 5px;
       }
+    }
+
+    &__data {
+      padding: 10px;
+    }
+
+    &__message {
+      width: calc(100% - 20px);
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: var(--basic-white);
+      color: red;
+      border-bottom-right-radius: 15px;
     }
 
     &__aside {
@@ -157,5 +174,17 @@
 
   &__button {
     width: 100%;
+  }
+
+  &__error {
+    padding: 10px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    border: 2px solid var(--green-crayola-pine);
+    border-radius: 15px;
   }
 }

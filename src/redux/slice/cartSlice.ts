@@ -27,6 +27,7 @@ interface IState {
   error: {
     message?: string;
   };
+  isSuccess: boolean;
 }
 
 const initialState: IState = {
@@ -38,6 +39,7 @@ const initialState: IState = {
   selectedSchedule: null,
   selectedPrice: null,
   error: null,
+  isSuccess: false,
 };
 
 const getAllItem = createAsyncThunk<ICart, { userId: number }>(
@@ -135,6 +137,12 @@ const cartsSlice = createSlice({
       state.selectedCategory = null;
       state.selectedSchedule = null;
       state.selectedPrice = null;
+    },
+    setIsSuccess: (state) => {
+      state.isSuccess = true;
+    },
+    clearIsSuccess: (state) => {
+      state.isSuccess = false;
     },
   },
   extraReducers: (builder) =>

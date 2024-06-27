@@ -1,9 +1,19 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 import { useAppSelector } from "../../hooks";
+import styles from "./Cart.module.scss";
 
 const PayCart: FC = () => {
-  const { payCart } = useAppSelector((state) => state.carts);
+  const { payCart, error } = useAppSelector((state) => state.carts);
+
+  if (!payCart) {
+    return (
+      <div className={styles.checkout__error}>
+        {error?.message} <p>Please delete the inactive appointment first</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       {payCart.html_button && (
