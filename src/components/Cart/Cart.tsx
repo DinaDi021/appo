@@ -6,14 +6,19 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { cartsActions } from "../../redux";
 import { IsLoading } from "../IsLoading";
 import css from "../LoginPanel/Form/Form.module.scss";
+import { Modal } from "../Modal/Modal";
 import styles from "./Cart.module.scss";
 
 const Cart: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { cart } = useAppSelector((state) => state.carts);
+  const { cart, error } = useAppSelector((state) => state.carts);
   const { isLoading } = useAppSelector((state) => state.progress);
   const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<
+    number | null
+  >(null);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +33,23 @@ const Cart: FC = () => {
 
   const isCartEmpty = cart === null || cart === undefined;
 
-  const deleteAppointment = async (cartId: number) => {
-    const itemToDelete = cart.items.find((item) => item.id === cartId);
-    await dispatch(cartsActions.deleteItem({ userId: user.id, cartId }));
-    dispatch(cartsActions.getAllItem({ userId: user.id }));
-    if (itemToDelete && itemToDelete.message) {
-      setShowMessage(false);
+  const deleteAppointment = async () => {
+    if (selectedAppointmentId !== null) {
+      setShowModal(false);
+      const itemToDelete = cart.items.find(
+        (item) => item.id === selectedAppointmentId,
+      );
+      await dispatch(
+        cartsActions.deleteItem({
+          userId: user.id,
+          cartId: selectedAppointmentId,
+        }),
+      );
+      dispatch(cartsActions.getAllItem({ userId: user.id }));
+      if (itemToDelete && itemToDelete.message) {
+        setShowMessage(false);
+      }
+      setSelectedAppointmentId(null);
     }
   };
 
@@ -41,8 +57,9 @@ const Cart: FC = () => {
     const validItems = cart.items.filter((item) => item.message);
     if (validItems.length > 0) {
       setShowMessage(true);
+      return;
     }
-    if (cart.totalCount > 0 && !showMessage) {
+    if (!error && cart.totalCount > 0) {
       await dispatch(cartsActions.checkoutCart({ userId: user.id }));
       navigate("checkout");
     }
@@ -61,7 +78,12 @@ const Cart: FC = () => {
               {cart.items.map((item) => (
                 <div key={item.id} className={styles.cart__appointment__info}>
                   <div className={styles.cart__appointment__button}>
-                    <button onClick={() => deleteAppointment(item.id)}>
+                    <button
+                      onClick={() => {
+                        setShowModal(true);
+                        setSelectedAppointmentId(item.id);
+                      }}
+                    >
                       <DeleteForeverIcon />
                     </button>
                   </div>
@@ -105,6 +127,11 @@ const Cart: FC = () => {
           </>
         )}
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={deleteAppointment}
+      />
     </>
   );
 };
