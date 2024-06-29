@@ -31,7 +31,7 @@ const Checkout: FC = () => {
 
   return (
     <div className={styles.checkout}>
-      <h3 className={styles.checkout__title}>Choose a payment type</h3>
+      <h4 className={styles.checkout__title}>Choose a payment type</h4>
       <div>
         <label className={styles.checkout__select}>
           <input

@@ -14,7 +14,6 @@ import {
   ForgotPasswordPage,
   GalleryPageForMaster,
   LoginPage,
-  MainPage,
   NotFoundPage,
   PayCartPage,
   PersonalAccount,
@@ -36,11 +35,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to={"main"} />,
-      },
-      {
-        path: "main",
-        element: <MainPage />,
+        element: <Navigate to={"services"} />,
       },
       {
         path: "availableSchedules",

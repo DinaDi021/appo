@@ -1,6 +1,5 @@
 export * from "./PricePage/PricePage";
 export * from "./ServicesPage/ServicesPage";
-export * from "./MainPage/MainPage";
 export * from "./NotFoundPage/NotFoundPage";
 export * from "./LoginPage/LoginPage";
 export * from "./RegisterPage/RegisterPage";

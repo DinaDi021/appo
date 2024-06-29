@@ -2,13 +2,14 @@
 
   &__page {
     width: 100%;
-    height: 100%;
+    height: fit-content;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
   }
 
   &__wrapper {
+    width: 40%;
     height: 100%;
     border-radius: 15px;
     border: 1px solid var(--green-crayola-pine);
@@ -24,6 +25,7 @@
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom: 1px solid var(--green-crayola-pine);
+    font-size: 25px;
   }
 
   &__form {
@@ -34,6 +36,8 @@
     &__body {
       display: flex;
       flex-direction: column;
+      align-items: stretch;
+      width: 100%;
 
       * {
         margin-bottom: 10px;
@@ -44,10 +48,66 @@
 
 .addService {
   &__wrapper {
-    width: 35%;
+    width: 45%;
     height: 100%;
     border-radius: 15px;
     border: 1px solid var(--green-crayola-pine);
   }
+}
 
+@media screen and (max-width: 1070px){
+  .addMaster {
+    &__page {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      div:not(:last-child) {
+        margin-bottom: 15px;
+      }
+    }
+    &__wrapper {
+      width: 60%;
+    }
+    &__title {
+      font-size: 20px;
+    }
+    &__form {
+      &__body {
+        input {
+          width: 65%;
+        }
+      }
+    }
+  }
+  .addService {
+    &__wrapper {
+      width: 60%;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .addMaster {
+    &__form {
+      &__body {
+        input {
+          width: 45%;
+        }
+      }
+    }
+  }
+  .addService {
+    &__wrapper {
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .addService {
+    &__wrapper {
+      width: 100%;
+    }
+  }
 }

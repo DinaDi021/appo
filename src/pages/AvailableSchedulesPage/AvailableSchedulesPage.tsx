@@ -1,5 +1,3 @@
-import React from "react";
-
 import { AvailableSchedules } from "../../components";
 
 const AvailableSchedulesPage = () => {

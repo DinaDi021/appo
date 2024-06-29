@@ -1,8 +1,10 @@
 .filter {
   &__container {
+    width: 330px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    width: 330px;
+    align-items: center;
     padding: 10px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -11,6 +13,7 @@
     margin-right: 20px;
     background-color: var(--basic-white);
     border: 1px solid var(--green-crayola-pine);
+
   }
 
   &__calendar {
@@ -32,6 +35,97 @@
 
     button {
       width: 280px;
+    }
+  }
+
+  &__mobile {
+    display: none;
+    &__close {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .filter {
+    &__container, &__calendar {
+      width: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .filter {
+    &__container {
+      width: 260px;
+      margin-right: 10px;
+    }
+    &__calendar {
+      width: 260px;
+      }
+    &__button {
+      button{
+        width: 240px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .filter {
+    &__container {
+      display: none;
+    }
+    &__container.visible {
+      width: 100%;
+      display: flex;
+      position: absolute;
+      z-index: 5;
+      margin-top: -15px;
+    }
+    &__mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &__title {
+        width: 60px;
+        height: 330px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        white-space: nowrap;
+        transform: rotate(180deg);
+        transform-origin: center center;
+        color: white;
+        background-image: url("../../assets/img/background/bc-main.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: 2px solid white;
+        border-right: none;
+        svg {
+          transform: rotate(90deg);
+          padding: 5px 0;
+        }
+      }
+      &__close {
+        display: flex;
+        color: var(--basic-grey);
+        position: absolute;
+        top: 20px;
+        right: -40px;
+      }
+    }
+    &__mobile.hide {
+      display: none;
+    }
+    &__calendar {
+      position: relative;
     }
   }
 }

@@ -171,7 +171,7 @@ const UsersInfo: FC = () => {
   return (
     <div className={css.user__container}>
       <div className={css.user__container__info}>
-        <h3>Contact Information </h3>
+        <h4 className={css.user__container__title}>Contact Information </h4>
         {imageSrc && (
           <div className={css.crop__modal}>
             <div className={css.crop__container}>
@@ -306,7 +306,7 @@ const UsersInfo: FC = () => {
       </div>
 
       <div className={css.user__container__action}>
-        <h3>Your actions</h3>
+        <h4 className={css.user__container__title}>Your actions</h4>
         <div
           className={
             isChangePasswordFormVisible

@@ -1,7 +1,7 @@
 .cart {
 
   &__page {
-    width: 80%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,6 +20,7 @@
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
       border-bottom: 1px solid var(--green-crayola-pine);
+      font-size: 30px;
     }
   }
 
@@ -30,6 +31,17 @@
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     color: var(--basic-black);
+  }
+
+  &__unlogged {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__title{
+      font-size: 30px;
+      color: var(--green-pine);
+    }
   }
 
   &__appointment {
@@ -70,7 +82,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
       color: var(--basic-white);
       backdrop-filter: blur(8px);
       border-left: 1px solid var(--green-crayola-pine);
@@ -84,6 +95,10 @@
 
     &__data {
       padding: 10px;
+
+      > p {
+        font-size: 15px;
+      }
     }
 
     &__message {
@@ -94,12 +109,18 @@
       background-color: var(--basic-white);
       color: red;
       border-bottom-right-radius: 15px;
+      font-size: 15px;
     }
 
     &__aside {
+      &__info {
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
 
-      button {
+      &__btn {
         width: 350px;
+        margin-bottom: 5px;
       }
     }
   }
@@ -110,9 +131,14 @@
     margin-bottom: 10px;
   }
 
+  &__title {
+    font-size: 20px;
+  }
+
   &__select {
     display: flex;
     align-items: center;
+    font-size: 17px;
   }
 
   &__inputPay {
@@ -175,16 +201,82 @@
   &__button {
     width: 100%;
   }
+}
 
-  &__error {
-    padding: 10px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: red;
-    border: 2px solid var(--green-crayola-pine);
-    border-radius: 15px;
+@media screen and (max-width: 1250px) {
+  .cart {
+    &__container {
+     display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .checkout {
+    width: 350px;
+  }
+;
+}
+
+@media screen and (max-width: 960px){
+  .cart {
+    &__page {
+      &__title {
+        font-size: 20px;
+      }
+    }
+    &__unlogged {
+      &__title{
+        font-size: 20px;
+      }
+    }
+    &__appointment {
+      &__data {
+        > p {
+          font-size: 13px;
+        }
+      }
+      &__message {
+        font-size: 13px;
+      }
+      &__aside {
+        &__info {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+  .checkout {
+    &__title {
+      font-size: 17px;
+    }
+    &__select {
+      font-size: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 550px){
+  .cart {
+    &__page {
+      width: 90%;
+    }
+    &__appointment {
+      width: 290px;
+      &__button {
+        width: calc(17% - 10px);
+        button {
+          padding: 6px;
+        }
+      }
+      &__aside {
+        &__btn {
+          width: 290px;
+        }
+      }
+    }
+  }
+  .checkout {
+    width: 290px;
   }
 }

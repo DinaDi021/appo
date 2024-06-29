@@ -31,7 +31,7 @@ const AccountAdmin: FC = () => {
       dispatch(usersActions.getAllUsers({ query: queryParams }));
       dispatch(adminActions.getAllRoles());
     }
-  }, [dispatch, user, filterRole, location.search]);
+  }, [dispatch, user, filterRole, query, setQuery]);
 
   if (!user) {
     return <p>User not logged in</p>;

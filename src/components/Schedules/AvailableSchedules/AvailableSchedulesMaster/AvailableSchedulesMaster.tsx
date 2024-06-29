@@ -1,11 +1,11 @@
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 
 import empty_person from "../../../../assets/img/empty_person.png";
 import { useAppDispatch } from "../../../../hooks";
 import { IMaster } from "../../../../interfaces";
-import styles from "../../../../pages/AvailableSchedulesPage/AvailableSchedulesPage.module.scss";
 import { schedulesActions } from "../../../../redux";
+import styles from "../AvailableSchedules.module.scss";
 
 interface IProps extends PropsWithChildren {
   availableSchedule: IMaster;
@@ -37,10 +37,10 @@ const AvailableSchedulesMaster: FC<IProps> = ({ availableSchedule }) => {
           alt={`Avatar ${master_id}`}
         />
         <div className={styles.available__profile__info}>
-          <h4>
+          <h5>
             {master_firstname} {master_lastname}
-          </h4>
-          <h4>Categories:</h4>
+          </h5>
+          <h5>Categories:</h5>
           <div className={styles.master__category}>
             {categories.map((category, index) => (
               <p key={index}>{category}</p>

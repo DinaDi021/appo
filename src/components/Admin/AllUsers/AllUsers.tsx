@@ -39,7 +39,12 @@ const AllUsers: FC = () => {
             value={filterRole}
             onChange={handleRoleChange}
             isOptionEqualToValue={isOptionEqualToValue}
-            sx={{ width: 280 }}
+            sx={{
+              width: 280,
+              "@media (max-width: 550px)": {
+                width: "240px",
+              },
+            }}
             renderInput={(params) => <TextField {...params} label="Roles" />}
           />
         </ThemeProvider>

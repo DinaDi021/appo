@@ -37,7 +37,7 @@ const GalleryForMaster: FC = () => {
           Is a place where you can upload photos of your work that clients can
           view on the artist's profile.
         </h4>
-        <div>{error && <p>{error.message}</p>}</div>
+        <div>{error && <p>The file is too large</p>}</div>
         <button
           className={styles.gallery__button_add}
           onClick={() => fileInput.current.click()}

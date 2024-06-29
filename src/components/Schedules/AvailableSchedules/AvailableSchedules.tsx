@@ -3,10 +3,10 @@ import { useLocation, useSearchParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { QueryParams } from "../../../interfaces";
-import styles from "../../../pages/AvailableSchedulesPage/AvailableSchedulesPage.module.scss";
 import { schedulesActions } from "../../../redux";
 import { updateQueryParams } from "../../../utils";
 import { Filter } from "../../Filter/Filter";
+import styles from "./AvailableSchedules.module.scss";
 import { AvailableSchedulesMaster } from "./AvailableSchedulesMaster/AvailableSchedulesMaster";
 
 const AvailableSchedules: FC = () => {
@@ -48,7 +48,7 @@ const AvailableSchedules: FC = () => {
       <div className={styles.noavailable__wrapper}>
         <Filter />
         <div className={styles.noavailable__text}>
-          No available schedules. Please choose different parameters.
+          <h4>No available schedules. Please choose different parameters.</h4>
         </div>
       </div>
     );

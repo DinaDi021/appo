@@ -79,6 +79,9 @@ const newTheme = (theme: Theme) =>
               },
             },
           },
+          input: {
+            minWidth: "auto !important",
+          },
         },
       },
       MuiChip: {
@@ -86,6 +89,16 @@ const newTheme = (theme: Theme) =>
           root: {
             color: "var(--basic-white)",
             backgroundColor: "var(--green-pine)!important",
+          },
+        },
+      },
+      MuiStack: {
+        styleOverrides: {
+          root: {
+            width: "300px",
+            "@media (max-width: 1050px)": {
+              width: "240px",
+            },
           },
         },
       },

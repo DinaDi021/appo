@@ -4,9 +4,9 @@ import styles from "./CreateMaster.module.scss";
 const CreateMaster = () => {
   return (
     <div className={styles.addMaster__wrapper}>
-      <h3 className={styles.addMaster__title}>
+      <h4 className={styles.addMaster__title}>
         To add a master - enter the details
-      </h3>
+      </h4>
       <CreateMasterForm />
     </div>
   );

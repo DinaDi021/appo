@@ -68,6 +68,11 @@
       background-size: cover;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
+
+      h2 {
+        text-align: center;
+        font-size: 30px;
+      }
     }
 
     &__item {
@@ -119,7 +124,6 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      font-size: 30px;
       color: var(--green-pine);
       transition: color 0.5s, transform 0.5s;
 
@@ -129,7 +133,10 @@
       }
 
       svg {
-        font-size: 3rem;
+        font-size: 2rem;
+      }
+      h3 {
+        font-size: 30px;
       }
 
       h3:not(:last-child) {
@@ -163,7 +170,7 @@
       width: 100%;
 
       &:hover .services__table__item__description {
-        max-height: 30px;
+        max-height: fit-content;
         opacity: 1;
         overflow: visible;
         transition: max-height 0.7s ease, opacity 0.7s ease;
@@ -193,6 +200,52 @@
         max-height: 0;
         overflow: hidden;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+
+  .priceTable{
+    &__column {
+      &__header {
+        h2 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .services {
+    &__table {
+      &__title {
+        h3{
+          font-size: 20px;
+        }
+
+        svg {
+          font-size: 1.5rem;
+        }
+      }
+
+      &__item {
+        &__title {
+          width: 65%;
+          font-size: 17px;
+        }
+
+        &__description {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px){
+  .services {
+    &__container {
+      width: 90%;
     }
   }
 }

@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { filtersActions } from "../../redux/slice/filtersSlice";
-// import { LoginPanel } from "../LoginPanel";
+import { filtersActions } from "../../redux";
 import styles from "./Header.module.scss";
 
 const Header: FC = () => {
@@ -24,10 +23,6 @@ const Header: FC = () => {
   }, [cart?.totalCount]);
 
   const links = [
-    {
-      path: "/main",
-      label: "Main",
-    },
     {
       path: "/availableSchedules",
       label: "Available Schedules",

@@ -13,7 +13,7 @@ const adminService = {
   addMaster: (data: IAddMaster): IRes<IUser> =>
     apiService.post(urls.admin.master, data),
   addService: (data: IAddService): IRes<IServices> =>
-    apiService.post(urls.admin.service, data),
+    apiService.post(urls.services.all, data),
 };
 
 export { adminService };

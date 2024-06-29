@@ -28,7 +28,11 @@ const Cart: FC = () => {
   }, [dispatch, user, showMessage]);
 
   if (!user) {
-    return <p>User not logged in</p>;
+    return (
+      <div className={styles.cart__unlogged}>
+        <h3 className={styles.cart__unlogged__title}>User not logged in</h3>
+      </div>
+    );
   }
 
   const isCartEmpty = cart === null || cart === undefined;
@@ -71,7 +75,7 @@ const Cart: FC = () => {
         {isLoading ? (
           <IsLoading />
         ) : isCartEmpty ? (
-          <p>Your cart is empty</p>
+          <h3>Your cart is empty</h3>
         ) : (
           <>
             <div className={styles.cart__appointment__main}>
@@ -110,9 +114,16 @@ const Cart: FC = () => {
               ))}
             </div>
             <div className={styles.cart__appointment__aside}>
-              <h3>Total to pay: ${cart.totalSum}</h3>
-              <h3>Total appointment: {cart.totalCount}</h3>
-              <button onClick={checkoutCart}>
+              <h4 className={styles.cart__appointment__aside__info}>
+                Total to pay: ${cart.totalSum}
+              </h4>
+              <h3 className={styles.cart__appointment__aside__info}>
+                Total appointment: {cart.totalCount}
+              </h3>
+              <button
+                onClick={checkoutCart}
+                className={styles.cart__appointment__aside__btn}
+              >
                 Confirm and receive payment
               </button>
             </div>

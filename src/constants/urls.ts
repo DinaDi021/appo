@@ -27,7 +27,6 @@ const button = "button";
 
 const admin = "admin";
 const master = "master";
-const service = "service";
 const roles = "roles";
 
 const urls = {
@@ -47,6 +46,7 @@ const urls = {
   },
   services: {
     all: `${v1}/${services}`,
+    byId: (id: number): string => `${v1}/${services}/${id}`,
   },
   prices: {
     all: (userId: number): string => `${v1}/${users}/${userId}/${prices}`,
@@ -87,7 +87,6 @@ const urls = {
   roles: `${v1}/${roles}`,
   admin: {
     master: `${v1}/${admin}/${master}`,
-    service: `${v1}/${admin}/${service}`,
   },
 };
 

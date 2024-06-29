@@ -2,8 +2,8 @@ import React, { FC } from "react";
 
 import { AvailableSchedulesDetails } from "../../components";
 import { GalleryForClient } from "../../components/Gallery/GalleryForClient";
+import styles from "../../components/Schedules/AvailableSchedules/AvailableSchedules.module.scss";
 import { useAppSelector } from "../../hooks";
-import styles from "./AvailableSchedulesPage.module.scss";
 
 const AvailableSchedulesDetailsPage: FC = () => {
   const { selectedMaster } = useAppSelector((state) => state.schedules);

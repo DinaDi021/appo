@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^5.14.12",
+    "@mui/system": "^5.15.20",
     "@mui/x-date-pickers": "^7.5.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",

@@ -4,10 +4,11 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
   }
   &__container {
     width: 70%;
-    height: min-content;
+    height: 620px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 15px;
@@ -15,6 +16,7 @@
     align-items: start;
     justify-items: center;
     padding: 0 10px;
+    overflow-x: scroll;
   }
 
   &__card {
@@ -43,8 +45,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    overflow-x: hidden;
-
+    margin-right: 15px;
   }
 
   &__profile {
@@ -65,6 +66,10 @@
       border-right: 1px solid var(--green-crayola-pine);
       border-left: 1px solid var(--green-crayola-pine);
 
+      h5{
+        font-size: 20px;
+      }
+
       :hover{
         color: var(--turquoise);
       }
@@ -79,6 +84,7 @@
     transform: translateX(-25%);
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    font-size: 15px;
 
     &__error, &__success {
       animation-name: slideIn;
@@ -125,7 +131,21 @@
   }
 
   &__text{
-    width: 50%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h4 {
+      font-size: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      color: white;
+      background-image: url("../../../assets/img/background/bc-main.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 2px solid white;
+    }
   }
 }
 
@@ -134,11 +154,12 @@
     width: 330px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     background-color: var(--basic-white);
     border: 1px solid var(--green-crayola-pine);
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    margin: 0 20px 20px 0;
   }
 
   &__info {
@@ -147,16 +168,21 @@
     align-items: center;
     justify-content: center;
     color: var(--green-crayola-pine);
-    margin-bottom: 15px;
+
+    &__name{
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
   }
 
   &__avatar {
-    width: 330px;
-    height: 270px;
-    object-fit: cover;
-    object-position: center;
-    border-top-right-radius: 15px;
-    margin-bottom: 10px;
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-top-right-radius: 15px;
+      margin-bottom: 10px;
+    }
   }
 
   &__photo {
@@ -197,6 +223,10 @@
   &__category {
     display: flex;
     justify-content: space-between;
+
+    p {
+      font-size: 15px;
+    }
   }
 }
 
@@ -251,5 +281,120 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .available {
+    &__container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .available {
+    &__container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &__profile {
+      &__info {
+        h5 {
+          font-size: 17px;
+            }
+        }
+      }
+    }
+  .master {
+    &__container  {
+      width: 260px;
+    }
+    &__button {
+      width: 240px;
+      button {
+        font-size: 13px;
+      }
+    }
+    &__info {
+      &__name {
+        font-size: 17px;
+      }
+    }
+    &__category {
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+  }
+
+@media screen and (min-width: 581px) and (max-width: 850px) {
+  .available {
+    &__page {
+      justify-content: center;
+    }
+    &__message {
+      font-size: 13px;
+    }
+  }
+  .master {
+    &__container {
+      width: 558.4px;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      margin-right: 0;
+    }
+    &__info {
+      padding: 10px 0 0 10px;
+    }
+    &__avatar {
+      border-left: 2px solid var(--green-crayola-pine);
+      img {
+        height: 100%;
+        border-bottom-right-radius: 15px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 710px) and (max-width: 780px){
+  .master {
+    &__photo {
+      width: 180px;
+      height: 160px;
+    }
+  }
+  .available {
+    &__card {
+      width: 180px;
+    }
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .available {
+    &__container {
+      width: 85%;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 580px){
+  .available {
+    &__page{
+      justify-content: center;
+    }
+  }
+  .master {
+    &__container {
+      width: 25rem;
+      margin-right: 0;
+    }
+    &__avatar{
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
   }
 }

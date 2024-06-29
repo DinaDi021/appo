@@ -72,9 +72,9 @@ const Services: FC = () => {
                     onClick={() => handleServiceClick([service.id])}
                     className={styles.services__table__item}
                   >
-                    <h5 className={styles.services__table__item__title}>
+                    <h4 className={styles.services__table__item__title}>
                       {service.title}
-                    </h5>
+                    </h4>
                     <p className={styles.services__table__item__description}>
                       {service.description}
                     </p>
