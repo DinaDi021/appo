@@ -1,20 +1,25 @@
 @import "src/styles";
 
 .schedules {
+  &__title {
+    font-size: 25px;
+  }
+
   &__container {
     display: flex;
+    justify-content: space-evenly;
   }
 
   &__table {
-    width: 50%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
 
     &__item {
       width: 220px;
       margin: 10px;
+      padding: 5px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -47,6 +52,10 @@
     margin: 15px 0;
     & > :not(:last-child) {
       margin-right: 10px;
+    }
+
+    h5{
+      font-size: 18px;
     }
   }
 
@@ -96,6 +105,24 @@
       align-items: center;
       border-radius: 10px;
       border: 2px solid var(--green-pine);
+    }
+  }
+}
+
+@media screen and (max-width: 950px){
+  .schedules {
+    &__container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__status {
+      h5 {
+        font-size: 15px;
+      }
+    }
+    &__title {
+      font-size: 20px;
     }
   }
 }

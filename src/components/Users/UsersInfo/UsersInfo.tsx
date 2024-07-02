@@ -20,8 +20,8 @@ import { IUpdateProfileParams } from "../../../interfaces";
 import { authActions, imagesActions, usersActions } from "../../../redux";
 import { croppedImg, dataURLtoFile } from "../../../utils/CroppedImg";
 import { updateShema } from "../../../validators";
-import { ChangePasswordForm } from "../../LoginPanel/Form/ChangePasswordForm";
-import styles from "../../LoginPanel/Form/Form.module.scss";
+import { ChangePasswordForm } from "../../Auth/Form/ChangePasswordForm";
+import styles from "../../Auth/Form/Form.module.scss";
 import { Modal } from "../../Modal/Modal";
 import css from "./UserInfo.module.scss";
 
@@ -304,7 +304,6 @@ const UsersInfo: FC = () => {
           </form>
         </div>
       </div>
-
       <div className={css.user__container__action}>
         <h4 className={css.user__container__title}>Your actions</h4>
         <div

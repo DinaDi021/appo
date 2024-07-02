@@ -93,7 +93,7 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div className={styles.schedules__status}>
           <AssignmentTurnedInOutlinedIcon />
-          <h4>{status}</h4>
+          <h5>{status}</h5>
         </div>
         {isEditing ? (
           <form

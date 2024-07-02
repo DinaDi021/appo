@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { IPrice, IUpdatePriceParams } from "../../../../interfaces";
 import { servicesActions } from "../../../../redux";
 import { priceShema } from "../../../../validators";
-import styles from "../../../LoginPanel/Form/Form.module.scss";
+import styles from "../../../Auth/Form/Form.module.scss";
 import { Modal } from "../../../Modal/Modal";
 import css from "../../Services.module.scss";
 
@@ -69,7 +69,7 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
   return (
     <div className={css.price__card}>
       <div className={css.price__title}>
-        <h4>{title}</h4>
+        <h5>{title}</h5>
       </div>
       <form
         className={styles.form__schedule}
@@ -86,7 +86,6 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
               type="number"
               placeholder={"price"}
               {...register("price")}
-              style={{ width: "75%" }}
             />
           </label>
           {errors.price && (

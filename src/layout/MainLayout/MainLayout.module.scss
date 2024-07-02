@@ -1,7 +1,13 @@
-.container {
-  display: flex;
-  height: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  justify-content: center;
+.mainLayout {
+  &__container {
+    display: flex;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    justify-content: center;
+  }
+
+  &__addFilter {
+    filter: brightness(0.5);
+  }
 }

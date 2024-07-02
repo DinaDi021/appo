@@ -3,8 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { servicesActions } from "../../redux";
-import { filtersActions } from "../../redux/slice/filtersSlice";
+import { filtersActions, servicesActions } from "../../redux";
 import styles from "./Services.module.scss";
 
 interface CategoryState {

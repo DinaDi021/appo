@@ -1,16 +1,18 @@
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { filtersActions } from "../../redux";
+import { filtersActions, mobileMenuActions } from "../../redux";
 import styles from "./Header.module.scss";
 
 const Header: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { cart } = useAppSelector((state) => state.carts);
+  const { isMobileMenuOpen } = useAppSelector((state) => state.mobileMenu);
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-
   const [shouldShake, setShouldShake] = useState(false);
 
   useEffect(() => {
@@ -51,20 +53,39 @@ const Header: FC = () => {
   };
 
   const handleLinkClick = (path: string) => {
+    dispatch(mobileMenuActions.toggleMobileMenu());
     if (path === "/availableSchedules") {
       handleClearFilterClick();
     }
   };
 
+  const handleToogleMobileMenuClick = () => {
+    dispatch(mobileMenuActions.toggleMobileMenu());
+  };
+
   return (
-    <div className={styles.container}>
-      <div className={styles.navigationMenu}>
-        <nav className={styles.navigation}>
+    <div
+      className={
+        isMobileMenuOpen
+          ? `${styles.header__container__mobile} ${styles.header__container__mobileBc}`
+          : styles.header__container
+      }
+    >
+      <div
+        className={styles.header__navigationMenu__mobile}
+        onClick={handleToogleMobileMenuClick}
+      >
+        {isMobileMenuOpen ? <CloseOutlinedIcon /> : <MenuIcon />}
+      </div>
+      <div
+        className={`${styles.header__navigationMenu} ${isMobileMenuOpen ? styles.menuOpen : styles.menuClosed}`}
+      >
+        <nav className={styles.header__navigation}>
           {links.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`${styles.link} ${
+              className={`${styles.header__link} ${
                 link.path === pathname
                   ? styles.link__active
                   : styles.link__inactive
@@ -78,15 +99,6 @@ const Header: FC = () => {
               {link.label}
             </Link>
           ))}
-          {/*{user ? (*/}
-          {/*  <Link to={"/me/info"}>*/}
-          {/*    <div className={styles.userIcon}>*/}
-          {/*      {user.data.firstname.charAt(0)}*/}
-          {/*    </div>*/}
-          {/*  </Link>*/}
-          {/*) : (*/}
-          {/*  <LoginPanel />*/}
-          {/*)}*/}
         </nav>
       </div>
     </div>

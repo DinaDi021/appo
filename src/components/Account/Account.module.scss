@@ -11,6 +11,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+
+    &__mobileMenu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 0;
+      opacity: 0;
+    }
 
     button {
       width: 60%;
@@ -27,7 +36,7 @@
   }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 520px){
   .account {
     flex-direction: column;
     align-items: center;
@@ -36,6 +45,32 @@
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: center;
+
+      &__mobileMenu {
+        opacity: 1;
+        height: fit-content;
+      }
+    }
+  }
+  .visible {
+    transform: translateY(0);
+    height: auto;
+    opacity: 1;
+    transition: transform 0.5s linear, opacity 0.5s linear, height 0.5s linear;
+  }
+
+  .hidden {
+    transform: translateY(-100%);
+    height: 0;
+    opacity: 0;
+    transition: transform 0.5s linear, opacity 0.5s linear, height 0.5s linear;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .account {
+    &__main {
+      width: 85%;
     }
   }
 }

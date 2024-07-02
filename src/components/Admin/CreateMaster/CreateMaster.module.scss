@@ -72,13 +72,6 @@
     &__title {
       font-size: 20px;
     }
-    &__form {
-      &__body {
-        input {
-          width: 65%;
-        }
-      }
-    }
   }
   .addService {
     &__wrapper {
@@ -88,15 +81,6 @@
 }
 
 @media screen and (max-width: 650px) {
-  .addMaster {
-    &__form {
-      &__body {
-        input {
-          width: 45%;
-        }
-      }
-    }
-  }
   .addService {
     &__wrapper {
       width: 80%;

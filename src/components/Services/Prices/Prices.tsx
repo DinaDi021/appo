@@ -32,21 +32,16 @@ const Prices: FC = () => {
 
   return (
     <div className={styles.price__container}>
-      <h3 style={{ marginBottom: "10px" }}>Services and price</h3>
-      <h4 style={{ marginBottom: "10px" }}>
+      <h4 className={styles.price__container__title}>Services and price</h4>
+      <h5 className={styles.price__container__description}>
         You can create price for your services
-      </h4>
+      </h5>
       <PriceForm />
-      <div
-        className={styles.priceTable}
-        style={{
-          gridTemplateColumns: `repeat(${uniqueCategories.length}, 1fr)`,
-        }}
-      >
+      <div className={styles.priceTable}>
         {uniqueCategories.map((category, index) => (
           <div key={index} className={styles.priceTable__column}>
             <div className={styles.priceTable__column__header}>
-              <h3>{category}</h3>
+              <h4>{category}</h4>
             </div>
             {pricesByCategory[category].map((price, index) => (
               <div key={index} className={styles.priceTable__column__item}>

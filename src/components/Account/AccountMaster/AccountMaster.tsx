@@ -1,7 +1,9 @@
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import ListIcon from "@mui/icons-material/List";
 import React, { FC, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector, useToggle } from "../../../hooks";
 import {
   appointmentsActions,
   imagesActions,
@@ -15,6 +17,10 @@ const AccountMaster: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
   const { isLoading } = useAppSelector((state) => state.progress);
+  const {
+    value: isMobileAccountSectionOpen,
+    change: toggleOpenAccountSection,
+  } = useToggle(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +33,12 @@ const AccountMaster: FC = () => {
     }
   }, [dispatch, user, navigate]);
 
+  useEffect(() => {
+    if (isMobileAccountSectionOpen) {
+      toggleOpenAccountSection();
+    }
+  }, [location.pathname]);
+
   if (!user) {
     return <p>User not logged in</p>;
   }
@@ -36,73 +48,89 @@ const AccountMaster: FC = () => {
       {isLoading ? (
         <IsLoading />
       ) : (
-        <div className={styles.account}>
-          <div className={styles.account__side}>
-            <button
-              onClick={() => navigate("/me/info")}
-              className={
-                location.pathname === "/me/info"
-                  ? styles.account__activeButton
-                  : ""
-              }
-            >
-              Contact Information
-            </button>
-            <button
-              onClick={() => navigate("/me/gallery")}
-              className={
-                location.pathname === "/me/gallery"
-                  ? styles.account__activeButton
-                  : ""
-              }
-            >
-              My gallery
-            </button>
-            <button
-              onClick={() => navigate("/me/prices")}
-              className={
-                location.pathname === "/me/prices"
-                  ? styles.account__activeButton
-                  : ""
-              }
-            >
-              My prices
-            </button>
-            <button
-              onClick={() => navigate("/me/schedules")}
-              className={
-                location.pathname === "/me/schedules"
-                  ? styles.account__activeButton
-                  : ""
-              }
-            >
-              My schedules
-            </button>
-            <button
-              onClick={() => navigate("/me/addSchedules")}
-              className={
-                location.pathname === "/me/addSchedules"
-                  ? styles.account__activeButton
-                  : ""
-              }
-            >
-              Add new time
-            </button>
-            <button
-              onClick={() => navigate("/me/appointments")}
-              className={
-                location.pathname === "/me/appointments"
-                  ? styles.account__activeButton
-                  : ""
-              }
-            >
-              My appointments
+        <>
+          <div
+            className={styles.account__side__mobileMenu}
+            onClick={toggleOpenAccountSection}
+          >
+            <button>
+              {isMobileAccountSectionOpen ? (
+                <CloseOutlinedIcon />
+              ) : (
+                <ListIcon />
+              )}
             </button>
           </div>
-          <div className={styles.account__main}>
-            <Outlet />
+          <div className={styles.account}>
+            <div
+              className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
+            >
+              <button
+                onClick={() => navigate("/me/info")}
+                className={
+                  location.pathname === "/me/info"
+                    ? styles.account__activeButton
+                    : ""
+                }
+              >
+                Contact Information
+              </button>
+              <button
+                onClick={() => navigate("/me/gallery")}
+                className={
+                  location.pathname === "/me/gallery"
+                    ? styles.account__activeButton
+                    : ""
+                }
+              >
+                My gallery
+              </button>
+              <button
+                onClick={() => navigate("/me/prices")}
+                className={
+                  location.pathname === "/me/prices"
+                    ? styles.account__activeButton
+                    : ""
+                }
+              >
+                My prices
+              </button>
+              <button
+                onClick={() => navigate("/me/schedules")}
+                className={
+                  location.pathname === "/me/schedules"
+                    ? styles.account__activeButton
+                    : ""
+                }
+              >
+                My schedules
+              </button>
+              <button
+                onClick={() => navigate("/me/addSchedules")}
+                className={
+                  location.pathname === "/me/addSchedules"
+                    ? styles.account__activeButton
+                    : ""
+                }
+              >
+                Add new time
+              </button>
+              <button
+                onClick={() => navigate("/me/appointments")}
+                className={
+                  location.pathname === "/me/appointments"
+                    ? styles.account__activeButton
+                    : ""
+                }
+              >
+                My appointments
+              </button>
+            </div>
+            <div className={styles.account__main}>
+              <Outlet />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

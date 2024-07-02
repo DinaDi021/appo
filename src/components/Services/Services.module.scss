@@ -2,7 +2,7 @@
 
 .price {
   &__card {
-    width: 250px;
+    width: 100%;
     height: 175px;
     padding: 15px;
     display: flex;
@@ -14,10 +14,24 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    &__title {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    &__description {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
   }
 
   &__title {
     padding: 0 0 15px 10px;
+    h5 {
+      font-size: 20px;
+    }
   }
 
   &__form {
@@ -25,13 +39,20 @@
     padding-left: 5px;
     margin-bottom: 20px;
 
+    &__addService {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 180px;
+    }
+
     &__button {
-      width: 20rem;
+      width: 100%;
     }
 
     &__input {
       @include customInputStyles;
-      width: 210px;
+      width: calc(100% - 70px);
       position: absolute;
       padding: 10px 35px;
     }
@@ -49,7 +70,8 @@
   display: grid;
   align-items: start;
   justify-items: center;
-  grid-column-gap: 20px;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
   &__column {
     width: 100%;
@@ -69,9 +91,9 @@
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
 
-      h2 {
+      h4 {
         text-align: center;
-        font-size: 30px;
+        font-size: 25px;
       }
     }
 
@@ -215,7 +237,6 @@
       }
     }
   }
-
   .services {
     &__table {
       &__title {
@@ -227,15 +248,40 @@
           font-size: 1.5rem;
         }
       }
-
       &__item {
         &__title {
           width: 65%;
           font-size: 17px;
         }
-
         &__description {
           font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 950px){
+.price {
+  &__container{
+    &__title {
+      font-size: 20px;
+    }
+    &__description {
+      font-size: 17px;
+    }
+  }
+  &__title {
+  h5 {
+    font-size: 17px;
+  }
+  }
+}
+  .priceTable {
+    &__column {
+      &__header {
+        h4 {
+          font-size: 20px;
         }
       }
     }
@@ -247,5 +293,8 @@
     &__container {
       width: 90%;
     }
+  }
+  .priceTable {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }

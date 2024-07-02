@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  isFulfilled,
+  isRejected,
+} from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import dayjs from "dayjs";
 
@@ -16,6 +21,9 @@ interface IState {
   selectedMaster: IMaster | null;
   filterDate: string;
   addedDateTime: string;
+  error: {
+    message?: string;
+  };
 }
 
 const initialState: IState = {
@@ -27,6 +35,7 @@ const initialState: IState = {
   selectedMaster: null,
   filterDate: dayjs().toDate().toISOString(),
   addedDateTime: null,
+  error: null,
 };
 
 const getAllUsersSchedules = createAsyncThunk<
@@ -198,6 +207,12 @@ const schedulesSlice = createSlice({
       })
       .addCase(deleteScheduleById.fulfilled, (state) => {
         state.schedule = null;
+      })
+      .addMatcher(isRejected(), (state, action) => {
+        state.error = action.payload;
+      })
+      .addMatcher(isFulfilled(), (state) => {
+        state.error = null;
       }),
 });
 

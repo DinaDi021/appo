@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { cartsActions } from "../../redux";
+import css from "../Auth/Form/Form.module.scss";
 import { IsLoading } from "../IsLoading";
-import css from "../LoginPanel/Form/Form.module.scss";
 import { Modal } from "../Modal/Modal";
 import styles from "./Cart.module.scss";
 

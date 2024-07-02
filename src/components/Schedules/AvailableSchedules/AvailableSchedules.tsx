@@ -56,7 +56,9 @@ const AvailableSchedules: FC = () => {
 
   return (
     <div className={styles.available__wrapper}>
-      <Filter />
+      <div className={styles.available__filter}>
+        <Filter />
+      </div>
       <div className={styles.available__container}>
         {availableSchedules.map((availableSchedule) => (
           <AvailableSchedulesMaster

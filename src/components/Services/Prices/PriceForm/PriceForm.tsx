@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { IAddPrice, IServices } from "../../../../interfaces";
 import { servicesActions } from "../../../../redux";
 import { priceShema } from "../../../../validators";
-import styles from "../../../LoginPanel/Form/Form.module.scss";
+import styles from "../../../Auth/Form/Form.module.scss";
 import { newTheme } from "../../../Theme";
 import css from "../../Services.module.scss";
 
@@ -46,7 +46,10 @@ const PriceForm: FC = () => {
 
   return (
     <div className={css.price__form}>
-      <form className={styles.form__login} onSubmit={handleSubmit(addPrice)}>
+      <form
+        className={css.price__form__addService}
+        onSubmit={handleSubmit(addPrice)}
+      >
         <div className={styles.form__container}>
           <label className={styles.form__autocomplete}>
             <ThemeProvider theme={newTheme(baseTheme)}>
@@ -55,7 +58,7 @@ const PriceForm: FC = () => {
                 id="combo-box-demo"
                 options={services}
                 sx={{
-                  width: 280,
+                  width: "100%",
                 }}
                 value={selectedService}
                 onChange={(_, value) => setSelectedService(value)}

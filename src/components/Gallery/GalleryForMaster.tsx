@@ -32,11 +32,11 @@ const GalleryForMaster: FC = () => {
   return (
     <>
       <div className={styles.gallery__container}>
-        <h3>Gallery</h3>
-        <h4>
+        <h4 className={styles.gallery__container__title}>Gallery</h4>
+        <h5 className={styles.gallery__container__description}>
           Is a place where you can upload photos of your work that clients can
           view on the artist's profile.
-        </h4>
+        </h5>
         <div>{error && <p>The file is too large</p>}</div>
         <button
           className={styles.gallery__button_add}

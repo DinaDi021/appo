@@ -1,4 +1,4 @@
-import { CreateMasterForm } from "../../LoginPanel";
+import { CreateMasterForm } from "../../Auth";
 import styles from "./CreateMaster.module.scss";
 
 const CreateMaster = () => {

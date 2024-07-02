@@ -8,3 +8,4 @@ export * from "./servicesSlice";
 export * from "./imagesSlice";
 export * from "./adminSlice";
 export * from "./filtersSlice";
+export * from "./mobileMenu";

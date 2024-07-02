@@ -45,21 +45,25 @@ const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
       <div className={styles.card}>
         <div className={styles.card__infoWrapper}>
           <div className={styles.card__info}>
-            <h4>Category: {category}</h4>
-            <h4>Service: {title}</h4>
-            <h4>
+            <h5 className={styles.card__item}>Category: {category}</h5>
+            <h5 className={styles.card__item}>Service: {title}</h5>
+            <h5 className={styles.card__item}>
               Your master: {master_firstname} {master_lastname}
-            </h4>
-            <h4 className={styles.card__info__date}>{dataTimeWithoutSec}</h4>
+            </h5>
+            <h5 className={`${styles.card__info__date} ${styles.card__item}`}>
+              {dataTimeWithoutSec}
+            </h5>
           </div>
         </div>
         <div className={styles.card__price}>
-          <h4>Price: {sum}</h4>
-          <h4>
+          <h5 className={styles.card__item}>Price: {sum}</h5>
+          <h5 className={styles.card__item}>
             Type your payment: {payment}
             {payment === "prepayment" && ` - ${paid_sum}`}
-          </h4>
-          <h4>Amount to be paid: {sumForToPay}</h4>
+          </h5>
+          <h5 className={styles.card__item}>
+            Amount to be paid: {sumForToPay}
+          </h5>
           <button
             onClick={() => setShowModal(true)}
             className={styles.card__btnAction}

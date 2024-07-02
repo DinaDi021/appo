@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { ForgotPasswordForm } from "../../components/LoginPanel/Form";
+import { ResetPasswordForm } from "../../components";
 import styles from "../pages.module.scss";
 
-const ForgotPasswordPage = () => {
+const ResetPasswordPage = () => {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.info}>
+    <div className={styles.auth__page}>
+      <div className={styles.auth__container}>
+        <div className={styles.auth__page__title}>
           <h3>Manage your records from your personal account</h3>
         </div>
-        <div className={styles.card}>
-          <h3>Recover Password</h3>
-          <ForgotPasswordForm />
+        <div className={styles.auth__page__form}>
+          <h4>Recover Password</h4>
+          <ResetPasswordForm />
           <h5>Already have an account?</h5>
           <h5>
             <Link to={`/login`}>Log in</Link>
@@ -24,4 +24,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export { ForgotPasswordPage };
+export { ResetPasswordPage };

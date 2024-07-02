@@ -112,7 +112,7 @@ const Filter: FC = () => {
                     color: "var(--basic-black)",
                   },
                   "@media (max-width: 900px)": {
-                    width: "260px",
+                    width: "280px",
                   },
                 }}
               />

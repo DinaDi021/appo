@@ -1,6 +1,6 @@
 import { AccountAdmin, AccountClient, AccountMaster } from "../../components";
 import { useAppSelector } from "../../hooks";
-import { LoginPage } from "../LoginPage/LoginPage";
+import { LoginPage } from "../AuthPage/LoginPage";
 import styles from "../pages.module.scss";
 
 const PersonalAccount = () => {

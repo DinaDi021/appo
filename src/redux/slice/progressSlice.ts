@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Istate {
+interface IState {
   isLoading: boolean;
 }
 
-const initialState: Istate = {
+const initialState: IState = {
   isLoading: false,
 };
 const progressSlice = createSlice({

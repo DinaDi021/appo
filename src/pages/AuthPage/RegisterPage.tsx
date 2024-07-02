@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { RegisterForm } from "../../components/LoginPanel/Form";
+import { RegisterForm } from "../../components";
 import styles from "../pages.module.scss";
 
 const RegisterPage = () => {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.info}>
+    <div className={styles.auth__page}>
+      <div className={styles.auth__container}>
+        <div className={styles.auth__page__title}>
           <h3>Manage your records from your personal account</h3>
         </div>
-        <div className={styles.card}>
-          <h3>Create Account</h3>
+        <div className={styles.auth__page__form}>
+          <h4>Create Account</h4>
           <RegisterForm />
           <h5>Already have an account?</h5>
           <h5>

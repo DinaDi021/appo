@@ -72,6 +72,10 @@ const AllSchedules = () => {
                 ),
               }}
               sx={{
+                maxHeight: "330px",
+                "@media (max-width: 900px)": {
+                  width: "280px",
+                },
                 ".MuiPickersYear-yearButton.Mui-selected:hover, .Mui-selected:hover.focus":
                   {
                     backgroundColor: "var(--turquoise) !important",

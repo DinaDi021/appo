@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IAddService } from "../../../interfaces";
 import { adminActions } from "../../../redux";
 import { addServices } from "../../../validators";
-import styles from "../../LoginPanel/Form/Form.module.scss";
+import styles from "../../Auth/Form/Form.module.scss";
 import css from "../CreateMaster/CreateMaster.module.scss";
 
 const CreateServicesForm = () => {

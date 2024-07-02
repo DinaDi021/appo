@@ -18,6 +18,7 @@ import {
   cartsReducer,
   filtersReducer,
   imagesReducer,
+  mobileMenuReducer,
   progressReducer,
   schedulesReducer,
   servicesReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   services: servicesReducer,
   images: imagesReducer,
   admin: adminReducer,
+  mobileMenu: mobileMenuReducer,
 });
 
 const persistConfig = {

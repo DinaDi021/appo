@@ -39,11 +39,24 @@
   }
 
   &__mobile {
-    display: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
     &__close {
-      display: none;
+      height: 0;
+      opacity: 0;
     }
   }
+}
+
+.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.hidden {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 
 @media screen and (max-width: 1300px) {
@@ -57,11 +70,11 @@
 @media screen and (max-width: 900px) {
   .filter {
     &__container {
-      width: 260px;
+      width: 280px;
       margin-right: 10px;
     }
     &__calendar {
-      width: 260px;
+      width: 280px;
       }
     &__button {
       button{
@@ -74,20 +87,21 @@
 @media screen and (max-width: 550px) {
   .filter {
     &__container {
-      display: none;
-    }
-    &__container.visible {
       width: 100%;
       display: flex;
       position: absolute;
       z-index: 5;
       margin-top: -15px;
+
     }
     &__mobile {
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      opacity: 1;
 
       &__title {
         width: 60px;
@@ -119,10 +133,8 @@
         position: absolute;
         top: 20px;
         right: -40px;
+        opacity: 1;
       }
-    }
-    &__mobile.hide {
-      display: none;
     }
     &__calendar {
       position: relative;

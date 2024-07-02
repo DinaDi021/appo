@@ -3,7 +3,7 @@
   &__page {
     width: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
   }
   &__container {
@@ -49,6 +49,7 @@
   }
 
   &__profile {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -91,7 +92,9 @@
       text-align: center;
       color: var(--basic-black);
     }
-
+  }
+  &__filter {
+    display: flex;
   }
 }
 
@@ -186,7 +189,7 @@
   }
 
   &__photo {
-    width: 210px;
+    width: calc(100% - 1px);
     height: 190px;
     object-fit: cover;
     object-position: center;
@@ -360,7 +363,6 @@
 @media screen and (min-width: 710px) and (max-width: 780px){
   .master {
     &__photo {
-      width: 180px;
       height: 160px;
     }
   }
@@ -381,11 +383,6 @@
 }
 
 @media screen and (max-width: 580px){
-  .available {
-    &__page{
-      justify-content: center;
-    }
-  }
   .master {
     &__container {
       width: 25rem;
