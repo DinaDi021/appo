@@ -1,5 +1,3 @@
-// ServerDay.tsx
-
 import { Badge } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers";

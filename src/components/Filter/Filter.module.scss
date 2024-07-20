@@ -49,15 +49,7 @@
   }
 }
 
-.visible {
-  transform: translateX(0);
-  opacity: 1;
-}
 
-.hidden {
-  transform: translateX(-100%);
-  opacity: 0;
-}
 
 @media screen and (max-width: 1300px) {
   .filter {
@@ -139,5 +131,15 @@
     &__calendar {
       position: relative;
     }
+  }
+
+  .visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .hidden {
+    transform: translateX(-100%);
+    opacity: 0;
   }
 }

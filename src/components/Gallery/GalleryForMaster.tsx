@@ -17,16 +17,12 @@ const GalleryForMaster: FC = () => {
     for (let i = 0; i < files.length; i++) {
       formData.append("images[]", files[i]);
     }
-    const result = await dispatch(
+    await dispatch(
       imagesActions.addPicturesToGallery({
         userId: user.id,
         data: formData,
       }),
     );
-
-    if (result.payload && result.meta.requestStatus === "fulfilled") {
-      dispatch(imagesActions.getGallery({ userId: user.id }));
-    }
   };
 
   return (

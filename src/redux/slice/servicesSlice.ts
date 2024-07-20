@@ -165,7 +165,10 @@ const servicesSlice = createSlice({
         state.price = action.payload;
         state.updatedPrice = null;
       })
-      .addCase(deletePriceById.fulfilled, (state) => {
+      .addCase(deletePriceById.fulfilled, (state, action) => {
+        state.allPrices = state.allPrices.filter(
+          (price) => price.price_id !== action.meta.arg.priceId,
+        );
         state.price = null;
       }),
 });

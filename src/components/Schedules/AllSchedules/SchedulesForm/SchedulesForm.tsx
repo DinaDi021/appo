@@ -123,7 +123,10 @@ const SchedulesForm: FC = () => {
         </div>
       )}
       {error && (
-        <div className={styles.form__error}>
+        <div
+          className={styles.form__error}
+          style={{ justifyContent: "flex-start" }}
+        >
           <p className={css.schedules__added__date}>{error?.message}</p>
         </div>
       )}

@@ -205,7 +205,10 @@ const schedulesSlice = createSlice({
         state.schedule = action.payload;
         state.updatedSchedule = null;
       })
-      .addCase(deleteScheduleById.fulfilled, (state) => {
+      .addCase(deleteScheduleById.fulfilled, (state, action) => {
+        state.allSchedules = state.allSchedules.filter(
+          (schedule) => schedule.schedule_id === action.meta.arg.scheduleId,
+        );
         state.schedule = null;
       })
       .addMatcher(isRejected(), (state, action) => {

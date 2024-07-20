@@ -59,9 +59,6 @@ const SchedulesMasterInfo: FC<IProps> = ({ schedule }) => {
         scheduleId: schedule_id,
       }),
     );
-    dispatch(
-      schedulesActions.getAllUsersSchedules({ userId, date: [filterDate] }),
-    );
   };
 
   const getDetails = () => {

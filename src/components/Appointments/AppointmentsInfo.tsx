@@ -37,7 +37,6 @@ const AppointmentsInfo: FC<IProps> = ({ appointment }) => {
     await dispatch(
       appointmentsActions.deleteAppointmentById({ userId, appointmentId }),
     );
-    dispatch(appointmentsActions.getUserAllAppointments({ userId }));
   };
 
   return (

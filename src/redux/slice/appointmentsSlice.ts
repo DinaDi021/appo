@@ -86,7 +86,10 @@ const appointmentsSlice = createSlice({
       .addCase(getUserAppointmentById.fulfilled, (state, action) => {
         state.appointment = action.payload;
       })
-      .addCase(deleteAppointmentById.fulfilled, (state) => {
+      .addCase(deleteAppointmentById.fulfilled, (state, action) => {
+        state.allAppointments = state.allAppointments.filter(
+          (appointment) => appointment.id !== action.meta.arg.appointmentId,
+        );
         state.appointment = null;
       }),
 });

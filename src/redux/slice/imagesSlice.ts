@@ -159,7 +159,10 @@ const imagesSlice = createSlice({
       .addCase(addPicturesToGallery.fulfilled, (state, action) => {
         state.gallery.push(action.payload);
       })
-      .addCase(deletePictureFromGalleryById.fulfilled, (state) => {
+      .addCase(deletePictureFromGalleryById.fulfilled, (state, action) => {
+        state.gallery = state.gallery.filter(
+          (image) => image.id !== action.meta.arg.galleryId,
+        );
         state.picture = null;
       })
       .addCase(addAvatar.fulfilled, (state, action) => {

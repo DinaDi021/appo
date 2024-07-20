@@ -9,22 +9,16 @@
     justify-content: center;
     flex-direction: row-reverse;
 
-    &__mobile {
-      width: calc(100% - 20px);
-      height: 100vh;
-      position: absolute;
-      z-index: 100;
+    &__mobileBc {
+      width: 100%;
       padding: 0 10px;
       margin-bottom: 35px;
+      height: 8vh;
       display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
+      align-items: center;
+      justify-content: center;
       flex-direction: row-reverse;
-    }
-
-    &__mobileBc {
-      background: rgba(0, 0, 0, 0.5);
-    }
+  }
   }
 
   &__navigationMenu {
@@ -117,6 +111,22 @@
     &__container {
       justify-content: flex-start;
       background: rgba(0, 0, 0, 0.5);
+      &__mobile {
+        width: calc(100% - 20px);
+        height: 100vh;
+        position: absolute;
+        z-index: 100;
+        padding: 0 10px;
+        margin-bottom: 35px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+      }
+
+      &__mobileBc {
+        background: rgba(0, 0, 0, 0.5);
+      }
     }
     &__navigationMenu {
       width: 90%;

@@ -63,7 +63,6 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
         priceId: price_id,
       }),
     );
-    await dispatch(servicesActions.getAllPrices({ userId }));
   };
 
   return (
