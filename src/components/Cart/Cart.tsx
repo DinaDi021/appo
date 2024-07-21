@@ -36,6 +36,7 @@ const Cart: FC = () => {
   }
 
   const isCartEmpty = cart === null || cart === undefined;
+  const isButtonDisabled = isCartEmpty || cart.totalCount === 0;
 
   const deleteAppointment = async () => {
     if (selectedAppointmentId !== null) {
@@ -123,6 +124,7 @@ const Cart: FC = () => {
               <button
                 onClick={checkoutCart}
                 className={styles.cart__appointment__aside__btn}
+                disabled={isButtonDisabled}
               >
                 Confirm and receive payment
               </button>
