@@ -1,6 +1,7 @@
 import { joiResolver } from "@hookform/resolvers/joi";
-import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import CategoryIcon from "@mui/icons-material/Category";
+import DescriptionIcon from "@mui/icons-material/Description";
+import TitleIcon from "@mui/icons-material/Title";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -47,7 +48,7 @@ const CreateServicesForm = () => {
       >
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <LockOutlinedIcon />
+            <TitleIcon />
             <input
               className={styles.form__input}
               type="text"
@@ -64,7 +65,7 @@ const CreateServicesForm = () => {
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <AlternateEmailOutlinedIcon />
+            <DescriptionIcon />
             <input
               className={styles.form__input}
               type="text"
@@ -80,7 +81,7 @@ const CreateServicesForm = () => {
         </div>
         <div className={styles.form__container}>
           <label className={styles.form__label}>
-            <AlternateEmailOutlinedIcon />
+            <CategoryIcon />
             <input
               className={styles.form__input}
               type="text"

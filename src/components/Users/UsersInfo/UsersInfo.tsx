@@ -20,8 +20,16 @@ import css from "./UserInfo.module.scss";
 
 const UsersInfo: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
-  const { id, firstname, lastname, birthdate, email, phone_number, image_url } =
-    user;
+  const {
+    id,
+    firstname,
+    lastname,
+    birthdate,
+    email,
+    phone_number,
+    image_url,
+    role,
+  } = user;
   const { error } = useAppSelector((state) => state.images);
   const dispatch = useAppDispatch();
   const [isChangePasswordFormVisible, setIsChangePasswordFormVisible] =
@@ -315,7 +323,9 @@ const UsersInfo: FC = () => {
         </button>
         <button onClick={logOut}>Log out</button>
         <button onClick={logOutAll}>Log out in All devices</button>
-        <button onClick={() => setShowModal(true)}>Delete account</button>
+        <button onClick={() => setShowModal(true)} disabled={role === "admin"}>
+          Delete account
+        </button>
       </div>
       <Modal
         show={showModal}
