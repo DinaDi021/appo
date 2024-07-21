@@ -21,14 +21,13 @@ const AccountAdmin: FC = () => {
   } = useToggle(false);
   const [query, setQuery] = useSearchParams();
   const queryParams: QueryParams = {
-    role_id: query.getAll("role_id").map(Number),
+    role_id: filterRole,
   };
-  const roleIds = filterRole?.map((role) => role.id);
 
   useEffect(() => {
     if (user) {
-      if (roleIds && roleIds.length > 0) {
-        setQuery({ role_id: roleIds.map(String) });
+      if (filterRole && filterRole.length > 0) {
+        setQuery({ role_id: filterRole.toString() });
       } else {
         setQuery({});
       }

@@ -17,7 +17,8 @@ const AllUsers: FC = () => {
   const dispatch = useAppDispatch();
 
   const handleRoleChange = (event: SyntheticEvent, value: IRoles[]) => {
-    dispatch(filtersActions.setRoleFilter(value));
+    const selectedRoleIds = value.map((role) => role.id);
+    dispatch(filtersActions.setRoleFilter(selectedRoleIds));
   };
   const isOptionEqualToValue = (option: IRoles, value: IRoles) =>
     option.id === value.id;
@@ -34,9 +35,9 @@ const AllUsers: FC = () => {
             disablePortal
             id="role-autocomplete"
             size={"medium"}
+            value={roles.filter((role) => filterRole.includes(role.id))}
             options={roles}
             getOptionLabel={(role: IRoles) => role.role}
-            value={filterRole}
             onChange={handleRoleChange}
             isOptionEqualToValue={isOptionEqualToValue}
             sx={{

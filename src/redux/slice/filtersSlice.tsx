@@ -1,20 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IRoles } from "../../interfaces";
-
 interface IState {
   filterDate: string[] | null;
   filterService: number[] | null;
   filterCategories: string[] | null;
   filterMaster: number | null;
-  filterRole: IRoles[] | null;
+  filterRole: number[] | null;
 }
 
 const initialState: IState = {
   filterDate: null,
-  filterService: undefined,
+  filterService: null,
   filterCategories: null,
-  filterMaster: undefined,
+  filterMaster: null,
   filterRole: [],
 };
 

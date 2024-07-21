@@ -3,7 +3,13 @@ import React, { FC } from "react";
 
 const IsLoading: FC = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <CircularProgress />
     </div>
   );

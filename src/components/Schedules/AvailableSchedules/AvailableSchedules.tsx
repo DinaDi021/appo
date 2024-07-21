@@ -1,26 +1,27 @@
 import React, { FC, useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { QueryParams } from "../../../interfaces";
 import { schedulesActions } from "../../../redux";
 import { updateQueryParams } from "../../../utils";
 import { Filter } from "../../Filter/Filter";
-import styles from "./AvailableSchedules.module.scss";
+import { IsLoading } from "../../IsLoading";
+import styles from "../AvailableSchedules/AvailableSchedules.module.scss";
 import { AvailableSchedulesMaster } from "./AvailableSchedulesMaster/AvailableSchedulesMaster";
 
 const AvailableSchedules: FC = () => {
   const { availableSchedules } = useAppSelector((state) => state.schedules);
+  const { isLoading } = useAppSelector((state) => state.progress);
   const { filterDate, filterService, filterCategories, filterMaster } =
     useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  const [query, setQuery] = useSearchParams();
+  const [, setQuery] = useSearchParams();
   const queryParams: QueryParams = {
-    date: [query.get("date")],
-    service_id: query.getAll("service_id").map(Number),
-    category: [query.get("category")],
-    master_id: +query.getAll("master_id"),
+    date: filterDate,
+    service_id: filterService,
+    category: filterCategories,
+    master_id: filterMaster,
   };
 
   useEffect(() => {
@@ -32,43 +33,44 @@ const AvailableSchedules: FC = () => {
       filterCategories,
       filterMaster,
     );
-
     dispatch(schedulesActions.getAvailableSchedules({ query: queryParams }));
-  }, [
-    dispatch,
-    filterService,
-    filterCategories,
-    filterMaster,
-    filterDate,
-    location.search,
-  ]);
+  }, [dispatch, filterService, filterCategories, filterMaster, filterDate]);
 
   if (!availableSchedules || availableSchedules.length === 0) {
     return (
       <div className={styles.noavailable__wrapper}>
         <Filter />
-        <div className={styles.noavailable__text}>
-          <h4>No available schedules. Please choose different parameters.</h4>
-        </div>
+        {isLoading ? (
+          <div className={styles.available__container}>
+            <IsLoading />
+          </div>
+        ) : (
+          <div className={styles.noavailable__text}>
+            No available schedules. Please choose different parameters.
+          </div>
+        )}
       </div>
     );
   }
 
   return (
     <div className={styles.available__wrapper}>
-      <div className={styles.available__filter}>
-        <Filter />
-      </div>
-      <div className={styles.available__container}>
-        {availableSchedules.map((availableSchedule) => (
-          <AvailableSchedulesMaster
-            key={availableSchedule.master_id}
-            availableSchedule={availableSchedule}
-          />
-        ))}
-      </div>
+      <Filter />
+      {isLoading ? (
+        <div className={styles.available__container}>
+          <IsLoading />
+        </div>
+      ) : (
+        <div className={styles.available__container}>
+          {availableSchedules.map((availableSchedule) => (
+            <AvailableSchedulesMaster
+              key={availableSchedule.master_id}
+              availableSchedule={availableSchedule}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
-
 export { AvailableSchedules };

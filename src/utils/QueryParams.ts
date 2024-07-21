@@ -1,38 +1,50 @@
+import { SetURLSearchParams } from "react-router-dom";
+
 import { QueryParams } from "../interfaces";
 
 export const updateQueryParams = (
   queryParams: QueryParams,
-  setQuery: any,
+  setQuery: SetURLSearchParams,
   filterDate?: string[],
   filterService?: number[],
   filterCategories?: string[],
   filterMaster?: number,
 ) => {
-  queryParams = { ...queryParams };
+  const newParams: QueryParams = { ...queryParams };
 
-  if (filterDate && filterDate.length > 0) {
-    queryParams.date = filterDate;
+  if (filterDate?.length) {
+    newParams.date = filterDate;
   } else {
-    delete queryParams.date;
+    delete newParams.date;
   }
 
-  if (filterService !== null) {
-    queryParams.service_id = filterService;
+  if (filterService) {
+    newParams.service_id = filterService;
   } else {
-    delete queryParams.service_id;
+    delete newParams.service_id;
   }
 
-  if (filterCategories && filterCategories.length > 0) {
-    queryParams.category = filterCategories;
+  if (filterCategories?.length) {
+    newParams.category = filterCategories;
   } else {
-    delete queryParams.category;
+    delete newParams.category;
   }
 
-  if (filterMaster !== null) {
-    queryParams.master_id = filterMaster;
+  if (filterMaster !== null && filterMaster !== undefined) {
+    newParams.master_id = filterMaster;
   } else {
-    delete queryParams.master_id;
+    delete newParams.master_id;
   }
 
-  setQuery(queryParams);
+  const params = new URLSearchParams();
+
+  Object.entries(newParams).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((val) => params.append(key, val.toString()));
+    } else if (value !== undefined) {
+      params.append(key, value.toString());
+    }
+  });
+
+  setQuery(params);
 };
