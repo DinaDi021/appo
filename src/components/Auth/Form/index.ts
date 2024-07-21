@@ -4,3 +4,4 @@ export * from "./ForgotPasswordForm";
 export * from "./ResetPasswordForm";
 export * from "./CreateMasterForm";
 export * from "./ForgotPasswordForm";
+export * from "./ChangePasswordForm";

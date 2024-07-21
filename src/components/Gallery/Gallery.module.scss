@@ -12,8 +12,8 @@
   }
 
   &__button {
-    cursor: pointer;
     width: 250px;
+    cursor: pointer;
 
     &__del {
       position: absolute;
@@ -21,8 +21,8 @@
       left: 5px;
       margin: 0;
       opacity: 0;
-      transition: opacity 0.5s ease;
       background-color: var(--basic-black);
+      transition: opacity 0.5s ease;
     }
   }
 

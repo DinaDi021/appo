@@ -1,5 +1,6 @@
-.available {
+@import "src/styles";
 
+.available {
   &__page {
     width: 100%;
     display: flex;
@@ -40,11 +41,11 @@
   }
 
   &__wrapper {
+    width: 100%;
     height: 88vh;
     padding: 15px 0;
     display: flex;
     justify-content: space-between;
-    width: 100%;
     margin-right: 15px;
   }
 
@@ -144,10 +145,8 @@
       padding: 15px;
       border-radius: 10px;
       color: white;
-      background-image: url("../../../assets/img/background/bc-main.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
       border: 2px solid white;
+      @include customBackgroundStyles
     }
   }
 }
@@ -155,6 +154,7 @@
 .master {
   &__container {
     width: 330px;
+    margin: 0 20px 20px 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -162,7 +162,6 @@
     border: 1px solid var(--green-crayola-pine);
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    margin: 0 20px 20px 0;
   }
 
   &__info {
@@ -199,13 +198,13 @@
   }
 
   &__button {
+    position: relative;
     width: 300px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10px;
-    position: relative;
 
     &__add {
       display: flex;
@@ -257,8 +256,8 @@
 }
 
 .iconWrapper {
-  display: inline-block;
   position: relative;
+  display: inline-block;
 }
 
 .cart-animation {
@@ -300,6 +299,7 @@
     &__container {
       grid-template-columns: repeat(2, 1fr);
     }
+
     &__profile {
       &__info {
         h5 {
@@ -308,21 +308,25 @@
         }
       }
     }
+
   .master {
     &__container  {
       width: 260px;
     }
+
     &__button {
       width: 240px;
       button {
         font-size: 13px;
       }
     }
+
     &__info {
       &__name {
         font-size: 17px;
       }
     }
+
     &__category {
       p {
         font-size: 13px;
@@ -336,6 +340,7 @@
     &__page {
       justify-content: center;
     }
+
     &__message {
       font-size: 13px;
     }
@@ -347,11 +352,14 @@
       justify-content: space-between;
       margin-right: 0;
     }
+
     &__info {
       padding: 10px 0 0 10px;
     }
+
     &__avatar {
       border-left: 2px solid var(--green-crayola-pine);
+
       img {
         height: 100%;
         border-bottom-right-radius: 15px;
@@ -366,6 +374,7 @@
       height: 160px;
     }
   }
+
   .available {
     &__card {
       width: 180px;
@@ -388,6 +397,7 @@
       width: 25rem;
       margin-right: 0;
     }
+
     &__avatar{
       display: flex;
       justify-content: center;

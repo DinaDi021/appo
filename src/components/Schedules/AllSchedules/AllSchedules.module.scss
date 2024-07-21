@@ -13,7 +13,6 @@
   &__table {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     align-items: center;
 
     &__item {
@@ -68,23 +67,22 @@
     }
   }
 
-
   &__form {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 
     &__input {
-      @include customInputStyles;
-      width: 80%;
-      padding-left: 30px;
-      height: 35px;
       position: absolute;
+      width: 80%;
+      height: 35px;
+      padding-left: 30px;
+      @include customInputStyles;
     }
 
     &__label {
-      width: 100%;
       position: relative;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -109,12 +107,26 @@
   }
 }
 
+@media screen and (min-width: 950px) {
+  .schedules {
+    &__container {
+      max-height: 80vh;
+      overflow-y: scroll;
+    }
+  }
+
+}
+
 @media screen and (max-width: 950px){
   .schedules {
     &__container {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+    &__table {
+     max-height: 60vh;
+      overflow-y: scroll;
     }
     &__status {
       h5 {

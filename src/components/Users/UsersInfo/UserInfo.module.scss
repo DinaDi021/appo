@@ -1,3 +1,5 @@
+@import "src/styles";
+
 .user {
   &__container {
     display: grid;
@@ -84,12 +86,10 @@
       margin-top: -20px;
       padding: 20px;
       margin-bottom: 10px;
-      background-image: url("../../../assets/img/background/bc-main.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       font-size: 25px;
+      @include customBackgroundStyles;
     }
 
     &__container {
@@ -112,11 +112,9 @@
       &__bc {
         width: calc(85% - 10px);
         color: var(--basic-white);
-        background-image: url("../../../assets/img/background/bc-main.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
         border-bottom-right-radius: 15px;
         border-top-right-radius: 15px;
+        @include customBackgroundStyles;
       }
 
     &__details {
@@ -148,7 +146,7 @@
 
 .changePasswordForm.visible {
   opacity: 1;
-  max-height: 200px;
+  max-height: 250px;
 }
 
 .crop {
@@ -169,12 +167,12 @@
     position: relative;
     width: 500px;
     height: 500px;
-    border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    border-radius: 8px;
   }
   &__button {
     position: relative;
@@ -188,15 +186,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       &__title {
         font-size: 20px;
       }
     }
+
     &__card {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       &__title{
       font-size: 20px;
       }
@@ -211,15 +212,19 @@
         width: 260px;
       }
     }
+
     &__card {
       &__container {
         width: 260px;
       }
+
       &__img {
         width: 130px;
       }
+
       &__details {
         width: 110px;
+
         p {
           font-size: 13px;
         }
@@ -235,13 +240,16 @@
         width: 220px;
       }
     }
+
     &__card {
       &__container {
         width: 220px;
       }
+
       &__img {
         width: 130px;
       }
+
       &__details {
         width: 110px;
         p {

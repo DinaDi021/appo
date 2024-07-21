@@ -1,28 +1,24 @@
+@import "src/styles";
+
 .header {
-  &__container {
+  &__container,  {
     width: 100%;
+    height: 8vh;
     padding: 0 10px;
     margin-bottom: 35px;
-    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row-reverse;
 
     &__mobileBc {
-      width: 100%;
-      padding: 0 10px;
-      margin-bottom: 35px;
-      height: 8vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row-reverse;
+      @extend .header__container
   }
   }
 
   &__navigationMenu {
     width: 65%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,8 +40,9 @@
   }
 
   &__navigation {
-    padding: 20px;
     width: 100%;
+    height: 100%;
+    margin: 20px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -111,11 +108,12 @@
     &__container {
       justify-content: flex-start;
       background: rgba(0, 0, 0, 0.5);
+
       &__mobile {
-        width: calc(100% - 20px);
-        height: 100vh;
         position: absolute;
         z-index: 100;
+        width: calc(100% - 20px);
+        height: 100vh;
         padding: 0 10px;
         margin-bottom: 35px;
         display: flex;
@@ -131,15 +129,14 @@
     &__navigationMenu {
       width: 90%;
       height: 100%;
-      background-image: url("../../assets/img/background/bc-main.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
       border: 2px solid white;
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;
       margin-right: -10px;
       border-right: none;
       opacity: 0;
+      @include customBackgroundStyles;
+
       &__mobile {
         opacity: 1;
       }

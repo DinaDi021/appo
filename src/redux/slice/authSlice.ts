@@ -115,6 +115,12 @@ const authSlice = createSlice({
     setLoggedInUser: (state, action) => {
       state.user = action.payload;
     },
+    resetError: (state) => {
+      state.error = null;
+    },
+    setError: (state, action) => {
+      state.error.message = action.payload;
+    },
   },
   extraReducers: (build) =>
     build

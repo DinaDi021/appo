@@ -1,5 +1,6 @@
-.addMaster {
+@import "src/styles";
 
+.addMaster {
   &__page {
     width: 100%;
     height: fit-content;
@@ -20,12 +21,11 @@
     padding: 15px;
     text-align: center;
     color: var(--basic-white);
-    background-image: url("../../../assets/img/background/bc-main.jpg");
-    background-size: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom: 1px solid var(--green-crayola-pine);
     font-size: 25px;
+    @include customBackgroundStyles;
   }
 
   &__form {
@@ -34,10 +34,10 @@
     }
 
     &__body {
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      width: 100%;
 
       * {
         margin-bottom: 10px;

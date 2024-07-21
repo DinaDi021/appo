@@ -20,7 +20,7 @@ import { IUpdateProfileParams } from "../../../interfaces";
 import { authActions, imagesActions, usersActions } from "../../../redux";
 import { croppedImg, dataURLtoFile } from "../../../utils/CroppedImg";
 import { updateShema } from "../../../validators";
-import { ChangePasswordForm } from "../../Auth/Form/ChangePasswordForm";
+import { ChangePasswordForm } from "../../Auth";
 import styles from "../../Auth/Form/Form.module.scss";
 import { Modal } from "../../Modal/Modal";
 import css from "./UserInfo.module.scss";

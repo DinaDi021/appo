@@ -1,3 +1,5 @@
+@import "src/styles";
+
 .appointments {
   &__container {
     width: 100%;
@@ -19,11 +21,9 @@
   &__infoWrapper {
     width: 45%;
     height: 100%;
-    background-image: url("../../assets/img/background/bc-main.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    @include customBackgroundStyles;
   }
 
   &__info {
@@ -40,14 +40,14 @@
     backdrop-filter: blur(5px);
 
 
-  &__date{
-    text-align: center;
-    padding: 8px 15px;
-    color: var(--basic-black);
-    border-radius: 10px;
-    background-color: var(--basic-white);
-    border: 2px solid var(--green-crayola-pine);
-  }
+    &__date{
+      padding: 8px 15px;
+      color: var(--basic-black);
+      text-align: center;
+      border-radius: 10px;
+      background-color: var(--basic-white);
+      border: 2px solid var(--green-crayola-pine);
+    }
   }
 
   &__price {
@@ -82,17 +82,21 @@
   .card {
     height: fit-content;
     flex-direction: column;
+
     &__infoWrapper {
       width: 100%;
       border-top-right-radius: 10px;
       border-bottom-left-radius: 0;
     }
+
     &__info {
       border-top-right-radius: 10px;
+
       > *:not(:last-child) {
         margin-bottom: 5px;
       }
     }
+
     &__price {
       width: calc(100% - 30px);
       > *:not(:last-child) {

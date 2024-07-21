@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { schedulesActions } from "../../../redux";
 import styles from "../../Filter/Filter.module.scss";
+import { IsLoading } from "../../IsLoading";
 import { newTheme, ServerDay } from "../../Theme";
 import css from "./AllSchedules.module.scss";
 import { SchedulesMasterInfo } from "./SchedulesMasterInfo/SchedulesMasterInfo";
@@ -19,6 +20,7 @@ const AllSchedules = () => {
     (state) => state.schedules,
   );
   const { filterDate } = useAppSelector((state) => state.schedules);
+  const { isLoading } = useAppSelector((state) => state.progress);
   const { user } = useAppSelector((state) => state.auth);
   const [query, setQuery] = useSearchParams();
 
@@ -88,18 +90,22 @@ const AllSchedules = () => {
           </ThemeProvider>
         </LocalizationProvider>
       </div>
-      <div className={css.schedules__table}>
-        {allSchedulesByDate && allSchedulesByDate.length > 0 ? (
-          allSchedulesByDate.map((schedule) => (
-            <SchedulesMasterInfo
-              key={schedule.schedule_id}
-              schedule={schedule}
-            />
-          ))
-        ) : (
-          <p>No Schedules yet</p>
-        )}
-      </div>
+      {isLoading ? (
+        <IsLoading />
+      ) : (
+        <div className={css.schedules__table}>
+          {allSchedulesByDate && allSchedulesByDate.length > 0 ? (
+            allSchedulesByDate.map((schedule) => (
+              <SchedulesMasterInfo
+                key={schedule.schedule_id}
+                schedule={schedule}
+              />
+            ))
+          ) : (
+            <p>No Schedules yet</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

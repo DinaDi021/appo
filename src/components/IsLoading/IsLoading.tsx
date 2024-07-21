@@ -10,7 +10,7 @@ const IsLoading: FC = () => {
         justifyContent: "center",
       }}
     >
-      <CircularProgress />
+      <CircularProgress sx={{ color: "var(--green-jungle-crayola)" }} />
     </div>
   );
 };

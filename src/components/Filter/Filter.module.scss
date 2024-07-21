@@ -1,15 +1,18 @@
+@import "src/styles";
+
 .filter {
   &__container {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    z-index: 1;
     width: 330px;
     height: fit-content;
     padding: 10px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    position: relative;
-    z-index: 1;
-    margin-right: 20px;
     background-color: var(--basic-white);
     border: 1px solid var(--green-crayola-pine);
   }
@@ -34,5 +37,109 @@
     button {
       width: 280px;
     }
+  }
+
+  &__mobile {
+    display: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    &__close {
+      height: 0;
+      opacity: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .filter {
+    &__container, &__calendar {
+      width: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .filter {
+    &__container {
+      width: 280px;
+      margin-right: 10px;
+    }
+
+    &__calendar {
+      width: 280px;
+    }
+
+    &__button {
+      button{
+        width: 240px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .filter {
+    &__container {
+      position: absolute;
+      z-index: 5;
+      width: 100%;
+      display: flex;
+      margin-top: -15px;
+    }
+
+    &__mobile {
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      opacity: 1;
+
+      &__title {
+        width: 60px;
+        height: 330px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        white-space: nowrap;
+        transform: rotate(180deg);
+        transform-origin: center center;
+        color: white;
+        border: 2px solid white;
+        border-right: none;
+        @include customBackgroundStyles;
+
+        svg {
+          transform: rotate(90deg);
+          padding: 5px 0;
+        }
+      }
+      &__close {
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        display: flex;
+        color: var(--basic-grey);
+        opacity: 1;
+      }
+    }
+    &__calendar {
+      position: relative;
+    }
+  }
+
+  .visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .hidden {
+    transform: translateX(-100%);
+    opacity: 0;
   }
 }

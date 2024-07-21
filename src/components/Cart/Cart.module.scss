@@ -1,5 +1,6 @@
-.cart {
+@import "src/styles";
 
+.cart {
   &__page {
     width: 70%;
     display: flex;
@@ -11,16 +12,15 @@
     border: 1px solid var(--green-crayola-pine);
 
     &__title {
-      padding: 15px;
       width: calc(100% - 30px);
+      padding: 15px;
       text-align: center;
       color: var(--basic-white);
-      background-image: url("../../assets/img/background/bc-main.jpg");
-      background-size: cover;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
       border-bottom: 1px solid var(--green-crayola-pine);
       font-size: 30px;
+      @include customBackgroundStyles;
     }
   }
 
@@ -71,11 +71,9 @@
     &__bc {
       width: calc(85% - 10px);
       color: var(--basic-white);
-      background-image: url("../../assets/img/background/bc-main.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
       border-bottom-right-radius: 15px;
-      border-top-right-radius: 15px
+      border-top-right-radius: 15px;
+      @include customBackgroundStyles;
     }
 
     &__details {
@@ -103,9 +101,9 @@
 
     &__message {
       width: calc(100% - 20px);
+      padding: 10px;
       display: flex;
       justify-content: center;
-      padding: 10px;
       background-color: var(--basic-white);
       color: red;
       border-bottom-right-radius: 15px;
@@ -114,8 +112,8 @@
 
     &__aside {
       &__info {
-        font-size: 20px;
         margin-bottom: 5px;
+        font-size: 20px;
       }
 
       &__btn {
@@ -145,12 +143,12 @@
     display: none;
 
     + span {
+      position: relative;
       display: inline-block;
       width: 25px;
       height: 25px;
       border: 1px solid var(--basic-black);
       border-radius: 5px;
-      position: relative;
       margin-right: 10px;
       cursor: pointer;
 
@@ -164,8 +162,8 @@
     }
 
     + span svg {
-      display: none;
       position: absolute;
+      display: none;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -206,7 +204,7 @@
 @media screen and (max-width: 1250px) {
   .cart {
     &__container {
-     display: flex;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -261,10 +259,13 @@
     &__page {
       width: 90%;
     }
+
     &__appointment {
       width: 290px;
+
       &__button {
         width: calc(17% - 10px);
+
         button {
           padding: 6px;
         }

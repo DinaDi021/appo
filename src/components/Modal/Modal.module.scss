@@ -22,11 +22,11 @@
 }
 
 .modal {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
   max-width: 500px;
   width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background: white;
   animation: slideIn 0.3s ease-in-out;
 
   &__content {
