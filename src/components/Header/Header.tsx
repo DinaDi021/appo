@@ -40,8 +40,8 @@ const Header: FC = () => {
       isCardLink: true,
     },
     {
-      path: "/me/info",
-      label: "Account",
+      path: user ? "/me/info" : "/login",
+      label: user ? "Account" : "Sign In",
     },
   ];
 

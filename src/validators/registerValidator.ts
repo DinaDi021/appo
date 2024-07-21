@@ -34,7 +34,7 @@ const schedulesShema = Joi.object({
 });
 
 const priceShema = Joi.object({
-  price: Joi.number().min(99).max(50000).optional(),
+  price: Joi.number().min(1).max(10000).optional(),
 });
 const forgotPasswordSchema = Joi.object({
   email: Joi.string().regex(regex.EMAIL).trim().required(),
@@ -48,6 +48,7 @@ const resetPasswordSchema = Joi.object({
 const changePasswordSchema = Joi.object({
   old_password: Joi.string().regex(regex.PASSWORD).trim(),
   new_password: Joi.string().regex(regex.PASSWORD).trim(),
+  confirm_Password: Joi.any().valid(Joi.ref("new_password")).required(),
 });
 
 const addServices = Joi.object({

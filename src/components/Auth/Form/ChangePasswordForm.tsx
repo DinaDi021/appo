@@ -1,10 +1,10 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector, useToggle } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { IChangePassword } from "../../../interfaces";
 import { authActions } from "../../../redux";
 import { changePasswordSchema } from "../../../validators";
@@ -23,10 +23,7 @@ const ChangePasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const { token } = useParams();
   const { error } = useAppSelector((state) => state.auth);
-  const { value: changePasswordSuccess, change: toggleChangePasswordSuccess } =
-    useToggle(false);
-  const [errorPasswordMessage, setErrorPasswordMessage] =
-    useState<string>(null);
+  const navigate = useNavigate();
 
   const changePassword: SubmitHandler<IChangePassword> = async (data) => {
     const { old_password, new_password } = data;
@@ -39,11 +36,8 @@ const ChangePasswordForm: FC = () => {
 
     if (requestStatus === "fulfilled") {
       reset();
-      toggleChangePasswordSuccess();
-      setErrorPasswordMessage(null);
-    }
-    if (requestStatus === "rejected") {
-      setErrorPasswordMessage(error?.message);
+      dispatch(authActions.setSuccessfulStatus(true));
+      navigate("/login");
     }
   };
 
@@ -87,16 +81,26 @@ const ChangePasswordForm: FC = () => {
             </div>
           )}
         </div>
+        <div className={styles.form__container}>
+          <label className={styles.form__label}>
+            <LockOutlinedIcon />
+            <input
+              className={styles.form__input}
+              type="password"
+              placeholder={"Confirm password"}
+              required={true}
+              {...register("confirm_Password")}
+            />
+          </label>
+          {errors.confirm_Password && (
+            <div className={styles.form__error}>
+              {errors?.confirm_Password && <span>passwords do not match</span>}
+            </div>
+          )}
+        </div>
         <button>Confirm password change</button>
       </form>
-      {errorPasswordMessage && (
-        <div className={styles.form__error}>{errorPasswordMessage}</div>
-      )}
-      {changePasswordSuccess && (
-        <div className={styles.form__success}>
-          Password changed successfully!
-        </div>
-      )}
+      {error && <div className={styles.form__error}>{error.message}</div>}
     </>
   );
 };

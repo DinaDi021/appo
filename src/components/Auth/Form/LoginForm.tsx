@@ -22,8 +22,9 @@ const LoginForm: FC = () => {
   });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { error } = useAppSelector((state) => state.auth);
+  const { changePasswordStatus, error } = useAppSelector((state) => state.auth);
   const login: SubmitHandler<IAuth> = async (user) => {
+    dispatch(authActions.setSuccessfulStatus(false));
     const {
       meta: { requestStatus },
     } = await dispatch(authActions.login({ user }));
@@ -72,6 +73,11 @@ const LoginForm: FC = () => {
           )}
         </div>
         {error && <span className={styles.errMessage}>{error.message}</span>}
+        {changePasswordStatus && (
+          <div className={styles.form__success}>
+            Password changed successfully!
+          </div>
+        )}
         <button>Log in</button>
       </form>
     </>

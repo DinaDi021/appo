@@ -2,14 +2,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import React, {
-  FC,
-  // PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import Cropper, { Area } from "react-easy-crop";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";

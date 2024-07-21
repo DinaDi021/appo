@@ -15,6 +15,7 @@ export interface IResetPassword
 export interface IChangePassword {
   old_password: string;
   new_password: string;
+  confirm_Password: string;
   token: string;
 }
 

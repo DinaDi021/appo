@@ -15,11 +15,13 @@ interface IState {
     email?: string[];
     message?: string;
   };
+  changePasswordStatus: boolean;
 }
 
 const initialState: IState = {
   user: null,
   error: null,
+  changePasswordStatus: false,
 };
 
 const register = createAsyncThunk<void, { user: IAuth }>(
@@ -119,7 +121,10 @@ const authSlice = createSlice({
       state.error = null;
     },
     setError: (state, action) => {
-      state.error.message = action.payload;
+      state.error = action.payload;
+    },
+    setSuccessfulStatus: (state, action) => {
+      state.changePasswordStatus = action.payload;
     },
   },
   extraReducers: (build) =>
