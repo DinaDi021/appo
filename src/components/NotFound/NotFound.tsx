@@ -16,7 +16,7 @@ const NotFound: FC = () => {
           <h1>404</h1>
           <h2>Page not found</h2>
           <h4>Sorry, we couldn’t find the page you’re looking for.</h4>
-          <Link to={`/main`}>
+          <Link to={`/services`}>
             <h2 className={styles.linkHome}>← Back to home</h2>
           </Link>
         </>
