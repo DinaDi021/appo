@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { cartsActions } from "../../redux";
 import css from "../Auth/Form/Form.module.scss";
-import { IsLoading } from "../IsLoading";
 import { Modal } from "../Modal/Modal";
 import styles from "./Cart.module.scss";
 
@@ -13,7 +12,6 @@ const Cart: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
   const { cart, error } = useAppSelector((state) => state.carts);
-  const { isLoading } = useAppSelector((state) => state.progress);
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [selectedAppointmentId, setSelectedAppointmentId] = useState<
     number | null
@@ -73,9 +71,7 @@ const Cart: FC = () => {
   return (
     <>
       <div className={styles.cart__appointment}>
-        {isLoading ? (
-          <IsLoading />
-        ) : isCartEmpty ? (
+        {isCartEmpty ? (
           <h3>Your cart is empty</h3>
         ) : (
           <>

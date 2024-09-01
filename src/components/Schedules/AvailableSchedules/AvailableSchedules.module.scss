@@ -27,13 +27,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    transition: linear 0.7s ;
     cursor: pointer;
+    transition: transorm 0.7s linear;
 
     :hover {
-      transition: linear 0.7s ;
-      transform: scale(1.1);
-
+      transform: translateY(5px);
       > * {
         transform: none !important;
       }
@@ -68,11 +66,11 @@
       border-right: 1px solid var(--green-crayola-pine);
       border-left: 1px solid var(--green-crayola-pine);
 
-      h5{
+      h5 {
         font-size: 20px;
       }
 
-      :hover{
+      :hover {
         color: var(--turquoise);
       }
 
@@ -88,7 +86,8 @@
     animation-fill-mode: forwards;
     font-size: 15px;
 
-    &__error, &__success {
+    &__error,
+    &__success {
       animation-name: slideIn;
       text-align: center;
       color: var(--basic-black);
@@ -125,7 +124,6 @@
   }
 }
 
-
 .noavailable {
   &__wrapper {
     width: 100%;
@@ -134,7 +132,7 @@
     align-items: center;
   }
 
-  &__text{
+  &__text {
     width: 70%;
     display: flex;
     align-items: center;
@@ -146,7 +144,7 @@
       border-radius: 10px;
       color: white;
       border: 2px solid white;
-      @include customBackgroundStyles
+      @include customBackgroundStyles;
     }
   }
 }
@@ -171,7 +169,7 @@
     justify-content: center;
     color: var(--green-crayola-pine);
 
-    &__name{
+    &__name {
       font-size: 20px;
       margin-bottom: 15px;
     }
@@ -304,13 +302,13 @@
       &__info {
         h5 {
           font-size: 17px;
-            }
         }
       }
     }
+  }
 
   .master {
-    &__container  {
+    &__container {
       width: 260px;
     }
 
@@ -333,7 +331,7 @@
       }
     }
   }
-  }
+}
 
 @media screen and (min-width: 581px) and (max-width: 850px) {
   .available {
@@ -368,7 +366,7 @@
   }
 }
 
-@media screen and (min-width: 710px) and (max-width: 780px){
+@media screen and (min-width: 710px) and (max-width: 780px) {
   .master {
     &__photo {
       height: 160px;
@@ -391,14 +389,14 @@
   }
 }
 
-@media screen and (max-width: 580px){
+@media screen and (max-width: 580px) {
   .master {
     &__container {
       width: 25rem;
       margin-right: 0;
     }
 
-    &__avatar{
+    &__avatar {
       display: flex;
       justify-content: center;
       align-items: stretch;

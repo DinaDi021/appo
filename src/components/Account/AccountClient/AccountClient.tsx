@@ -5,13 +5,11 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector, useToggle } from "../../../hooks";
 import { appointmentsActions, usersActions } from "../../../redux";
-import { IsLoading } from "../../IsLoading";
 import styles from "../Account.module.scss";
 
 const AccountClient: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { isLoading } = useAppSelector((state) => state.progress);
   const navigate = useNavigate();
   const {
     value: isMobileAccountSectionOpen,
@@ -38,53 +36,43 @@ const AccountClient: FC = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <IsLoading />
-      ) : (
-        <>
-          <div
-            className={styles.account__side__mobileMenu}
-            onClick={toggleOpenAccountSection}
+      <div
+        className={styles.account__side__mobileMenu}
+        onClick={toggleOpenAccountSection}
+      >
+        <button>
+          {isMobileAccountSectionOpen ? <CloseOutlinedIcon /> : <ListIcon />}
+        </button>
+      </div>
+      <div className={styles.account}>
+        <div
+          className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
+        >
+          <button
+            onClick={() => navigate("/me/info")}
+            className={
+              location.pathname === "/me/info"
+                ? styles.account__activeButton
+                : ""
+            }
           >
-            <button>
-              {isMobileAccountSectionOpen ? (
-                <CloseOutlinedIcon />
-              ) : (
-                <ListIcon />
-              )}
-            </button>
-          </div>
-          <div className={styles.account}>
-            <div
-              className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
-            >
-              <button
-                onClick={() => navigate("/me/info")}
-                className={
-                  location.pathname === "/me/info"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                Contact Information
-              </button>
-              <button
-                onClick={() => navigate("/me/appointments")}
-                className={
-                  location.pathname === "/me/appointments"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                My appointments
-              </button>
-            </div>
-            <div className={styles.account__main}>
-              <Outlet />
-            </div>
-          </div>
-        </>
-      )}
+            Contact Information
+          </button>
+          <button
+            onClick={() => navigate("/me/appointments")}
+            className={
+              location.pathname === "/me/appointments"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My appointments
+          </button>
+        </div>
+        <div className={styles.account__main}>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };

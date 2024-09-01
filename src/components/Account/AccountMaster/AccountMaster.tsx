@@ -10,13 +10,11 @@ import {
   servicesActions,
   usersActions,
 } from "../../../redux";
-import { IsLoading } from "../../IsLoading";
 import styles from "../Account.module.scss";
 
 const AccountMaster: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { isLoading } = useAppSelector((state) => state.progress);
   const {
     value: isMobileAccountSectionOpen,
     change: toggleOpenAccountSection,
@@ -45,93 +43,83 @@ const AccountMaster: FC = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <IsLoading />
-      ) : (
-        <>
-          <div
-            className={styles.account__side__mobileMenu}
-            onClick={toggleOpenAccountSection}
+      <div
+        className={styles.account__side__mobileMenu}
+        onClick={toggleOpenAccountSection}
+      >
+        <button>
+          {isMobileAccountSectionOpen ? <CloseOutlinedIcon /> : <ListIcon />}
+        </button>
+      </div>
+      <div className={styles.account}>
+        <div
+          className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
+        >
+          <button
+            onClick={() => navigate("/me/info")}
+            className={
+              location.pathname === "/me/info"
+                ? styles.account__activeButton
+                : ""
+            }
           >
-            <button>
-              {isMobileAccountSectionOpen ? (
-                <CloseOutlinedIcon />
-              ) : (
-                <ListIcon />
-              )}
-            </button>
-          </div>
-          <div className={styles.account}>
-            <div
-              className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
-            >
-              <button
-                onClick={() => navigate("/me/info")}
-                className={
-                  location.pathname === "/me/info"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                Contact Information
-              </button>
-              <button
-                onClick={() => navigate("/me/gallery")}
-                className={
-                  location.pathname === "/me/gallery"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                My gallery
-              </button>
-              <button
-                onClick={() => navigate("/me/prices")}
-                className={
-                  location.pathname === "/me/prices"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                My prices
-              </button>
-              <button
-                onClick={() => navigate("/me/schedules")}
-                className={
-                  location.pathname === "/me/schedules"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                My schedules
-              </button>
-              <button
-                onClick={() => navigate("/me/addSchedules")}
-                className={
-                  location.pathname === "/me/addSchedules"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                Add new time
-              </button>
-              <button
-                onClick={() => navigate("/me/appointments")}
-                className={
-                  location.pathname === "/me/appointments"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                My appointments
-              </button>
-            </div>
-            <div className={styles.account__main}>
-              <Outlet />
-            </div>
-          </div>
-        </>
-      )}
+            Contact Information
+          </button>
+          <button
+            onClick={() => navigate("/me/gallery")}
+            className={
+              location.pathname === "/me/gallery"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My gallery
+          </button>
+          <button
+            onClick={() => navigate("/me/prices")}
+            className={
+              location.pathname === "/me/prices"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My prices
+          </button>
+          <button
+            onClick={() => navigate("/me/schedules")}
+            className={
+              location.pathname === "/me/schedules"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My schedules
+          </button>
+          <button
+            onClick={() => navigate("/me/addSchedules")}
+            className={
+              location.pathname === "/me/addSchedules"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            Add new time
+          </button>
+          <button
+            onClick={() => navigate("/me/appointments")}
+            className={
+              location.pathname === "/me/appointments"
+                ? styles.account__activeButton
+                : ""
+            }
+          >
+            My appointments
+          </button>
+        </div>
+        <div className={styles.account__main}>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };

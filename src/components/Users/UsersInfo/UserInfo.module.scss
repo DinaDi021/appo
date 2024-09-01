@@ -24,7 +24,7 @@
     }
   }
 
-  &__img{
+  &__img {
     &__container {
       display: flex;
       flex-direction: column;
@@ -46,7 +46,9 @@
       object-fit: cover;
       object-position: center;
       border-radius: 25px;
-      transition: transform 0.7s ease, height 0.7s ease;
+      transition:
+        transform 0.7s ease,
+        height 0.7s ease;
       cursor: pointer;
 
       &:hover {
@@ -100,7 +102,7 @@
       border-radius: 15px;
     }
 
-    &__img{
+    &__img {
       width: 150px;
       height: 100%;
       object-fit: cover;
@@ -109,13 +111,13 @@
       border-top-left-radius: 15px;
     }
 
-      &__bc {
-        width: calc(85% - 10px);
-        color: var(--basic-white);
-        border-bottom-right-radius: 15px;
-        border-top-right-radius: 15px;
-        @include customBackgroundStyles;
-      }
+    &__bc {
+      width: calc(85% - 10px);
+      color: var(--basic-white);
+      border-bottom-right-radius: 15px;
+      border-top-right-radius: 15px;
+      @include customBackgroundStyles;
+    }
 
     &__details {
       width: 185px;
@@ -129,7 +131,7 @@
       border-bottom-right-radius: 15px;
       border-top-right-radius: 15px;
 
-      p{
+      p {
         font-size: 15px;
         overflow-wrap: break-word;
       }
@@ -141,7 +143,9 @@
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s, opacity 0.5s;
+  transition:
+    max-height 0.5s,
+    opacity 0.5s;
 }
 
 .changePasswordForm.visible {
@@ -198,8 +202,8 @@
       justify-content: center;
       align-items: center;
 
-      &__title{
-      font-size: 20px;
+      &__title {
+        font-size: 20px;
       }
     }
   }
@@ -208,7 +212,8 @@
 @media screen and (max-width: 550px) {
   .user {
     &__container {
-      &__info, &__action {
+      &__info,
+      &__action {
         width: 260px;
       }
     }
@@ -236,7 +241,8 @@
 @media screen and (max-width: 380px) {
   .user {
     &__container {
-      &__info, &__action {
+      &__info,
+      &__action {
         width: 220px;
       }
     }

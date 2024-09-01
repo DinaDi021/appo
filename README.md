@@ -9,36 +9,34 @@ Welcome to the Beauty Platform project! This application is designed to connect 
 - **Appointment Booking**: Clients can book appointments with beauty professionals.
 - **Admin Registration for Professionals**: Beauty professionals need to register through the admin to appear on the platform.
 - **Professional Account Management**: Beauty professionals have access to their accounts where they can:
-    - Create and manage a gallery for showcasing their work.
-    - Provide descriptions of their services and prices.
-    - Create schedules with date and time.
+  - Create and manage a gallery for showcasing their work.
+  - Provide descriptions of their services and prices.
+  - Create schedules with date and time.
 
 ## Technologies Used
 
 - React, TypeScript, Material-UI (MUI)
 
 ## Getting Started
+
 ### Installation
 
-1. **Clone the repository**
+1.  **Clone the repository**
 
+    git clone https://github.com/DinaDi021/appo
 
-   git clone https://github.com/DinaDi021/appo
-
-2. **Install dependencies**
-
+2.  **Install dependencies**
 
         npm install
 
-3. **Create a .env file in the root directory as example**
+3.  **Create a .env file in the root directory as example**
 
+4.  **Start the development server**
 
-4. **Start the development server**
-
-
-       npm start   
+    npm start
 
 ### Or you can use:
+
 - **Live Version**: https://appo-di-k.netlify.app
 
 ## Contact

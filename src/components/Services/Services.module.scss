@@ -65,7 +65,7 @@
   }
 }
 
-.priceTable{
+.priceTable {
   width: 100%;
   display: grid;
   align-items: start;
@@ -146,7 +146,9 @@
       align-items: center;
       cursor: pointer;
       color: var(--green-pine);
-      transition: color 0.5s, transform 0.5s;
+      transition:
+        color 0.5s,
+        transform 0.5s;
 
       &:hover {
         color: var(--turquoise);
@@ -171,7 +173,9 @@
       color: var(--basic-black);
       cursor: pointer;
       overflow: hidden;
-      transition: max-height 0.7s linear, opacity 0.7s linear;
+      transition:
+        max-height 0.7s linear,
+        opacity 0.7s linear;
 
       &.slideDown {
         max-height: 500px;
@@ -194,7 +198,9 @@
         max-height: fit-content;
         opacity: 1;
         overflow: visible;
-        transition: max-height 0.7s ease, opacity 0.7s ease;
+        transition:
+          max-height 0.7s ease,
+          opacity 0.7s ease;
       }
 
       &__title {
@@ -224,15 +230,13 @@
         transition: opacity 0.5s ease;
         opacity: 0;
         font-size: 15px;
-
       }
     }
   }
 }
 
 @media screen and (max-width: 960px) {
-
-  .priceTable{
+  .priceTable {
     &__column {
       &__header {
         h2 {
@@ -245,7 +249,7 @@
   .services {
     &__table {
       &__title {
-        h3{
+        h3 {
           font-size: 20px;
         }
 
@@ -269,24 +273,23 @@
 }
 
 @media screen and (max-width: 950px) {
+  .price {
+    &__container {
+      &__title {
+        font-size: 20px;
+      }
 
-.price {
-  &__container{
+      &__description {
+        font-size: 17px;
+      }
+    }
+
     &__title {
-      font-size: 20px;
-    }
-
-    &__description {
-      font-size: 17px;
+      h5 {
+        font-size: 17px;
+      }
     }
   }
-
-  &__title {
-  h5 {
-    font-size: 17px;
-  }
-  }
-}
   .priceTable {
     &__column {
       &__header {
@@ -298,7 +301,7 @@
   }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
   .services {
     &__container {
       width: 90%;

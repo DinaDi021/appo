@@ -1,7 +1,7 @@
 @import "src/styles";
 
 .header {
-  &__container,  {
+  &__container {
     width: 100%;
     height: 8vh;
     padding: 0 10px;
@@ -12,8 +12,8 @@
     flex-direction: row-reverse;
 
     &__mobileBc {
-      @extend .header__container
-  }
+      @extend .header__container;
+    }
   }
 
   &__navigationMenu {
@@ -23,7 +23,9 @@
     align-items: center;
     justify-content: space-between;
     opacity: 1;
-    transition: transform 0.3s linear, opacity 0.3s linear;
+    transition:
+      transform 0.3s linear,
+      opacity 0.3s linear;
 
     &__mobile {
       z-index: 2;
@@ -74,36 +76,51 @@
   }
 }
 
-  .menuButton {
-    display: none;
-  }
+.menuButton {
+  display: none;
+}
 
-  .menuIcon,
-  .closeIcon {
-    display: none !important;
-    color: var(--basic-white);
-  }
+.menuIcon,
+.closeIcon {
+  display: none !important;
+  color: var(--basic-white);
+}
 
-  .shakeAnimation {
-    animation: shake 1.3s ease-in-out;
-  }
+.shakeAnimation {
+  animation: shake 1.3s ease-in-out;
+}
 
-  @keyframes shake {
-    0% { transform: translate(0, 0); }
-    10%, 30%, 50%, 70%, 90% { transform: translate(-5px, -5px); }
-    20%, 40%, 60%, 80% { transform: translate(5px, 5px); }
-    100% { transform: translate(0, 0); }
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
   }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate(-5px, -5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate(5px, 5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
 
-  @media screen and (max-width: 950px){
-    .header {
-      &__link {
-        font-size: 17px;
-      }
+@media screen and (max-width: 950px) {
+  .header {
+    &__link {
+      font-size: 17px;
     }
   }
+}
 
-  @media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .header {
     &__container {
       justify-content: flex-start;
@@ -152,19 +169,19 @@
         font-size: 25px;
         color: var(--basic-white);
         &:hover {
-          color: var(--dusty-blue)
+          color: var(--dusty-blue);
         }
       }
     }
   }
 
-    .menuOpen {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .menuClosed {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
+  .menuOpen {
+    transform: translateY(0);
+    opacity: 1;
   }
+
+  .menuClosed {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}

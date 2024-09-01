@@ -38,7 +38,7 @@
     justify-content: center;
     align-items: center;
 
-    &__title{
+    &__title {
       font-size: 30px;
       color: var(--green-pine);
     }
@@ -56,7 +56,6 @@
       align-items: center;
       border: 1px solid var(--green-crayola-pine);
       border-radius: 15px;
-
 
       &:not(:last-child) {
         margin-bottom: 10px;
@@ -179,7 +178,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s, background-color 0.3s;
+    transition:
+      transform 0.3s,
+      background-color 0.3s;
 
     &:hover {
       transform: scale(1.2);
@@ -213,10 +214,9 @@
   .checkout {
     width: 350px;
   }
-;
 }
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 960px) {
   .cart {
     &__page {
       &__title {
@@ -224,7 +224,7 @@
       }
     }
     &__unlogged {
-      &__title{
+      &__title {
         font-size: 20px;
       }
     }
@@ -254,7 +254,7 @@
   }
 }
 
-@media screen and (max-width: 550px){
+@media screen and (max-width: 550px) {
   .cart {
     &__page {
       width: 90%;

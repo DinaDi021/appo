@@ -1,5 +1,6 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import AlternateEmailOutlinedIcon from "@mui/icons-material/AlternateEmailOutlined";
+import CakeIcon from "@mui/icons-material/Cake";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
@@ -253,7 +254,7 @@ const UsersInfo: FC = () => {
             </div>
             <div className={styles.form__container}>
               <label className={styles.form__label}>
-                <PersonRoundedIcon />
+                <CakeIcon />
                 <input
                   className={styles.form__input}
                   type="text"

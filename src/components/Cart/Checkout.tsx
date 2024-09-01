@@ -9,7 +9,7 @@ import styles from "./Cart.module.scss";
 
 const Checkout: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
-  const { checkoutCart } = useAppSelector((state) => state.carts);
+  const { cart, checkoutCart } = useAppSelector((state) => state.carts);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [paymentType, setPaymentType] = useState<keyof IPaymentType>("full");
@@ -18,6 +18,9 @@ const Checkout: FC = () => {
   const handlePaymentTypeChange = (type: keyof IPaymentType) => {
     setPaymentType(type);
   };
+
+  const isCartEmpty = cart === null || cart === undefined;
+  const isButtonDisabled = isCartEmpty || cart.totalCount === 0;
 
   const handlePaymentSubmit = async () => {
     await dispatch(
@@ -62,7 +65,11 @@ const Checkout: FC = () => {
           Prepayment {checkoutCart.totalSum.prepayment}
         </label>
       </div>
-      <button className={styles.checkout__button} onClick={handlePaymentSubmit}>
+      <button
+        className={styles.checkout__button}
+        onClick={handlePaymentSubmit}
+        disabled={isButtonDisabled}
+      >
         Make an order
       </button>
     </div>

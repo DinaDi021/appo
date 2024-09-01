@@ -7,18 +7,18 @@
   font-family: "UbuntuRegular", sans-serif;
   margin: 0;
 
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--green-crayola-pine);
-      border-radius: 10px;
-    }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--green-crayola-pine);
+    border-radius: 10px;
+  }
 
-    &::-webkit-scrollbar-corner {
-      background-color: transparent;
-    }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
 }
 
 :root {
@@ -62,7 +62,10 @@
     color: var(--basic-grey);
   }
 
-  &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
   }
 }
@@ -267,7 +270,7 @@ input {
 }
 
 .slider-controler .slider-arrow::after {
-  content: '';
+  content: "";
 }
 
 .swiper-pagination {
@@ -285,7 +288,8 @@ input {
 }
 
 @media screen and (max-width: 960px) {
-  button, input {
+  button,
+  input {
     font-size: 13px;
   }
 }

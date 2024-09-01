@@ -1,7 +1,7 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import React, { FC, PropsWithChildren, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -85,6 +85,7 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
               type="number"
               placeholder={"price"}
               {...register("price")}
+              onWheel={(e) => e.currentTarget.blur()}
             />
           </label>
           {errors.price && (
@@ -95,7 +96,7 @@ const PriceDetails: FC<IProps> = ({ onePrice }) => {
         </div>
         <div className={css.price__form__actionBtn}>
           <button type="submit">
-            <EditIcon />
+            <TaskAltIcon />
           </button>
           <button
             type="button"

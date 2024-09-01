@@ -6,13 +6,11 @@ import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector, useToggle } from "../../../hooks";
 import { QueryParams } from "../../../interfaces";
 import { adminActions, usersActions } from "../../../redux";
-import { IsLoading } from "../../IsLoading";
 import styles from "../Account.module.scss";
 
 const AccountAdmin: FC = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { isLoading } = useAppSelector((state) => state.progress);
   const { filterRole } = useAppSelector((state) => state.filters);
   const navigate = useNavigate();
   const {
@@ -49,73 +47,65 @@ const AccountAdmin: FC = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <IsLoading />
-      ) : (
-        <>
+      <>
+        <div
+          className={styles.account__side__mobileMenu}
+          onClick={toggleOpenAccountSection}
+        >
+          <button>
+            {isMobileAccountSectionOpen ? <CloseOutlinedIcon /> : <ListIcon />}
+          </button>
+        </div>
+        <div className={styles.account}>
           <div
-            className={styles.account__side__mobileMenu}
-            onClick={toggleOpenAccountSection}
+            className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
           >
-            <button>
-              {isMobileAccountSectionOpen ? (
-                <CloseOutlinedIcon />
-              ) : (
-                <ListIcon />
-              )}
+            <button
+              onClick={() => navigate("/me/info")}
+              className={
+                location.pathname === "/me/info"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              Contact Information
+            </button>
+            <button
+              onClick={() => navigate("/me/admin/usersInfo")}
+              className={
+                location.pathname === "/me/admin/usersInfo"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              All users
+            </button>
+            <button
+              onClick={() => navigate("/me/admin/addMasters")}
+              className={
+                location.pathname === "/me/admin/addMasters"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              Create Master
+            </button>
+            <button
+              onClick={() => navigate("/me/admin/addServices")}
+              className={
+                location.pathname === "/me/admin/addServices"
+                  ? styles.account__activeButton
+                  : ""
+              }
+            >
+              Create Service
             </button>
           </div>
-          <div className={styles.account}>
-            <div
-              className={`${styles.account__side} ${isMobileAccountSectionOpen ? styles.visible : styles.hidden}`}
-            >
-              <button
-                onClick={() => navigate("/me/info")}
-                className={
-                  location.pathname === "/me/info"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                Contact Information
-              </button>
-              <button
-                onClick={() => navigate("/me/admin/usersInfo")}
-                className={
-                  location.pathname === "/me/admin/usersInfo"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                All users
-              </button>
-              <button
-                onClick={() => navigate("/me/admin/addMasters")}
-                className={
-                  location.pathname === "/me/admin/addMasters"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                Create Master
-              </button>
-              <button
-                onClick={() => navigate("/me/admin/addServices")}
-                className={
-                  location.pathname === "/me/admin/addServices"
-                    ? styles.account__activeButton
-                    : ""
-                }
-              >
-                Create Service
-              </button>
-            </div>
-            <div className={styles.account__main}>
-              <Outlet />
-            </div>
+          <div className={styles.account__main}>
+            <Outlet />
           </div>
-        </>
-      )}
+        </div>
+      </>
     </div>
   );
 };

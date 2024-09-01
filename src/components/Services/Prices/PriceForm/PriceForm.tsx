@@ -24,7 +24,7 @@ const PriceForm: FC = () => {
 
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { services } = useAppSelector((state) => state.services);
+  const { services, allPrices } = useAppSelector((state) => state.services);
   const [selectedService, setSelectedService] = useState<IServices | null>(
     null,
   );
@@ -62,6 +62,9 @@ const PriceForm: FC = () => {
                 }}
                 value={selectedService}
                 onChange={(_, value) => setSelectedService(value)}
+                getOptionDisabled={(option: IServices) =>
+                  allPrices.some((price) => price.service_id === option.id)
+                }
                 getOptionLabel={(service) => service.title}
                 renderInput={(params) => (
                   <TextField {...params} label="Services" />

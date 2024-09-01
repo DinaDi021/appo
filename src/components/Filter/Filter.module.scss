@@ -53,7 +53,8 @@
 
 @media screen and (max-width: 1300px) {
   .filter {
-    &__container, &__calendar {
+    &__container,
+    &__calendar {
       width: 300px;
     }
   }
@@ -71,7 +72,7 @@
     }
 
     &__button {
-      button{
+      button {
         width: 240px;
       }
     }
