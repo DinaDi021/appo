@@ -3,14 +3,21 @@ import { FC } from "react";
 import { useAppSelector } from "../../hooks";
 
 const PayCart: FC = () => {
-  const { payCart } = useAppSelector((state) => state.carts);
+  const { cart, payCart } = useAppSelector((state) => state.carts);
+
+  const isCartEmpty = cart === null || cart === undefined;
+  const isButtonDisabled = isCartEmpty || cart.totalCount === 0;
 
   return (
-    <div>
-      {payCart.html_button && (
-        <div dangerouslySetInnerHTML={{ __html: payCart.html_button }} />
+    <>
+      {!isButtonDisabled && (
+        <div>
+          {payCart.html_button && (
+            <div dangerouslySetInnerHTML={{ __html: payCart.html_button }} />
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

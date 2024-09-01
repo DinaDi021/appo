@@ -12,10 +12,12 @@ const MainLayout = () => {
       <>
         <Header />
       </>
-      <div
-        className={`${styles.mainLayout__container} ${isMobileMenuOpen ? styles.__addFilter : ""}`}
-      >
-        <Outlet />
+      <div style={{ minHeight: "76vh" }}>
+        <div
+          className={`${styles.mainLayout__container} ${isMobileMenuOpen ? styles.__addFilter : ""}`}
+        >
+          <Outlet />
+        </div>
       </div>
       <>
         <Footer />

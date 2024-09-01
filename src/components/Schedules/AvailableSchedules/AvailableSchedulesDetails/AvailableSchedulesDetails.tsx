@@ -24,6 +24,9 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
   const { user } = useAppSelector((state) => state.auth);
   const successToggle = useToggle(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{ schedule?: boolean; price?: boolean }>(
+    {},
+  );
   const userId = user?.id;
   const { selectedSchedule, selectedPrice, error } = useAppSelector(
     (state) => state.carts,
@@ -34,6 +37,16 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
     navigate("/availableSchedules");
   };
   const addToCart = async () => {
+    const hasSchedule = !!selectedSchedule;
+    const hasPrice = !!selectedPrice;
+
+    if (!hasSchedule || !hasPrice) {
+      setErrors({
+        schedule: !hasSchedule,
+        price: !hasPrice,
+      });
+      return;
+    }
     if (userId && selectedSchedule && selectedPrice) {
       const data: IItem = {
         schedule_id: selectedSchedule.schedule_id,
@@ -53,11 +66,15 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
           dispatch(cartsActions.setSelectedPrice(null));
           successToggle.change();
           setIsSuccess(true);
+          setErrors({
+            schedule: false,
+            price: false,
+          });
 
           setTimeout(() => {
             setIsSuccess(false);
             successToggle.change();
-          }, 8000);
+          }, 4000);
           dispatch(cartsActions.getAllItem({ userId: user.id }));
         }
       });
@@ -165,6 +182,16 @@ const AvailableSchedulesDetails: FC<IProps> = ({ availableSchedule }) => {
               }`}
             >
               The appointment has been successfully added to the cart
+            </span>
+          )}
+          {errors.price && (
+            <span className={styles.available__message__error}>
+              You have to choose services
+            </span>
+          )}
+          {errors.schedule && (
+            <span className={styles.available__message__error}>
+              You have to choose date
             </span>
           )}
           <button onClick={getSchedules}>

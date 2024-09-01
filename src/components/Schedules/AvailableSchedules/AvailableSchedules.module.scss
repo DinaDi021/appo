@@ -92,6 +92,10 @@
       text-align: center;
       color: var(--basic-black);
     }
+
+    &__error {
+      color: red;
+    }
   }
   &__filter {
     display: flex;

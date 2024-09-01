@@ -2,6 +2,7 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { ClientUrl } from "../../constants/enum";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { IPaymentType } from "../../interfaces/cartInterface";
 import { cartsActions } from "../../redux";
@@ -13,7 +14,7 @@ const Checkout: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [paymentType, setPaymentType] = useState<keyof IPaymentType>("full");
-  const url = `https://master--appo-di-k.netlify.app/cart/payment/`;
+  const url = ClientUrl.PAYMENT;
 
   const handlePaymentTypeChange = (type: keyof IPaymentType) => {
     setPaymentType(type);
